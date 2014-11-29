@@ -36,7 +36,7 @@
         [self setPosition:100 ofDividerAtIndex:0];
         self.delegate = self;
         
-        [self setPosition:([[NSScreen mainScreen] frame].size.width - 300) ofDividerAtIndex:0];
+        [self setPosition:([[NSScreen mainScreen] frame].size.width - 200) ofDividerAtIndex:0];
         self.autoresizingMask = NSViewHeightSizable;
     }
     return self;

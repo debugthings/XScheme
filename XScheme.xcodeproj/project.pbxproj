@@ -27,6 +27,12 @@
 		E7243EF819C2E81A00E1E9C4 /* XSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EF719C2E81A00E1E9C4 /* XSLabel.m */; };
 		E7243EFC19C3022400E1E9C4 /* XSView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EFB19C3022400E1E9C4 /* XSView.m */; };
 		E7478AF61A29C9540022BC11 /* NSColor+CustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E7478AF51A29C9540022BC11 /* NSColor+CustomColor.m */; };
+		E7478AF91A2A1CC20022BC11 /* denial-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478AF81A2A1CC20022BC11 /* denial-icon@2x.png */; };
+		E7478B011A2A1FEA0022BC11 /* disjunction-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B001A2A1FEA0022BC11 /* disjunction-icon@2x.png */; };
+		E7478B031A2A20250022BC11 /* conjunction-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B021A2A20250022BC11 /* conjunction-icon@2x.png */; };
+		E7478B051A2A22A30022BC11 /* delay-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B041A2A22A30022BC11 /* delay-icon@2x.png */; };
+		E7478B071A2A237F0022BC11 /* enter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B061A2A237F0022BC11 /* enter-icon@2x.png */; };
+		E7478B0D1A2A26840022BC11 /* exit-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B0C1A2A26840022BC11 /* exit-icon@2x.png */; };
 		E768AC9A19EFFC3800AD2A0C /* XSDelayObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9919EFFC3800AD2A0C /* XSDelayObject.m */; };
 		E768AC9D19EFFC5600AD2A0C /* XSDenialObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9C19EFFC5600AD2A0C /* XSDenialObject.m */; };
 		E768ACA019EFFC8200AD2A0C /* XSDisjunctionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9F19EFFC8200AD2A0C /* XSDisjunctionObject.m */; };
@@ -83,6 +89,12 @@
 		E7243EFB19C3022400E1E9C4 /* XSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSView.m; path = ObjectView/BlueView/XSView.m; sourceTree = "<group>"; };
 		E7478AF41A29C9540022BC11 /* NSColor+CustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+CustomColor.h"; path = "Categories/CustomColors/NSColor+CustomColor.h"; sourceTree = "<group>"; };
 		E7478AF51A29C9540022BC11 /* NSColor+CustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+CustomColor.m"; path = "Categories/CustomColors/NSColor+CustomColor.m"; sourceTree = "<group>"; };
+		E7478AF81A2A1CC20022BC11 /* denial-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "denial-icon@2x.png"; sourceTree = "<group>"; };
+		E7478B001A2A1FEA0022BC11 /* disjunction-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disjunction-icon@2x.png"; sourceTree = "<group>"; };
+		E7478B021A2A20250022BC11 /* conjunction-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "conjunction-icon@2x.png"; sourceTree = "<group>"; };
+		E7478B041A2A22A30022BC11 /* delay-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delay-icon@2x.png"; sourceTree = "<group>"; };
+		E7478B061A2A237F0022BC11 /* enter-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enter-icon@2x.png"; sourceTree = "<group>"; };
+		E7478B0C1A2A26840022BC11 /* exit-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exit-icon@2x.png"; sourceTree = "<group>"; };
 		E768AC9819EFFC3800AD2A0C /* XSDelayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDelayObject.h; path = Objects/XSDelayObject/XSDelayObject.h; sourceTree = "<group>"; };
 		E768AC9919EFFC3800AD2A0C /* XSDelayObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSDelayObject.m; path = Objects/XSDelayObject/XSDelayObject.m; sourceTree = "<group>"; };
 		E768AC9B19EFFC5600AD2A0C /* XSDenialObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDenialObject.h; path = Objects/XSDenielObject/XSDenialObject.h; sourceTree = "<group>"; };
@@ -198,6 +210,7 @@
 		E7243EB219C2CB9E00E1E9C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E7478AF71A2A1CB00022BC11 /* Images */,
 				E7243EB319C2CB9E00E1E9C4 /* XScheme-Info.plist */,
 				E7243EB419C2CB9E00E1E9C4 /* InfoPlist.strings */,
 				E7243EB719C2CB9E00E1E9C4 /* main.m */,
@@ -296,6 +309,19 @@
 				E7478AF51A29C9540022BC11 /* NSColor+CustomColor.m */,
 			);
 			name = NSColor;
+			sourceTree = "<group>";
+		};
+		E7478AF71A2A1CB00022BC11 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E7478B0C1A2A26840022BC11 /* exit-icon@2x.png */,
+				E7478B061A2A237F0022BC11 /* enter-icon@2x.png */,
+				E7478B021A2A20250022BC11 /* conjunction-icon@2x.png */,
+				E7478B001A2A1FEA0022BC11 /* disjunction-icon@2x.png */,
+				E7478AF81A2A1CC20022BC11 /* denial-icon@2x.png */,
+				E7478B041A2A22A30022BC11 /* delay-icon@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		E768AC9119EFFB8400AD2A0C /* XSEnterObject */ = {
@@ -442,7 +468,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7478AF91A2A1CC20022BC11 /* denial-icon@2x.png in Resources */,
+				E7478B031A2A20250022BC11 /* conjunction-icon@2x.png in Resources */,
 				E7243EB619C2CB9E00E1E9C4 /* InfoPlist.strings in Resources */,
+				E7478B071A2A237F0022BC11 /* enter-icon@2x.png in Resources */,
+				E7478B051A2A22A30022BC11 /* delay-icon@2x.png in Resources */,
+				E7478B0D1A2A26840022BC11 /* exit-icon@2x.png in Resources */,
+				E7478B011A2A1FEA0022BC11 /* disjunction-icon@2x.png in Resources */,
 				E7243EC419C2CB9E00E1E9C4 /* Images.xcassets in Resources */,
 				E7243EBC19C2CB9E00E1E9C4 /* Credits.rtf in Resources */,
 				E7243EC219C2CB9E00E1E9C4 /* MainMenu.xib in Resources */,

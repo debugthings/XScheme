@@ -14,16 +14,12 @@ static NSInteger const kIndentBetweenObject = 20;
 
 @implementation UtilityView
 
-- (id)initWithFrame:(NSRect)frame
-{
+- (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame Color:[NSColor sideMenuBackgroundColor]];
     
-    if (self)
-    {
-        for(int i = 0; i < 6; i++)
-        {
+    if (self) {
+        for (int i = 0; i < 6; i++) {
             NSInteger topPadding = kIndentBetweenObject + ((kIndentBetweenObject + 48) * i);
-            
             
             NSDictionary *metrics = @{@"topPadding":[NSNumber numberWithInteger:topPadding]};
             
@@ -33,7 +29,8 @@ static NSInteger const kIndentBetweenObject = 20;
             
             XSLabel *label = [[XSLabel alloc] init];
             label.translatesAutoresizingMaskIntoConstraints = NO;
-            [label setAttributedStringValue:[object attributedString]];
+            [label setStringValue:[object title]];
+            label.textColor = [NSColor whiteColor];
             
             [self addSubview:object];
             [self addSubview:line];
@@ -66,27 +63,19 @@ static NSInteger const kIndentBetweenObject = 20;
                                                                          metrics:nil
                                                                            views:elements]];
             
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topPadding-[label(48)]"
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[label(25)]-20-[line]"
                                                                          options:0
                                                                          metrics:metrics
                                                                            views:elements]];
-            
         }
     }
     
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
-    [super drawRect:dirtyRect];
-}
-
-
 #pragma mark - ObjectsView
 
-- (NSView *)objectViewOrigin:(CGPoint)origin ObjectType:(NSInteger)objectType
-{
+- (NSView *)objectViewOrigin:(CGPoint)origin ObjectType:(NSInteger)objectType {
     return nil;
 }
 

@@ -27,7 +27,7 @@ typedef enum XSObjectType XSObjectType;
 - (id)initObject:(XSObjectType)objectType;
 
 - (NSString *)title;
-- (NSString *)descriptionObject;
-- (NSAttributedString *)attributedString;
+//- (NSString *)descriptionObject;
+//- (NSAttributedString *)attributedString;
 
 @end
