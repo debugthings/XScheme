@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface XSEditorView : NSView
+@interface XSEditorView : XSView
 
 @end

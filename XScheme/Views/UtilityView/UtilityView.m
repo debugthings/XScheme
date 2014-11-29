@@ -10,23 +10,25 @@
 #import "XSObjectView.h"
 #import "XSLabel.h"
 
+static NSInteger const kIndentBetweenObject = 20;
+
 @implementation UtilityView
 
 - (id)initWithFrame:(NSRect)frame
 {
-    self = [super initWithFrame:frame Color:NSColorFromRGB(0xf2f2f2)];
+    self = [super initWithFrame:frame Color:[NSColor sideMenuBackgroundColor]];
     
     if (self)
     {
         for(int i = 0; i < 6; i++)
         {
-            NSInteger topPadding = 10 + ((10 + 48) * i);
+            NSInteger topPadding = kIndentBetweenObject + ((kIndentBetweenObject + 48) * i);
             
             
             NSDictionary *metrics = @{@"topPadding":[NSNumber numberWithInteger:topPadding]};
             
             XSObjectView *object = [[XSObjectView alloc] initObject:i];
-            XSView *line = [[XSView alloc] initWithFrame:CGRectZero Color:[NSColor lightGrayColor]];
+            XSView *line = [[XSView alloc] initWithFrame:CGRectZero Color:[NSColor lightGrayColorCustom]];
             line.translatesAutoresizingMaskIntoConstraints = NO;
             
             XSLabel *label = [[XSLabel alloc] init];
@@ -54,12 +56,12 @@
                                                                          metrics:nil
                                                                            views:elements]];
             
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[object]-5-[line(0.5)]"
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[object]-10-[line(0.5)]"
                                                                          options:0
                                                                          metrics:nil
                                                                            views:elements]];
             
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[object]-5-[label]-8-|"
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[object]-10-[label]-8-|"
                                                                          options:0
                                                                          metrics:nil
                                                                            views:elements]];

@@ -10,11 +10,35 @@
 
 @implementation NSColor (CustomColors)
 
-- (NSColor *)workplaceBackgrountColor {
-    return [NSColor colorWithHexColorString:@"0x26303b"];
++ (NSColor *)workplaceBackgrountColor {
+    return [NSColor colorWithHexColorString:@"0x212121"];
 }
 
-+ (NSColor *)colorWithHexColorString:(NSString*)inColorString
++ (NSColor *)sideMenuBackgroundColor {
+    return [NSColor colorWithHexColorString:@"0x2c2c2c"];
+}
+
++ (NSColor *)objectsBackgroundColor {
+    return [NSColor colorWithHexColorString:@"0xececec"];
+}
+
++ (NSColor *)enterObjectBorderColor {
+    return [NSColor colorWithHexColorString:@"0x33c748"];
+}
+
++ (NSColor *)exitObjectBorderColor {
+    return [NSColor colorWithHexColorString:@"0xdf4644"];
+}
+
++ (NSColor *)objectBorderColor {
+    return [NSColor colorWithHexColorString:@"0xfdb839"];
+}
+
++ (NSColor *)lightGrayColorCustom {
+    return [NSColor colorWithHexColorString:@"0x636363"];
+}
+
++ (NSColor *)colorWithHexColorString:(NSString *)inColorString
 {
     NSColor* result = nil;
     unsigned colorCode = 0;

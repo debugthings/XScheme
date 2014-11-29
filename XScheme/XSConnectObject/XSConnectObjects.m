@@ -18,8 +18,7 @@
 
 @synthesize bezierPathsArray = _bezierPathsArray;
 
-+ (XSConnectObjects *)sharedObject
-{
++ (XSConnectObjects *)sharedObject {
     static XSConnectObjects *connectionObject = nil;
     static dispatch_once_t once_tocken;
     
@@ -30,10 +29,8 @@
     return connectionObject;
 }
 
-+ (void)connectingLineBetweenObject:(id)firstObject andObject:(id)secondObject
-{
-    if([firstObject isKindOfClass:[NSView class]] && [secondObject isKindOfClass:[NSView class]])
-    {
++ (void)connectingLineBetweenObject:(id)firstObject andObject:(id)secondObject {
+    if ([firstObject isKindOfClass:[NSView class]] && [secondObject isKindOfClass:[NSView class]]) {
         NSView *firstView = (NSView *)firstObject;
         NSView *secondView = (NSView *)secondObject;
         
@@ -43,7 +40,7 @@
         CGPoint startPoint = [XSConnectObjects bottomConnectPoint:firstView.frame];
         CGPoint endPoint = [XSConnectObjects topConnectPoint:secondView.frame];
         
-        if(startPoint.y <= endPoint.y)
+        if (startPoint.y <= endPoint.y)
             startPoint = [XSConnectObjects topConnectPoint:firstView.frame];
         
         [bezierPath moveToPoint:startPoint];
@@ -53,53 +50,47 @@
         
         [XSConnectObjects collisionsWithPath:bezierPath];
         
-        [[NSColor blackColor] set];
+        [[NSColor lightGrayColorCustom] set];
         [bezierPath stroke];
         
         [XSConnectObjects insertPath:bezierPath];
     }
 }
 
-+ (CGPoint)bottomConnectPoint:(CGRect)frame
-{
++ (CGPoint)bottomConnectPoint:(CGRect)frame {
     CGPoint point = CGPointMake(frame.origin.x + frame.size.width / 2, frame.origin.y);
     return point;
 }
 
-+ (CGPoint)topConnectPoint:(CGRect)frame
-{
++ (CGPoint)topConnectPoint:(CGRect)frame {
     CGPoint point = CGPointMake(frame.origin.x + frame.size.width / 2, frame.origin.y + frame.size.height);
     return point;
 }
 
-+ (void)insertPath:(NSBezierPath *)bezierPath
-{
++ (void)insertPath:(NSBezierPath *)bezierPath {
     XSConnectObjects *connectionObject = [XSConnectObjects sharedObject];
     [connectionObject.bezierPathsArray addObject:bezierPath];
 }
 
-+ (void)removePath:(NSBezierPath *)bezierPath
-{
++ (void)removePath:(NSBezierPath *)bezierPath {
     XSConnectObjects *connectionObject = [XSConnectObjects sharedObject];
     [connectionObject.bezierPathsArray removeObject:bezierPath];
 }
 
-+ (NSArray *)collisionsWithPath:(NSBezierPath *)bezierPath
-{
-    XSConnectObjects *connectionObject = [XSConnectObjects sharedObject];
-    
++ (NSArray *)collisionsWithPath:(NSBezierPath *)bezierPath {
+//    XSConnectObjects *connectionObject = [XSConnectObjects sharedObject];
+//    
     NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for(int i = 0; i < [connectionObject.bezierPathsArray count]; i++)
-    {
-        NSBezierPath *path = [connectionObject.bezierPathsArray objectAtIndex:i];
-        
-        NSRect rect1 = [path controlPointBounds];
-        NSRect rect2 = [bezierPath controlPointBounds];
-        
-        if(CGRectContainsRect(rect1, rect2))
-            NSLog(@"YES");
-    }
+//    for(int i = 0; i < [connectionObject.bezierPathsArray count]; i++)
+//    {
+//        NSBezierPath *path = [connectionObject.bezierPathsArray objectAtIndex:i];
+//        
+//        NSRect rect1 = [path controlPointBounds];
+//        NSRect rect2 = [bezierPath controlPointBounds];
+//        
+//        if(CGRectContainsRect(rect1, rect2))
+//    }
     
     return points;
 }

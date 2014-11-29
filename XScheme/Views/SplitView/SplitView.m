@@ -23,7 +23,7 @@
     if (self)
     {
         // Initialization code here.
-        self.dividerStyle = NSSplitViewDividerStyleThin;
+        self.dividerStyle = NSSplitViewDividerStyleThick;
         [self setVertical:YES];
         
         XSEditorView *view1 = [[XSEditorView alloc] initWithFrame:CGRectMake([[self.window contentView] bounds].origin.x, [[self.window contentView] bounds].origin.y, 400, [[self.window contentView] bounds].size.height)];
@@ -42,11 +42,22 @@
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
+- (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
-    // Drawing code here.
+}
+
+- (void)drawDividerInRect:(NSRect)rect {
+    NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:29.0f/255.0f
+                                                                                               green:29.0f/255.0f
+                                                                                                blue:29.0f/255.0f
+                                                                                               alpha:1.0f]
+                                                         endingColor:[NSColor colorWithCalibratedRed:32.0f/255.0f
+                                                                                               green:32.0f/255.0f
+                                                                                                blue:32.0f/255.0f
+                                                                                               alpha:1.0f]];
+    [gradient drawInRect:rect angle:180];
+//    [[NSColor redColor] set];
+//    NSRectFill(rect);
 }
 
 #pragma mark NSSplitViewDelegate

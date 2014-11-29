@@ -10,6 +10,15 @@
 
 @interface NSColor (CustomColors)
 
-- (NSColor *)workplaceBackgrountColor;
++ (NSColor *)workplaceBackgrountColor;
++ (NSColor *)sideMenuBackgroundColor;
++ (NSColor *)enterObjectBorderColor;
++ (NSColor *)objectsBackgroundColor;
++ (NSColor *)objectBorderColor;
++ (NSColor *)exitObjectBorderColor;
+
++ (NSColor *)lightGrayColorCustom;
+
++ (NSColor *)colorWithHexColorString:(NSString *)inColorString;
 
 @end

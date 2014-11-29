@@ -25,17 +25,19 @@
 
 @implementation XSEditorView
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    
-    if (self) {
+- (id)initWithFrame:(NSRect)frame
+{
+    self = [super initWithFrame:frame Color:[NSColor workplaceBackgrountColor]];
+    if (self)
+    {
+        // Initialization code here.
         [self addObjects];
     }
-    
     return self;
 }
 
-- (void)addObjects {
+- (void)addObjects
+{
     self.enterObject = [[XSObjectView alloc] initObject:kXSObjectTypeEnter];
     [self addSubview:self.enterObject];
     
@@ -149,15 +151,54 @@
                                                                    views:NSDictionaryOfVariableBindings(_oneMoreConjunctionObject, _exitObject)]];
     
     [self addSubview:self.exitObject];
+    
+    
+    
+    
+    
+//    id previousObject;
+//    
+//    for(int i = 0; i < 6; i++)
+//    {
+//        NSInteger topPadding = 10 + ((40 + 48) * i);
+//        
+//        
+//        NSDictionary *metrics = @{@"topPadding":[NSNumber numberWithInteger:topPadding]};
+//        
+//        XSObjectView *object = [[XSObjectView alloc] initObject:i];
+//        [self addSubview:object];
+//        
+//        NSDictionary *elements = NSDictionaryOfVariableBindings(object);
+//        
+//        
+//        if(i == 0)
+//            [self addConstraint:[NSLayoutConstraint constraintWithItem:object
+//                                                             attribute:NSLayoutAttributeCenterX
+//                                                             relatedBy:NSLayoutRelationEqual
+//                                                                toItem:object
+//                                                             attribute:NSLayoutAttributeBaseline
+//                                                            multiplier:10
+//                                                              constant:10]];
+//        
+////        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=10)-[object]-(<=10)-|"
+////                                                                     options:0
+////                                                                     metrics:nil
+////                                                                       views:elements]];
+//        
+//        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topPadding-[object]"
+//                                                                     options:0
+//                                                                     metrics:metrics
+//                                                                       views:elements]];
+//        
+//        previousObject = object;
+//
+//    }
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
-    
-    [[NSColor whiteColor] setFill];
-    NSRectFill(dirtyRect);
-    
+        
     [XSConnectObjects connectingLineBetweenObject:self.enterObject andObject:self.conjunctionObject];
     [XSConnectObjects connectingLineBetweenObject:self.enterObject andObject:self.disjunctionObject];
     [XSConnectObjects connectingLineBetweenObject:self.conjunctionObject andObject:self.delayFirstObject];

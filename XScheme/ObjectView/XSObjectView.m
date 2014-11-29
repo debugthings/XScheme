@@ -33,8 +33,8 @@
         _type = objectType;
         
         [self setWantsLayer:YES];
-        self.layer.borderWidth = 1.0f;
-        self.layer.borderColor = NSColorFromRGB(0xbfbfbf).CGColor;
+        self.layer.borderWidth = 3.0f;
+        self.layer.cornerRadius = 24.0f;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[self(==48)]"
@@ -47,36 +47,41 @@
                                                                      metrics:nil
                                                                        views:NSDictionaryOfVariableBindings(self)]];
         
-        XSView *blueView = [[XSView alloc] initWithFrame:CGRectMake(2, 2, 44, 44) Color:NSColorFromRGB(0xc0d4e5)];
+//        XSView *blueView = [[XSView alloc] initWithFrame:CGRectMake(2, 2, 44, 44) Color:NSColorFromRGB(0xc0d4e5)];
         
         XSLabel *label = [[XSLabel alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
         [label setFont:[NSFont fontWithName:@"HelveticaNeue-Light" size:30.0f]];
         [label setTextColor:[NSColor whiteColor]];
         label.alignment = NSCenterTextAlignment;
         
-        switch (objectType)
-        {
+        switch (objectType) {
             case kXSObjectTypeEnter:
+                self.layer.borderColor = [NSColor enterObjectBorderColor].CGColor;
                 label.stringValue = @"x";
                 break;
             
             case kXSObjectTypeExit:
+                self.layer.borderColor = [NSColor exitObjectBorderColor].CGColor;
                 label.stringValue = @"y";
                 break;
                 
             case kXSObjectTypeConjunction:
+                self.layer.borderColor = [NSColor objectBorderColor].CGColor;
                 label.stringValue = @"∧";
                 break;
                 
             case kXSObjectTypeDisjunction:
+                self.layer.borderColor = [NSColor objectBorderColor].CGColor;
                 label.stringValue = @"∨";
                 break;
                 
             case kXSObjectTypeDenial:
+                self.layer.borderColor = [NSColor objectBorderColor].CGColor;
                 label.stringValue = @"—";
                 break;
                 
             case kXSObjectTypeDelay:
+                self.layer.borderColor = [NSColor objectBorderColor].CGColor;
                 label.stringValue = @"z";
                 break;
                 
@@ -84,9 +89,9 @@
                 break;
         }
         
-        [blueView addSubview:label];
+//        [blueView addSubview:label];
         
-        [self addSubview:blueView];
+        [self addSubview:label];
     }
     
     return self;
