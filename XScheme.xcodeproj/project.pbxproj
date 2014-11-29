@@ -1,0 +1,709 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E71787DE19F0FD6100173675 /* XSConnectObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = E71787DD19F0FD6100173675 /* XSConnectObjects.m */; };
+		E7243EAC19C2CB9E00E1E9C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7243EAB19C2CB9E00E1E9C4 /* Cocoa.framework */; };
+		E7243EB619C2CB9E00E1E9C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7243EB419C2CB9E00E1E9C4 /* InfoPlist.strings */; };
+		E7243EB819C2CB9E00E1E9C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EB719C2CB9E00E1E9C4 /* main.m */; };
+		E7243EBC19C2CB9E00E1E9C4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E7243EBA19C2CB9E00E1E9C4 /* Credits.rtf */; };
+		E7243EBF19C2CB9E00E1E9C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EBE19C2CB9E00E1E9C4 /* AppDelegate.m */; };
+		E7243EC219C2CB9E00E1E9C4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7243EC019C2CB9E00E1E9C4 /* MainMenu.xib */; };
+		E7243EC419C2CB9E00E1E9C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7243EC319C2CB9E00E1E9C4 /* Images.xcassets */; };
+		E7243ECB19C2CB9E00E1E9C4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7243ECA19C2CB9E00E1E9C4 /* XCTest.framework */; };
+		E7243ECC19C2CB9E00E1E9C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7243EAB19C2CB9E00E1E9C4 /* Cocoa.framework */; };
+		E7243ED419C2CB9E00E1E9C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7243ED219C2CB9E00E1E9C4 /* InfoPlist.strings */; };
+		E7243ED619C2CB9E00E1E9C4 /* XSchemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243ED519C2CB9E00E1E9C4 /* XSchemeTests.m */; };
+		E7243EE319C2D01E00E1E9C4 /* UtilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EE219C2D01E00E1E9C4 /* UtilityView.m */; };
+		E7243EE719C2D06F00E1E9C4 /* XSEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EE619C2D06F00E1E9C4 /* XSEditorView.m */; };
+		E7243EEB19C2D45A00E1E9C4 /* SplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EEA19C2D45A00E1E9C4 /* SplitView.m */; };
+		E7243EF219C2DF2D00E1E9C4 /* XSObjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EF119C2DF2D00E1E9C4 /* XSObjectView.m */; };
+		E7243EF419C2E1CC00E1E9C4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7243EF319C2E1CC00E1E9C4 /* QuartzCore.framework */; };
+		E7243EF819C2E81A00E1E9C4 /* XSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EF719C2E81A00E1E9C4 /* XSLabel.m */; };
+		E7243EFC19C3022400E1E9C4 /* XSView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EFB19C3022400E1E9C4 /* XSView.m */; };
+		E7478AF61A29C9540022BC11 /* NSColor+CustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E7478AF51A29C9540022BC11 /* NSColor+CustomColor.m */; };
+		E768AC9A19EFFC3800AD2A0C /* XSDelayObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9919EFFC3800AD2A0C /* XSDelayObject.m */; };
+		E768AC9D19EFFC5600AD2A0C /* XSDenialObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9C19EFFC5600AD2A0C /* XSDenialObject.m */; };
+		E768ACA019EFFC8200AD2A0C /* XSDisjunctionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9F19EFFC8200AD2A0C /* XSDisjunctionObject.m */; };
+		E768ACA319EFFCA000AD2A0C /* XSConjunctionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768ACA219EFFCA000AD2A0C /* XSConjunctionObject.m */; };
+		E768ACA619EFFD3100AD2A0C /* XSExitObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768ACA519EFFD3100AD2A0C /* XSExitObject.m */; };
+		E768ACA919EFFD4600AD2A0C /* XSEnterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768ACA819EFFD4600AD2A0C /* XSEnterObject.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E7243ECD19C2CB9E00E1E9C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7243EA019C2CB9E00E1E9C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7243EA719C2CB9E00E1E9C4;
+			remoteInfo = XScheme;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E71787DC19F0FD6100173675 /* XSConnectObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSConnectObjects.h; path = XSConnectObject/XSConnectObjects.h; sourceTree = "<group>"; };
+		E71787DD19F0FD6100173675 /* XSConnectObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSConnectObjects.m; path = XSConnectObject/XSConnectObjects.m; sourceTree = "<group>"; };
+		E7243EA819C2CB9E00E1E9C4 /* XScheme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XScheme.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7243EAB19C2CB9E00E1E9C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		E7243EAE19C2CB9E00E1E9C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		E7243EAF19C2CB9E00E1E9C4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E7243EB019C2CB9E00E1E9C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E7243EB319C2CB9E00E1E9C4 /* XScheme-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XScheme-Info.plist"; sourceTree = "<group>"; };
+		E7243EB519C2CB9E00E1E9C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E7243EB719C2CB9E00E1E9C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E7243EB919C2CB9E00E1E9C4 /* XScheme-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XScheme-Prefix.pch"; sourceTree = "<group>"; };
+		E7243EBB19C2CB9E00E1E9C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		E7243EBD19C2CB9E00E1E9C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E7243EBE19C2CB9E00E1E9C4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E7243EC119C2CB9E00E1E9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		E7243EC319C2CB9E00E1E9C4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E7243EC919C2CB9E00E1E9C4 /* XSchemeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XSchemeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7243ECA19C2CB9E00E1E9C4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E7243ED119C2CB9E00E1E9C4 /* XSchemeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XSchemeTests-Info.plist"; sourceTree = "<group>"; };
+		E7243ED319C2CB9E00E1E9C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E7243ED519C2CB9E00E1E9C4 /* XSchemeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XSchemeTests.m; sourceTree = "<group>"; };
+		E7243EE119C2D01E00E1E9C4 /* UtilityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UtilityView.h; path = Views/UtilityView/UtilityView.h; sourceTree = "<group>"; };
+		E7243EE219C2D01E00E1E9C4 /* UtilityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UtilityView.m; path = Views/UtilityView/UtilityView.m; sourceTree = "<group>"; };
+		E7243EE519C2D06F00E1E9C4 /* XSEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSEditorView.h; path = Views/EditorView/XSEditorView.h; sourceTree = "<group>"; };
+		E7243EE619C2D06F00E1E9C4 /* XSEditorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSEditorView.m; path = Views/EditorView/XSEditorView.m; sourceTree = "<group>"; };
+		E7243EE919C2D45A00E1E9C4 /* SplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitView.h; path = Views/SplitView/SplitView.h; sourceTree = "<group>"; };
+		E7243EEA19C2D45A00E1E9C4 /* SplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitView.m; path = Views/SplitView/SplitView.m; sourceTree = "<group>"; };
+		E7243EEC19C2D7F500E1E9C4 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		E7243EF019C2DF2D00E1E9C4 /* XSObjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSObjectView.h; path = ObjectView/XSObjectView.h; sourceTree = "<group>"; };
+		E7243EF119C2DF2D00E1E9C4 /* XSObjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSObjectView.m; path = ObjectView/XSObjectView.m; sourceTree = "<group>"; };
+		E7243EF319C2E1CC00E1E9C4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E7243EF619C2E81A00E1E9C4 /* XSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSLabel.h; path = ObjectView/ObjectLabel/XSLabel.h; sourceTree = "<group>"; };
+		E7243EF719C2E81A00E1E9C4 /* XSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSLabel.m; path = ObjectView/ObjectLabel/XSLabel.m; sourceTree = "<group>"; };
+		E7243EFA19C3022400E1E9C4 /* XSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSView.h; path = ObjectView/BlueView/XSView.h; sourceTree = "<group>"; };
+		E7243EFB19C3022400E1E9C4 /* XSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSView.m; path = ObjectView/BlueView/XSView.m; sourceTree = "<group>"; };
+		E7478AF41A29C9540022BC11 /* NSColor+CustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+CustomColor.h"; path = "Categories/CustomColors/NSColor+CustomColor.h"; sourceTree = "<group>"; };
+		E7478AF51A29C9540022BC11 /* NSColor+CustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+CustomColor.m"; path = "Categories/CustomColors/NSColor+CustomColor.m"; sourceTree = "<group>"; };
+		E768AC9819EFFC3800AD2A0C /* XSDelayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDelayObject.h; path = Objects/XSDelayObject/XSDelayObject.h; sourceTree = "<group>"; };
+		E768AC9919EFFC3800AD2A0C /* XSDelayObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSDelayObject.m; path = Objects/XSDelayObject/XSDelayObject.m; sourceTree = "<group>"; };
+		E768AC9B19EFFC5600AD2A0C /* XSDenialObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDenialObject.h; path = Objects/XSDenielObject/XSDenialObject.h; sourceTree = "<group>"; };
+		E768AC9C19EFFC5600AD2A0C /* XSDenialObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSDenialObject.m; path = Objects/XSDenielObject/XSDenialObject.m; sourceTree = "<group>"; };
+		E768AC9E19EFFC8200AD2A0C /* XSDisjunctionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDisjunctionObject.h; path = Objects/XSDisjunctionObject/XSDisjunctionObject.h; sourceTree = "<group>"; };
+		E768AC9F19EFFC8200AD2A0C /* XSDisjunctionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSDisjunctionObject.m; path = Objects/XSDisjunctionObject/XSDisjunctionObject.m; sourceTree = "<group>"; };
+		E768ACA119EFFCA000AD2A0C /* XSConjunctionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSConjunctionObject.h; path = Objects/XSConjunctionObject/XSConjunctionObject.h; sourceTree = "<group>"; };
+		E768ACA219EFFCA000AD2A0C /* XSConjunctionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSConjunctionObject.m; path = Objects/XSConjunctionObject/XSConjunctionObject.m; sourceTree = "<group>"; };
+		E768ACA419EFFD3100AD2A0C /* XSExitObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSExitObject.h; path = Objects/XSExitObject/XSExitObject.h; sourceTree = "<group>"; };
+		E768ACA519EFFD3100AD2A0C /* XSExitObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSExitObject.m; path = Objects/XSExitObject/XSExitObject.m; sourceTree = "<group>"; };
+		E768ACA719EFFD4600AD2A0C /* XSEnterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSEnterObject.h; path = Objects/XSEnterObject/XSEnterObject.h; sourceTree = "<group>"; };
+		E768ACA819EFFD4600AD2A0C /* XSEnterObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSEnterObject.m; path = Objects/XSEnterObject/XSEnterObject.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E7243EA519C2CB9E00E1E9C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7243EF419C2E1CC00E1E9C4 /* QuartzCore.framework in Frameworks */,
+				E7243EAC19C2CB9E00E1E9C4 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7243EC619C2CB9E00E1E9C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7243ECC19C2CB9E00E1E9C4 /* Cocoa.framework in Frameworks */,
+				E7243ECB19C2CB9E00E1E9C4 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E71787DB19F0FD0A00173675 /* XSConnectObject */ = {
+			isa = PBXGroup;
+			children = (
+				E71787DC19F0FD6100173675 /* XSConnectObjects.h */,
+				E71787DD19F0FD6100173675 /* XSConnectObjects.m */,
+			);
+			name = XSConnectObject;
+			sourceTree = "<group>";
+		};
+		E71787DF19F1000600173675 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E7478AF31A29C9120022BC11 /* NSColor */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		E7243E9F19C2CB9E00E1E9C4 = {
+			isa = PBXGroup;
+			children = (
+				E7243EB119C2CB9E00E1E9C4 /* XScheme */,
+				E7243ECF19C2CB9E00E1E9C4 /* XSchemeTests */,
+				E7243EAA19C2CB9E00E1E9C4 /* Frameworks */,
+				E7243EA919C2CB9E00E1E9C4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E7243EA919C2CB9E00E1E9C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EA819C2CB9E00E1E9C4 /* XScheme.app */,
+				E7243EC919C2CB9E00E1E9C4 /* XSchemeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7243EAA19C2CB9E00E1E9C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EF319C2E1CC00E1E9C4 /* QuartzCore.framework */,
+				E7243EAB19C2CB9E00E1E9C4 /* Cocoa.framework */,
+				E7243ECA19C2CB9E00E1E9C4 /* XCTest.framework */,
+				E7243EAD19C2CB9E00E1E9C4 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E7243EAD19C2CB9E00E1E9C4 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EAE19C2CB9E00E1E9C4 /* AppKit.framework */,
+				E7243EAF19C2CB9E00E1E9C4 /* CoreData.framework */,
+				E7243EB019C2CB9E00E1E9C4 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		E7243EB119C2CB9E00E1E9C4 /* XScheme */ = {
+			isa = PBXGroup;
+			children = (
+				E71787DF19F1000600173675 /* Categories */,
+				E71787DB19F0FD0A00173675 /* XSConnectObject */,
+				E7243EF919C3020A00E1E9C4 /* XSView */,
+				E7243EF519C2E7F500E1E9C4 /* XSLabel */,
+				E768AC9719EFFBFD00AD2A0C /* Objects */,
+				E7243EDF19C2CFF500E1E9C4 /* Views */,
+				E7243EBD19C2CB9E00E1E9C4 /* AppDelegate.h */,
+				E7243EBE19C2CB9E00E1E9C4 /* AppDelegate.m */,
+				E7243EC019C2CB9E00E1E9C4 /* MainMenu.xib */,
+				E7243EC319C2CB9E00E1E9C4 /* Images.xcassets */,
+				E7243EB219C2CB9E00E1E9C4 /* Supporting Files */,
+				E7243EEC19C2D7F500E1E9C4 /* Global.h */,
+			);
+			path = XScheme;
+			sourceTree = "<group>";
+		};
+		E7243EB219C2CB9E00E1E9C4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EB319C2CB9E00E1E9C4 /* XScheme-Info.plist */,
+				E7243EB419C2CB9E00E1E9C4 /* InfoPlist.strings */,
+				E7243EB719C2CB9E00E1E9C4 /* main.m */,
+				E7243EB919C2CB9E00E1E9C4 /* XScheme-Prefix.pch */,
+				E7243EBA19C2CB9E00E1E9C4 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E7243ECF19C2CB9E00E1E9C4 /* XSchemeTests */ = {
+			isa = PBXGroup;
+			children = (
+				E7243ED519C2CB9E00E1E9C4 /* XSchemeTests.m */,
+				E7243ED019C2CB9E00E1E9C4 /* Supporting Files */,
+			);
+			path = XSchemeTests;
+			sourceTree = "<group>";
+		};
+		E7243ED019C2CB9E00E1E9C4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7243ED119C2CB9E00E1E9C4 /* XSchemeTests-Info.plist */,
+				E7243ED219C2CB9E00E1E9C4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E7243EDF19C2CFF500E1E9C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EE819C2D43C00E1E9C4 /* SplitView */,
+				E7243EE419C2D05400E1E9C4 /* EditorView */,
+				E7243EE019C2CFFB00E1E9C4 /* UtilityView */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E7243EE019C2CFFB00E1E9C4 /* UtilityView */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EE119C2D01E00E1E9C4 /* UtilityView.h */,
+				E7243EE219C2D01E00E1E9C4 /* UtilityView.m */,
+			);
+			name = UtilityView;
+			sourceTree = "<group>";
+		};
+		E7243EE419C2D05400E1E9C4 /* EditorView */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EE519C2D06F00E1E9C4 /* XSEditorView.h */,
+				E7243EE619C2D06F00E1E9C4 /* XSEditorView.m */,
+			);
+			name = EditorView;
+			sourceTree = "<group>";
+		};
+		E7243EE819C2D43C00E1E9C4 /* SplitView */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EE919C2D45A00E1E9C4 /* SplitView.h */,
+				E7243EEA19C2D45A00E1E9C4 /* SplitView.m */,
+			);
+			name = SplitView;
+			sourceTree = "<group>";
+		};
+		E7243EEF19C2DF0E00E1E9C4 /* ObjectView */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EF019C2DF2D00E1E9C4 /* XSObjectView.h */,
+				E7243EF119C2DF2D00E1E9C4 /* XSObjectView.m */,
+			);
+			name = ObjectView;
+			sourceTree = "<group>";
+		};
+		E7243EF519C2E7F500E1E9C4 /* XSLabel */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EF619C2E81A00E1E9C4 /* XSLabel.h */,
+				E7243EF719C2E81A00E1E9C4 /* XSLabel.m */,
+			);
+			name = XSLabel;
+			sourceTree = "<group>";
+		};
+		E7243EF919C3020A00E1E9C4 /* XSView */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EFA19C3022400E1E9C4 /* XSView.h */,
+				E7243EFB19C3022400E1E9C4 /* XSView.m */,
+			);
+			name = XSView;
+			sourceTree = "<group>";
+		};
+		E7478AF31A29C9120022BC11 /* NSColor */ = {
+			isa = PBXGroup;
+			children = (
+				E7478AF41A29C9540022BC11 /* NSColor+CustomColor.h */,
+				E7478AF51A29C9540022BC11 /* NSColor+CustomColor.m */,
+			);
+			name = NSColor;
+			sourceTree = "<group>";
+		};
+		E768AC9119EFFB8400AD2A0C /* XSEnterObject */ = {
+			isa = PBXGroup;
+			children = (
+				E768ACA719EFFD4600AD2A0C /* XSEnterObject.h */,
+				E768ACA819EFFD4600AD2A0C /* XSEnterObject.m */,
+			);
+			name = XSEnterObject;
+			sourceTree = "<group>";
+		};
+		E768AC9219EFFBA400AD2A0C /* XSExitObject */ = {
+			isa = PBXGroup;
+			children = (
+				E768ACA419EFFD3100AD2A0C /* XSExitObject.h */,
+				E768ACA519EFFD3100AD2A0C /* XSExitObject.m */,
+			);
+			name = XSExitObject;
+			sourceTree = "<group>";
+		};
+		E768AC9319EFFBAD00AD2A0C /* XSConjunctionObject */ = {
+			isa = PBXGroup;
+			children = (
+				E768ACA119EFFCA000AD2A0C /* XSConjunctionObject.h */,
+				E768ACA219EFFCA000AD2A0C /* XSConjunctionObject.m */,
+			);
+			name = XSConjunctionObject;
+			sourceTree = "<group>";
+		};
+		E768AC9419EFFBBA00AD2A0C /* XSDisjunctionObject */ = {
+			isa = PBXGroup;
+			children = (
+				E768AC9E19EFFC8200AD2A0C /* XSDisjunctionObject.h */,
+				E768AC9F19EFFC8200AD2A0C /* XSDisjunctionObject.m */,
+			);
+			name = XSDisjunctionObject;
+			sourceTree = "<group>";
+		};
+		E768AC9519EFFBDD00AD2A0C /* XSDenialObject */ = {
+			isa = PBXGroup;
+			children = (
+				E768AC9B19EFFC5600AD2A0C /* XSDenialObject.h */,
+				E768AC9C19EFFC5600AD2A0C /* XSDenialObject.m */,
+			);
+			name = XSDenialObject;
+			sourceTree = "<group>";
+		};
+		E768AC9619EFFBE900AD2A0C /* XSDelayObject */ = {
+			isa = PBXGroup;
+			children = (
+				E768AC9819EFFC3800AD2A0C /* XSDelayObject.h */,
+				E768AC9919EFFC3800AD2A0C /* XSDelayObject.m */,
+			);
+			name = XSDelayObject;
+			sourceTree = "<group>";
+		};
+		E768AC9719EFFBFD00AD2A0C /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				E7243EEF19C2DF0E00E1E9C4 /* ObjectView */,
+				E768AC9619EFFBE900AD2A0C /* XSDelayObject */,
+				E768AC9519EFFBDD00AD2A0C /* XSDenialObject */,
+				E768AC9419EFFBBA00AD2A0C /* XSDisjunctionObject */,
+				E768AC9319EFFBAD00AD2A0C /* XSConjunctionObject */,
+				E768AC9219EFFBA400AD2A0C /* XSExitObject */,
+				E768AC9119EFFB8400AD2A0C /* XSEnterObject */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E7243EA719C2CB9E00E1E9C4 /* XScheme */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7243ED919C2CB9E00E1E9C4 /* Build configuration list for PBXNativeTarget "XScheme" */;
+			buildPhases = (
+				E7243EA419C2CB9E00E1E9C4 /* Sources */,
+				E7243EA519C2CB9E00E1E9C4 /* Frameworks */,
+				E7243EA619C2CB9E00E1E9C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XScheme;
+			productName = XScheme;
+			productReference = E7243EA819C2CB9E00E1E9C4 /* XScheme.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E7243EC819C2CB9E00E1E9C4 /* XSchemeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7243EDC19C2CB9E00E1E9C4 /* Build configuration list for PBXNativeTarget "XSchemeTests" */;
+			buildPhases = (
+				E7243EC519C2CB9E00E1E9C4 /* Sources */,
+				E7243EC619C2CB9E00E1E9C4 /* Frameworks */,
+				E7243EC719C2CB9E00E1E9C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7243ECE19C2CB9E00E1E9C4 /* PBXTargetDependency */,
+			);
+			name = XSchemeTests;
+			productName = XSchemeTests;
+			productReference = E7243EC919C2CB9E00E1E9C4 /* XSchemeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E7243EA019C2CB9E00E1E9C4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Vladimir Shemet";
+				TargetAttributes = {
+					E7243EC819C2CB9E00E1E9C4 = {
+						TestTargetID = E7243EA719C2CB9E00E1E9C4;
+					};
+				};
+			};
+			buildConfigurationList = E7243EA319C2CB9E00E1E9C4 /* Build configuration list for PBXProject "XScheme" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E7243E9F19C2CB9E00E1E9C4;
+			productRefGroup = E7243EA919C2CB9E00E1E9C4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E7243EA719C2CB9E00E1E9C4 /* XScheme */,
+				E7243EC819C2CB9E00E1E9C4 /* XSchemeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7243EA619C2CB9E00E1E9C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7243EB619C2CB9E00E1E9C4 /* InfoPlist.strings in Resources */,
+				E7243EC419C2CB9E00E1E9C4 /* Images.xcassets in Resources */,
+				E7243EBC19C2CB9E00E1E9C4 /* Credits.rtf in Resources */,
+				E7243EC219C2CB9E00E1E9C4 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7243EC719C2CB9E00E1E9C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7243ED419C2CB9E00E1E9C4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E7243EA419C2CB9E00E1E9C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E768ACA619EFFD3100AD2A0C /* XSExitObject.m in Sources */,
+				E71787DE19F0FD6100173675 /* XSConnectObjects.m in Sources */,
+				E768ACA319EFFCA000AD2A0C /* XSConjunctionObject.m in Sources */,
+				E768ACA919EFFD4600AD2A0C /* XSEnterObject.m in Sources */,
+				E768AC9D19EFFC5600AD2A0C /* XSDenialObject.m in Sources */,
+				E7478AF61A29C9540022BC11 /* NSColor+CustomColor.m in Sources */,
+				E768AC9A19EFFC3800AD2A0C /* XSDelayObject.m in Sources */,
+				E7243EFC19C3022400E1E9C4 /* XSView.m in Sources */,
+				E7243EBF19C2CB9E00E1E9C4 /* AppDelegate.m in Sources */,
+				E7243EF819C2E81A00E1E9C4 /* XSLabel.m in Sources */,
+				E7243EF219C2DF2D00E1E9C4 /* XSObjectView.m in Sources */,
+				E7243EEB19C2D45A00E1E9C4 /* SplitView.m in Sources */,
+				E7243EE719C2D06F00E1E9C4 /* XSEditorView.m in Sources */,
+				E768ACA019EFFC8200AD2A0C /* XSDisjunctionObject.m in Sources */,
+				E7243EB819C2CB9E00E1E9C4 /* main.m in Sources */,
+				E7243EE319C2D01E00E1E9C4 /* UtilityView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7243EC519C2CB9E00E1E9C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7243ED619C2CB9E00E1E9C4 /* XSchemeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E7243ECE19C2CB9E00E1E9C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7243EA719C2CB9E00E1E9C4 /* XScheme */;
+			targetProxy = E7243ECD19C2CB9E00E1E9C4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E7243EB419C2CB9E00E1E9C4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7243EB519C2CB9E00E1E9C4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E7243EBA19C2CB9E00E1E9C4 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7243EBB19C2CB9E00E1E9C4 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		E7243EC019C2CB9E00E1E9C4 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7243EC119C2CB9E00E1E9C4 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		E7243ED219C2CB9E00E1E9C4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7243ED319C2CB9E00E1E9C4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E7243ED719C2CB9E00E1E9C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E7243ED819C2CB9E00E1E9C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E7243EDA19C2CB9E00E1E9C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "XScheme/XScheme-Prefix.pch";
+				INFOPLIST_FILE = "XScheme/XScheme-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E7243EDB19C2CB9E00E1E9C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "XScheme/XScheme-Prefix.pch";
+				INFOPLIST_FILE = "XScheme/XScheme-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E7243EDD19C2CB9E00E1E9C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/XScheme.app/Contents/MacOS/XScheme";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "XScheme/XScheme-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "XSchemeTests/XSchemeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		E7243EDE19C2CB9E00E1E9C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/XScheme.app/Contents/MacOS/XScheme";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "XScheme/XScheme-Prefix.pch";
+				INFOPLIST_FILE = "XSchemeTests/XSchemeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E7243EA319C2CB9E00E1E9C4 /* Build configuration list for PBXProject "XScheme" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7243ED719C2CB9E00E1E9C4 /* Debug */,
+				E7243ED819C2CB9E00E1E9C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7243ED919C2CB9E00E1E9C4 /* Build configuration list for PBXNativeTarget "XScheme" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7243EDA19C2CB9E00E1E9C4 /* Debug */,
+				E7243EDB19C2CB9E00E1E9C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7243EDC19C2CB9E00E1E9C4 /* Build configuration list for PBXNativeTarget "XSchemeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7243EDD19C2CB9E00E1E9C4 /* Debug */,
+				E7243EDE19C2CB9E00E1E9C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E7243EA019C2CB9E00E1E9C4 /* Project object */;
+}
