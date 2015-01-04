@@ -16,15 +16,22 @@
 
 @implementation XSView
 
-- (id)initWithFrame:(NSRect)frame Color:(NSColor *)color
-{
+- (id)initWithFrame:(NSRect)frame Color:(NSColor *)color {
     self = [super initWithFrame:frame];
     
-    if (self)
-    {
+    if (self) {
         self.backgroundColor = color;
-        // Initialization code here.
     }
+    return self;
+}
+
+- (id)initWithColor:(NSColor *)color {
+    self = [super init];
+    
+    if (self) {
+        self.backgroundColor = color;
+    }
+    
     return self;
 }
 
@@ -36,5 +43,4 @@
     NSRectFill(dirtyRect);
 }
 
-//NSColorFromRGB(0xc0d4e5)
 @end

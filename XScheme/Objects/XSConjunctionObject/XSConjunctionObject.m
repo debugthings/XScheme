@@ -10,10 +10,29 @@
 
 @implementation XSConjunctionObject
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
+- (instancetype)initListObject {
+    self = [super initListObjectWithType:kXSObjectTypeConjunction
+                                   title:@"Конъюнкция"
+                                   image:[NSImage imageNamed:@"conjunction-icon"]
+                             borderColor:[NSColor objectBorderColor]];
     
-    // Drawing code here.
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
+- (instancetype)initSchemeObject {
+    self = [super initSchemeObjectWithType:kXSObjectTypeConjunction
+                                     image:[NSImage imageNamed:@"conjunction-icon"]
+                               borderColor:[NSColor objectBorderColor]];
+    
+    if (self) {
+        
+    }
+    
+    return self;
 }
 
 @end

@@ -10,4 +10,7 @@
 
 @interface XSDisjunctionObject : XSObjectView
 
+- (instancetype)initSchemeObject;
+- (instancetype)initListObject;
+
 @end

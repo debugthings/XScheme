@@ -10,10 +10,29 @@
 
 @implementation XSExitObject
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
+- (instancetype)initListObject {
+    self = [super initListObjectWithType:kXSObjectTypeExit
+                                   title:@"Выход"
+                                   image:[NSImage imageNamed:@"exit-icon"]
+                             borderColor:[NSColor exitObjectBorderColor]];
     
-    // Drawing code here.
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
+- (instancetype)initSchemeObject {
+    self = [super initSchemeObjectWithType:kXSObjectTypeExit
+                                     image:[NSImage imageNamed:@"exit-icon"]
+                               borderColor:[NSColor exitObjectBorderColor]];
+    
+    if (self) {
+        
+    }
+    
+    return self;
 }
 
 @end

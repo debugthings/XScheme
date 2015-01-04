@@ -10,10 +10,29 @@
 
 @implementation XSDisjunctionObject
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
+- (instancetype)initListObject {
+    self = [super initListObjectWithType:kXSObjectTypeDisjunction
+                                   title:@"Дизъюнкция"
+                                   image:[NSImage imageNamed:@"disjunction-icon"]
+                             borderColor:[NSColor objectBorderColor]];
     
-    // Drawing code here.
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
+- (instancetype)initSchemeObject {
+    self = [super initSchemeObjectWithType:kXSObjectTypeDisjunction
+                                     image:[NSImage imageNamed:@"disjunction-icon"]
+                               borderColor:[NSColor objectBorderColor]];
+    
+    if (self) {
+        
+    }
+    
+    return self;
 }
 
 @end

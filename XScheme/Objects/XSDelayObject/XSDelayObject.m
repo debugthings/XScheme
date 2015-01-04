@@ -10,8 +10,29 @@
 
 @implementation XSDelayObject
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
+- (instancetype)initListObject {
+    self = [super initListObjectWithType:kXSObjectTypeDelay
+                                    title:@"Задержка"
+                                    image:[NSImage imageNamed:@"delay-icon"]
+                              borderColor:[NSColor objectBorderColor]];
+    
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
+- (instancetype)initSchemeObject {
+    self = [super initSchemeObjectWithType:kXSObjectTypeDelay
+                               image:[NSImage imageNamed:@"delay-icon"]
+                         borderColor:[NSColor objectBorderColor]];
+    
+    if (self) {
+        
+    }
+    
+    return self;
 }
 
 @end

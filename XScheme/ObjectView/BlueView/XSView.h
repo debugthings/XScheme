@@ -11,5 +11,6 @@
 @interface XSView : NSView
 
 - (id)initWithFrame:(NSRect)frameRect Color:(NSColor *)color;
+- (id)initWithColor:(NSColor *)color;
 
 @end

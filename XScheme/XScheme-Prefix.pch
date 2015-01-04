@@ -7,6 +7,16 @@
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
     #import "Global.h"
+    #import "XSUtility.h"
     #import "XSView.h"
     #import "NSColor+CustomColor.h"
+    #import "NSGradient+CustomGradients.h"
+
+    #import "XSEnterObject.h"
+    #import "XSExitObject.h"
+    #import "XSConjunctionObject.h"
+    #import "XSDisjunctionObject.h"
+    #import "XSDenialObject.h"
+    #import "XSDelayObject.h"
+
 #endif

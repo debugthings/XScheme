@@ -9,11 +9,14 @@
 #import "AppDelegate.h"
 #import "SplitView.h"
 
+@interface AppDelegate()
+
+@end
+
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
     [self.window setFrame:[[NSScreen mainScreen] frame] display:YES animate:YES];
     
     SplitView *splitView = [[SplitView alloc] initWithFrame:[[self.window contentView] bounds]];

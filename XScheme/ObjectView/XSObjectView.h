@@ -20,14 +20,17 @@ enum XSObjectType {
 
 typedef enum XSObjectType XSObjectType;
 
-@interface XSObjectView : NSView
+@interface XSObjectView : XSView
 
 @property (readonly) XSObjectType type;
 
-- (id)initObject:(XSObjectType)objectType;
+- (id)initSchemeObjectWithType:(XSObjectType)objectType
+                         image:(NSImage *)image
+                   borderColor:(NSColor *)borderColor;
 
-- (NSString *)title;
-//- (NSString *)descriptionObject;
-//- (NSAttributedString *)attributedString;
+- (id)initListObjectWithType:(XSObjectType)objectType
+                        title:(NSString *)title
+                        image:(NSImage *)image
+                  borderColor:(NSColor *)borderColor;
 
 @end

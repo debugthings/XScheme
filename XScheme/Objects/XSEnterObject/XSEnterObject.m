@@ -10,10 +10,29 @@
 
 @implementation XSEnterObject
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
+- (instancetype)initListObject {
+    self = [super initListObjectWithType:kXSObjectTypeEnter
+                                    title:@"Вход"
+                                    image:[NSImage imageNamed:@"enter-icon"]
+                              borderColor:[NSColor enterObjectBorderColor]];
     
-    // Drawing code here.
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
+- (instancetype)initSchemeObject {
+    self = [super initSchemeObjectWithType:kXSObjectTypeEnter
+                               image:[NSImage imageNamed:@"enter-icon"]
+                         borderColor:[NSColor enterObjectBorderColor]];
+    
+    if (self) {
+        
+    }
+    
+    return self;
 }
 
 @end

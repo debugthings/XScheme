@@ -10,10 +10,29 @@
 
 @implementation XSDenialObject
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
+- (instancetype)initListObject {
+    self = [super initListObjectWithType:kXSObjectTypeDenial
+                                   title:@"Отрицание"
+                                   image:[NSImage imageNamed:@"denial-icon"]
+                             borderColor:[NSColor objectBorderColor]];
     
-    // Drawing code here.
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
+- (instancetype)initSchemeObject {
+    self = [super initSchemeObjectWithType:kXSObjectTypeDenial
+                                     image:[NSImage imageNamed:@"denial-icon"]
+                               borderColor:[NSColor objectBorderColor]];
+    
+    if (self) {
+        
+    }
+    
+    return self;
 }
 
 @end
