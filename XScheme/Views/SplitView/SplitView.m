@@ -12,6 +12,8 @@
 
 @interface SplitView() <NSSplitViewDelegate>
 
+@property (nonatomic, strong) XSObjectView *draggedObject;
+
 @end
 
 @implementation SplitView
@@ -20,7 +22,6 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        // Initialization code here.
         self.dividerStyle = NSSplitViewDividerStyleThick;
         [self setVertical:YES];
         
@@ -42,6 +43,16 @@
         
         [self setPosition:([[NSScreen mainScreen] frame].size.width - 200) ofDividerAtIndex:0];
         self.autoresizingMask = NSViewHeightSizable;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(listObjectBeginDrag:)
+                                                     name:XSListObjectBeginDragNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(listObjectEndDrag:)
+                                                     name:XSListObjectEndDragNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -56,6 +67,28 @@
                                                                                                 blue:32.0f/255.0f
                                                                                                alpha:1.0f]];
     [gradient drawInRect:rect angle:180];
+}
+
+- (void)listObjectBeginDrag:(NSNotification *)notification {
+    XSObjectView *objectView = notification.object;
+    
+    self.draggedObject = [[XSObjectView alloc] initSchemeObjectWithType:objectView.type
+                                                                  image:objectView.image
+                                                            borderColor:objectView.borderColor];
+    
+    self.draggedObject.translatesAutoresizingMaskIntoConstraints = YES;
+    
+    [self.draggedObject setFrame:CGRectMake([XSUtility mousePosition].x - kSchemeObjectWidth / 2, [XSUtility mousePosition].y - kSchemeObjectHeight / 2, kSchemeObjectWidth, kSchemeObjectHeight)];
+    
+    [self.window.contentView addSubview:self.draggedObject];
+}
+
+- (void)mouseMoved:(NSEvent *)theEvent {
+    NSLog(@"%f", theEvent.locationInWindow.x);
+}
+
+- (void)listObjectEndDrag:(NSNotification *)notification {
+//    [self.draggedObject removeFromSuperview];
 }
 
 #pragma mark NSSplitViewDelegate

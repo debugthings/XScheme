@@ -23,6 +23,8 @@ typedef enum XSObjectType XSObjectType;
 @interface XSObjectView : XSView
 
 @property (readonly) XSObjectType type;
+@property (readonly) NSImage *image;
+@property (readonly) NSColor *borderColor;
 
 - (id)initSchemeObjectWithType:(XSObjectType)objectType
                          image:(NSImage *)image

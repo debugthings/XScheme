@@ -20,10 +20,18 @@
     Задержка        Z
 */
 
+NSString * const XSListObjectBeginDragNotification = @"XSListElementBeginDragNotification";
+NSString * const XSListObjectEndDragNotification = @"XSListElementEndDragNotification";
+
+NSString * const XSSchemeObjectBeginDragNotification = @"XSSchemeObjectBeginDragNotification";
+NSString * const XSSchemeObjectEndDragNotification = @"XSSchemeObjectEndDragNotification";
+
 static NSInteger const kBorderWidth = 3;
 static NSInteger const kCornerRadius = 24;
 
-@interface XSObjectView()
+@interface XSObjectView() {
+    BOOL _isDragging;
+}
 
 @property (nonatomic) BOOL isListElement;
 
@@ -31,8 +39,6 @@ static NSInteger const kCornerRadius = 24;
 @property (readonly) XSLabel *titleLabel;
 @property (readonly) NSImageView *imageView;
 
-@property (nonatomic) NSColor *borderColor;
-@property (nonatomic) NSImage *image;
 @property (nonatomic) NSString *title;
 
 @end
@@ -43,6 +49,8 @@ static NSInteger const kCornerRadius = 24;
 @synthesize imageView = _imageView;
 @synthesize contentView = _contentView;
 @synthesize titleLabel = _titleLabel;
+@synthesize image = _image;
+@synthesize borderColor = _borderColor;
 
 /* Object for scheme */
 
@@ -121,6 +129,34 @@ static NSInteger const kCornerRadius = 24;
     
     [self contentViewConstraints];
     [self imageViewConstraints];
+}
+
+#pragma mark - Mouse responde
+
+- (void)mouseDragged:(NSEvent *)theEvent {
+    if (!_isDragging) {
+        _isDragging = YES;
+        
+        if (self.isListElement)
+            [[NSNotificationCenter defaultCenter] postNotificationName:XSListObjectBeginDragNotification
+                                                                object:self];
+        else
+            [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectBeginDragNotification
+                                                                object:self];
+    }
+}
+
+- (void)mouseUp:(NSEvent *)theEvent {
+    if (_isDragging) {
+        _isDragging = NO;
+        
+        if (self.isListElement)
+            [[NSNotificationCenter defaultCenter] postNotificationName:XSListObjectEndDragNotification
+                                                                object:self];
+        else
+            [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectEndDragNotification
+                                                                object:self];
+    }
 }
 
 #pragma mark - UI Elements

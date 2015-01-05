@@ -25,4 +25,8 @@
     return [XSUtility windowContentViewRect].size.width;
 }
 
++ (NSPoint)mousePosition {
+    return [NSEvent mouseLocation];
+}
+
 @end
