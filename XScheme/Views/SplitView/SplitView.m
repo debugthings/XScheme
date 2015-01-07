@@ -53,6 +53,21 @@
                                                  selector:@selector(listObjectEndDrag:)
                                                      name:XSListObjectEndDragNotification
                                                    object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(objectDragging:)
+                                                     name:XSObjectDraggingNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(schemeObjectDragging:)
+                                                     name:XSSchemeObjectBeginDragNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(schemeObjectDragging:)
+                                                     name:XSSchemeObjectEndDragNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -83,12 +98,21 @@
     [self.window.contentView addSubview:self.draggedObject];
 }
 
-- (void)mouseMoved:(NSEvent *)theEvent {
-    NSLog(@"%f", theEvent.locationInWindow.x);
+- (void)objectDragging:(NSNotification *)notification {
+    NSPoint locationInWindow = [[notification.userInfo valueForKey:@"locationInWindow"] pointValue];
+    
+    locationInWindow.x -= kSchemeObjectWidth / 2;
+    locationInWindow.y -= kSchemeObjectHeight / 2;
+    
+    [self.draggedObject setFrameOrigin:locationInWindow];
 }
 
 - (void)listObjectEndDrag:(NSNotification *)notification {
 //    [self.draggedObject removeFromSuperview];
+}
+
+- (void)schemeObjectDragging:(NSNotification *)notification {
+//    [notification.object setFrameOrigin:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
 }
 
 #pragma mark NSSplitViewDelegate

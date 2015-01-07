@@ -11,6 +11,8 @@
 extern NSString * const XSListObjectBeginDragNotification;
 extern NSString * const XSListObjectEndDragNotification;
 
+extern NSString * const XSObjectDraggingNotification;
+
 extern NSString * const XSSchemeObjectBeginDragNotification;
 extern NSString * const XSSchemeObjectEndDragNotification;
 

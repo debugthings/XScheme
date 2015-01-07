@@ -23,6 +23,8 @@
 NSString * const XSListObjectBeginDragNotification = @"XSListElementBeginDragNotification";
 NSString * const XSListObjectEndDragNotification = @"XSListElementEndDragNotification";
 
+NSString * const XSObjectDraggingNotification = @"XSObjectDraggingNotification";
+
 NSString * const XSSchemeObjectBeginDragNotification = @"XSSchemeObjectBeginDragNotification";
 NSString * const XSSchemeObjectEndDragNotification = @"XSSchemeObjectEndDragNotification";
 
@@ -144,6 +146,10 @@ static NSInteger const kCornerRadius = 24;
             [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectBeginDragNotification
                                                                 object:self];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:XSObjectDraggingNotification
+                                                        object:self
+                                                      userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow]}];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
