@@ -11,41 +11,43 @@
 @implementation NSColor (CustomColors)
 
 + (NSColor *)workplaceBackgrountColor {
-    return [NSColor colorWithHexColorString:@"0x212121"];
+    return [NSColor colorWithHexColorString:@"0x212121" alpha:1.0f];
 }
 
 + (NSColor *)sideMenuBackgroundColor {
-    return [NSColor colorWithHexColorString:@"0x2c2c2c"];
+    return [NSColor colorWithHexColorString:@"0x2c2c2c" alpha:1.0f];
 }
 
 + (NSColor *)objectsBackgroundColor {
-    return [NSColor colorWithHexColorString:@"0xececec"];
+    return [NSColor colorWithHexColorString:@"0xececec" alpha:1.0f];
 }
 
 + (NSColor *)enterObjectBorderColor {
-    return [NSColor colorWithHexColorString:@"0x33c748"];
+    return [NSColor colorWithHexColorString:@"0x33c748" alpha:1.0f];
 }
 
 + (NSColor *)exitObjectBorderColor {
-    return [NSColor colorWithHexColorString:@"0xdf4644"];
+    return [NSColor colorWithHexColorString:@"0xdf4644" alpha:1.0f];
 }
 
 + (NSColor *)objectBorderColor {
-    return [NSColor colorWithHexColorString:@"0xfdb839"];
+    return [NSColor colorWithHexColorString:@"0xfdb839" alpha:1.0f];
 }
 
 + (NSColor *)lightGrayColorCustom {
-    return [NSColor colorWithHexColorString:@"0x636363"];
+    return [NSColor colorWithHexColorString:@"0x636363" alpha:1.0f];
 }
 
-+ (NSColor *)colorWithHexColorString:(NSString *)inColorString
-{
++ (NSColor *)indexBackgroundColor {
+    return [NSColor colorWithHexColorString:@"0xeb3936" alpha:0.9f];
+}
+
++ (NSColor *)colorWithHexColorString:(NSString *)inColorString alpha:(CGFloat)alpha {
     NSColor* result = nil;
     unsigned colorCode = 0;
     unsigned char redByte, greenByte, blueByte;
     
-    if (nil != inColorString)
-    {
+    if (nil != inColorString) {
         NSScanner* scanner = [NSScanner scannerWithString:inColorString];
         (void) [scanner scanHexInt:&colorCode]; // ignore error
     }
@@ -57,7 +59,7 @@
               colorWithCalibratedRed:(CGFloat)redByte / 0xff
               green:(CGFloat)greenByte / 0xff
               blue:(CGFloat)blueByte / 0xff
-              alpha:1.0];
+              alpha:alpha];
     return result;
 }
 

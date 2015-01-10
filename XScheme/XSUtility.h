@@ -8,16 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
+enum XSObjectType {
+    
+    kXSObjectTypeEnter,           /* ВХОД */
+    kXSObjectTypeExit,            /* ВЫХОД */
+    kXSObjectTypeConjunction,     /* КОНЪЮНКЦИЯ */
+    kXSObjectTypeDisjunction,     /* ДИЗЪЮНКЦИЯ */
+    kXSObjectTypeDenial,          /* ОТРИЦАНИЕ */
+    kXSObjectTypeDelay            /* ЗАДЕРЖКА */
+};
+
+typedef enum XSObjectType XSObjectType;
+
+
 extern NSString * const XSListObjectBeginDragNotification;
 extern NSString * const XSListObjectEndDragNotification;
+extern NSString * const XSListObjectDraggingNotification;
 
-extern NSString * const XSObjectDraggingNotification;
-
+extern NSString * const XSSchemeObjectDraggingNotification;
 extern NSString * const XSSchemeObjectBeginDragNotification;
 extern NSString * const XSSchemeObjectEndDragNotification;
 
-static NSInteger const kSchemeObjectHeight = 48;
-static NSInteger const kSchemeObjectWidth = 48;
+static NSInteger const kSchemeObjectHeight = 58;
+static NSInteger const kSchemeObjectWidth = 58;
 
 @interface XSUtility : NSObject
 
@@ -25,5 +38,7 @@ static NSInteger const kSchemeObjectWidth = 48;
 + (CGFloat)windowContentViewHeight;
 + (CGFloat)windowContentViewWidth;
 + (NSPoint)mousePosition;
+
++ (NSString *)keyForObjectType:(XSObjectType)type;
 
 @end

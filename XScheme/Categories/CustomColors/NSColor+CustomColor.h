@@ -19,6 +19,8 @@
 
 + (NSColor *)lightGrayColorCustom;
 
-+ (NSColor *)colorWithHexColorString:(NSString *)inColorString;
++ (NSColor *)indexBackgroundColor;
+
++ (NSColor *)colorWithHexColorString:(NSString *)inColorString alpha:(CGFloat)alpha;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface XSEditorView : XSView
 
+- (void)addNewSchemeObject:(XSObjectView *)newObjectView;
+
 @end

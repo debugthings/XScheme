@@ -8,8 +8,6 @@
 
 #import "XSObjectView.h"
 #import <Quartz/Quartz.h>
-#import "XSLabel.h"
-#import "XSView.h"
 
 /*
     Вход            X
@@ -22,9 +20,9 @@
 
 NSString * const XSListObjectBeginDragNotification = @"XSListElementBeginDragNotification";
 NSString * const XSListObjectEndDragNotification = @"XSListElementEndDragNotification";
+NSString * const XSListObjectDraggingNotification = @"XSListObjectDraggingNotificaton";
 
-NSString * const XSObjectDraggingNotification = @"XSObjectDraggingNotification";
-
+NSString * const XSSchemeObjectDraggingNotification = @"XSSchemeObjectDraggingNotification";
 NSString * const XSSchemeObjectBeginDragNotification = @"XSSchemeObjectBeginDragNotification";
 NSString * const XSSchemeObjectEndDragNotification = @"XSSchemeObjectEndDragNotification";
 
@@ -40,6 +38,7 @@ static NSInteger const kCornerRadius = 24;
 @property (readonly) XSView *contentView;
 @property (readonly) XSLabel *titleLabel;
 @property (readonly) NSImageView *imageView;
+@property (readonly) XSLabel *indexLabel;
 
 @property (nonatomic) NSString *title;
 
@@ -53,6 +52,13 @@ static NSInteger const kCornerRadius = 24;
 @synthesize titleLabel = _titleLabel;
 @synthesize image = _image;
 @synthesize borderColor = _borderColor;
+@synthesize indexLabel = _indexLabel;
+
++ (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView {
+    return [[XSObjectView alloc] initSchemeObjectWithType:objectView.type
+                                                    image:objectView.image
+                                              borderColor:objectView.borderColor];
+}
 
 /* Object for scheme */
 
@@ -64,10 +70,7 @@ static NSInteger const kCornerRadius = 24;
     
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        [self setWantsLayer:YES];
-        self.layer.cornerRadius = kCornerRadius;
-        
+        [self setFrame:CGRectMake(0, 0, 58, 58)];
         _type = objectType;
         _borderColor = borderColor;
         _image = image;
@@ -89,7 +92,6 @@ static NSInteger const kCornerRadius = 24;
     
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        
         self.isListElement = YES;
         _title = title;
         _type = objectType;
@@ -100,6 +102,17 @@ static NSInteger const kCornerRadius = 24;
     }
     
     return self;
+}
+
+- (void)showIndex {
+    if (![self.subviews containsObject:self.indexLabel])
+        [self addSubview:self.indexLabel];
+    
+    [self.indexLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)_index]];
+}
+
+- (void)hideIndex {
+    [self.indexLabel removeFromSuperview];
 }
 
 - (void)createContentView {
@@ -133,7 +146,7 @@ static NSInteger const kCornerRadius = 24;
     [self imageViewConstraints];
 }
 
-#pragma mark - Mouse responde
+#pragma mark - Mouse respondes
 
 - (void)mouseDragged:(NSEvent *)theEvent {
     if (!_isDragging) {
@@ -147,9 +160,14 @@ static NSInteger const kCornerRadius = 24;
                                                                 object:self];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:XSObjectDraggingNotification
-                                                        object:self
-                                                      userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow]}];
+    if (self.isListElement)
+        [[NSNotificationCenter defaultCenter] postNotificationName:XSListObjectDraggingNotification
+                                                            object:self
+                                                          userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow]}];
+    else
+        [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectDraggingNotification
+                                                            object:self
+                                                          userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow]}];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
@@ -200,12 +218,27 @@ static NSInteger const kCornerRadius = 24;
 - (XSLabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[XSLabel alloc] init];
+        _titleLabel.backgroundColor = nil;
         _titleLabel.font = [NSFont systemFontOfSize:14.0f];
         _titleLabel.textColor = [NSColor whiteColor];
         _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
     return _titleLabel;
+}
+
+- (XSLabel *)indexLabel {
+    if (!_indexLabel) {
+        _indexLabel = [[XSLabel alloc] initWithFrame:CGRectMake(kSchemeObjectWidth - 20, kSchemeObjectHeight - 20, 20, 20)];
+        [_indexLabel setWantsLayer:YES];
+        _indexLabel.textColor = [NSColor whiteColor];
+        [_indexLabel setAlignment:NSCenterTextAlignment];
+        _indexLabel.font = [NSFont systemFontOfSize:14.0f];
+        _indexLabel.backgroundColor = [NSColor indexBackgroundColor];
+        _indexLabel.layer.cornerRadius = 10;
+    }
+    
+    return _indexLabel;
 }
 
 #pragma mark - UI Constraints 
@@ -224,14 +257,21 @@ static NSInteger const kCornerRadius = 24;
 }
 
 - (void)imageViewConstraints {
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_imageView(48)]"
+    NSDictionary *metrics = nil;
+    
+    if (self.isListElement)
+        metrics = @{@"indent" : @0};
+    else
+        metrics = @{@"indent" : @5};
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(indent)-[_imageView(48)]"
                                                                              options:0
-                                                                             metrics:nil
+                                                                             metrics:metrics
                                                                                views:NSDictionaryOfVariableBindings(_imageView)]];
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_imageView(48)]"
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(indent)-[_imageView(48)]"
                                                                              options:0
-                                                                             metrics:nil
+                                                                             metrics:metrics
                                                                                views:NSDictionaryOfVariableBindings(_imageView)]];
 }
 

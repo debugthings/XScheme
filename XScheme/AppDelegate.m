@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "SplitView.h"
+#import "XSSplitView.h"
 
 @interface AppDelegate()
 
@@ -19,7 +19,7 @@
 {
     [self.window setFrame:[[NSScreen mainScreen] frame] display:YES animate:YES];
     
-    SplitView *splitView = [[SplitView alloc] initWithFrame:[[self.window contentView] bounds]];
+    XSSplitView *splitView = [[XSSplitView alloc] initWithFrame:[[self.window contentView] bounds]];
     [[self.window contentView] addSubview:splitView];
 }
 

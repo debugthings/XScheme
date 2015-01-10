@@ -35,8 +35,7 @@
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
+- (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
     [self.backgroundColor setFill];

@@ -10,12 +10,10 @@
 
 @implementation XSLabel
 
-- (id)initWithFrame:(NSRect)frameRect
-{
+- (id)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     
-    if(self)
-    {
+    if (self) {
         [self setBezeled:NO];
         [self setDrawsBackground:NO];
         [self setEditable:NO];
@@ -25,12 +23,10 @@
     return self;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
-    if(self)
-    {
+    if (self) {
         [self setBezeled:NO];
         [self setDrawsBackground:NO];
         [self setEditable:NO];
@@ -40,9 +36,13 @@
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
+- (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
+    
+    if (self.backgroundColor) {
+        [self.backgroundColor setFill];
+        NSRectFill(dirtyRect);
+    }
 }
 
 @end

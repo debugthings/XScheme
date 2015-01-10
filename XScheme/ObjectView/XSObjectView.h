@@ -8,31 +8,26 @@
 
 #import <Cocoa/Cocoa.h>
 
-enum XSObjectType {
-    
-    kXSObjectTypeEnter,           /* ВХОД */
-    kXSObjectTypeExit,            /* ВЫХОД */
-    kXSObjectTypeConjunction,     /* КОНЪЮНКЦИЯ */
-    kXSObjectTypeDisjunction,     /* ДИЗЪЮНКЦИЯ */
-    kXSObjectTypeDenial,          /* ОТРИЦАНИЕ */
-    kXSObjectTypeDelay            /* ЗАДЕРЖКА */
-};
-
-typedef enum XSObjectType XSObjectType;
 
 @interface XSObjectView : XSView
 
 @property (readonly) XSObjectType type;
 @property (readonly) NSImage *image;
 @property (readonly) NSColor *borderColor;
+@property (nonatomic) NSInteger index;
 
-- (id)initSchemeObjectWithType:(XSObjectType)objectType
-                         image:(NSImage *)image
-                   borderColor:(NSColor *)borderColor;
++ (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView;
 
-- (id)initListObjectWithType:(XSObjectType)objectType
-                        title:(NSString *)title
-                        image:(NSImage *)image
-                  borderColor:(NSColor *)borderColor;
+- (instancetype)initSchemeObjectWithType:(XSObjectType)objectType
+                                   image:(NSImage *)image
+                             borderColor:(NSColor *)borderColor;
+
+- (instancetype)initListObjectWithType:(XSObjectType)objectType
+                                 title:(NSString *)title
+                                 image:(NSImage *)image
+                           borderColor:(NSColor *)borderColor;
+
+- (void)showIndex;
+- (void)hideIndex;
 
 @end

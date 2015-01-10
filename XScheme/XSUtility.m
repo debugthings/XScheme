@@ -29,4 +29,39 @@
     return [NSEvent mouseLocation];
 }
 
++ (NSString *)keyForObjectType:(XSObjectType)type {
+    NSString *key = @"";
+    
+    switch (type) {
+        case kXSObjectTypeEnter:
+            key = @"kXSObjectTypeEnter";
+            break;
+            
+        case kXSObjectTypeExit:
+            key = @"kXSObjectTypeExit";
+            break;
+            
+        case kXSObjectTypeConjunction:
+            key = @"kXSObjectTypeConjunction";
+            break;
+            
+        case kXSObjectTypeDisjunction:
+            key = @"kXSObjectTypeDisjunction";
+            break;
+            
+        case kXSObjectTypeDenial:
+            key = @"kXSObjectTypeDenial";
+            break;
+            
+        case kXSObjectTypeDelay:
+            key = @"kXSObjectTypeDelay";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return key;
+}
+
 @end

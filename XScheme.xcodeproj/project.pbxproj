@@ -21,7 +21,7 @@
 		E7243ED619C2CB9E00E1E9C4 /* XSchemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243ED519C2CB9E00E1E9C4 /* XSchemeTests.m */; };
 		E7243EE319C2D01E00E1E9C4 /* XSUtilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EE219C2D01E00E1E9C4 /* XSUtilityView.m */; };
 		E7243EE719C2D06F00E1E9C4 /* XSEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EE619C2D06F00E1E9C4 /* XSEditorView.m */; };
-		E7243EEB19C2D45A00E1E9C4 /* SplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EEA19C2D45A00E1E9C4 /* SplitView.m */; };
+		E7243EEB19C2D45A00E1E9C4 /* XSSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EEA19C2D45A00E1E9C4 /* XSSplitView.m */; };
 		E7243EF219C2DF2D00E1E9C4 /* XSObjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EF119C2DF2D00E1E9C4 /* XSObjectView.m */; };
 		E7243EF419C2E1CC00E1E9C4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7243EF319C2E1CC00E1E9C4 /* QuartzCore.framework */; };
 		E7243EF819C2E81A00E1E9C4 /* XSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EF719C2E81A00E1E9C4 /* XSLabel.m */; };
@@ -34,6 +34,7 @@
 		E7478B071A2A237F0022BC11 /* enter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B061A2A237F0022BC11 /* enter-icon@2x.png */; };
 		E7478B0D1A2A26840022BC11 /* exit-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B0C1A2A26840022BC11 /* exit-icon@2x.png */; };
 		E74CE6E41A5006C1000FAD9C /* XSUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CE6E31A5006C1000FAD9C /* XSUtility.m */; };
+		E75C89A01A6174780016FEE8 /* XSSchemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E75C899F1A6174780016FEE8 /* XSSchemeManager.m */; };
 		E768AC9A19EFFC3800AD2A0C /* XSDelayObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9919EFFC3800AD2A0C /* XSDelayObject.m */; };
 		E768AC9D19EFFC5600AD2A0C /* XSDenialObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9C19EFFC5600AD2A0C /* XSDenialObject.m */; };
 		E768ACA019EFFC8200AD2A0C /* XSDisjunctionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9F19EFFC8200AD2A0C /* XSDisjunctionObject.m */; };
@@ -80,8 +81,8 @@
 		E7243EE219C2D01E00E1E9C4 /* XSUtilityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSUtilityView.m; path = Views/UtilityView/XSUtilityView.m; sourceTree = "<group>"; };
 		E7243EE519C2D06F00E1E9C4 /* XSEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSEditorView.h; path = Views/EditorView/XSEditorView.h; sourceTree = "<group>"; };
 		E7243EE619C2D06F00E1E9C4 /* XSEditorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSEditorView.m; path = Views/EditorView/XSEditorView.m; sourceTree = "<group>"; };
-		E7243EE919C2D45A00E1E9C4 /* SplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitView.h; path = Views/SplitView/SplitView.h; sourceTree = "<group>"; };
-		E7243EEA19C2D45A00E1E9C4 /* SplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitView.m; path = Views/SplitView/SplitView.m; sourceTree = "<group>"; };
+		E7243EE919C2D45A00E1E9C4 /* XSSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSSplitView.h; path = Views/SplitView/XSSplitView.h; sourceTree = "<group>"; };
+		E7243EEA19C2D45A00E1E9C4 /* XSSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSSplitView.m; path = Views/SplitView/XSSplitView.m; sourceTree = "<group>"; };
 		E7243EEC19C2D7F500E1E9C4 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		E7243EF019C2DF2D00E1E9C4 /* XSObjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSObjectView.h; path = ObjectView/XSObjectView.h; sourceTree = "<group>"; };
 		E7243EF119C2DF2D00E1E9C4 /* XSObjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSObjectView.m; path = ObjectView/XSObjectView.m; sourceTree = "<group>"; };
@@ -100,6 +101,8 @@
 		E7478B0C1A2A26840022BC11 /* exit-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exit-icon@2x.png"; sourceTree = "<group>"; };
 		E74CE6E21A5006C1000FAD9C /* XSUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSUtility.h; path = XScheme/XSUtility.h; sourceTree = "<group>"; };
 		E74CE6E31A5006C1000FAD9C /* XSUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSUtility.m; path = XScheme/XSUtility.m; sourceTree = "<group>"; };
+		E75C899E1A6174780016FEE8 /* XSSchemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSSchemeManager.h; path = XScheme/XSSchemeManager/XSSchemeManager.h; sourceTree = "<group>"; };
+		E75C899F1A6174780016FEE8 /* XSSchemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSSchemeManager.m; path = XScheme/XSSchemeManager/XSSchemeManager.m; sourceTree = "<group>"; };
 		E768AC9819EFFC3800AD2A0C /* XSDelayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDelayObject.h; path = Objects/XSDelayObject/XSDelayObject.h; sourceTree = "<group>"; };
 		E768AC9919EFFC3800AD2A0C /* XSDelayObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSDelayObject.m; path = Objects/XSDelayObject/XSDelayObject.m; sourceTree = "<group>"; };
 		E768AC9B19EFFC5600AD2A0C /* XSDenialObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDenialObject.h; path = Objects/XSDenielObject/XSDenialObject.h; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 		E7243E9F19C2CB9E00E1E9C4 = {
 			isa = PBXGroup;
 			children = (
+				E75C899E1A6174780016FEE8 /* XSSchemeManager.h */,
+				E75C899F1A6174780016FEE8 /* XSSchemeManager.m */,
 				E74CE6E21A5006C1000FAD9C /* XSUtility.h */,
 				E74CE6E31A5006C1000FAD9C /* XSUtility.m */,
 				E7243EB119C2CB9E00E1E9C4 /* XScheme */,
@@ -282,8 +287,8 @@
 		E7243EE819C2D43C00E1E9C4 /* SplitView */ = {
 			isa = PBXGroup;
 			children = (
-				E7243EE919C2D45A00E1E9C4 /* SplitView.h */,
-				E7243EEA19C2D45A00E1E9C4 /* SplitView.m */,
+				E7243EE919C2D45A00E1E9C4 /* XSSplitView.h */,
+				E7243EEA19C2D45A00E1E9C4 /* XSSplitView.m */,
 			);
 			name = SplitView;
 			sourceTree = "<group>";
@@ -539,13 +544,14 @@
 				E7243EBF19C2CB9E00E1E9C4 /* AppDelegate.m in Sources */,
 				E7243EF819C2E81A00E1E9C4 /* XSLabel.m in Sources */,
 				E7243EF219C2DF2D00E1E9C4 /* XSObjectView.m in Sources */,
-				E7243EEB19C2D45A00E1E9C4 /* SplitView.m in Sources */,
+				E7243EEB19C2D45A00E1E9C4 /* XSSplitView.m in Sources */,
 				E7243EE719C2D06F00E1E9C4 /* XSEditorView.m in Sources */,
 				E7BE53C51A3C8F71005CC718 /* NSGradient+CustomGradients.m in Sources */,
 				E768ACA019EFFC8200AD2A0C /* XSDisjunctionObject.m in Sources */,
 				E7243EB819C2CB9E00E1E9C4 /* main.m in Sources */,
 				E7243EE319C2D01E00E1E9C4 /* XSUtilityView.m in Sources */,
 				E74CE6E41A5006C1000FAD9C /* XSUtility.m in Sources */,
+				E75C89A01A6174780016FEE8 /* XSSchemeManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

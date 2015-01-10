@@ -9,111 +9,49 @@
 #import "XSEditorView.h"
 #import "XSConnectObjects.h"
 
-@interface XSEditorView()
-
-//@property XSObjectView *enterObject;
-//@property XSObjectView *conjunctionObject;
-//@property XSObjectView *disjunctionObject;
-//@property XSObjectView *delayFirstObject;
-//@property XSObjectView *delaySecondObject;
-//@property XSObjectView *denielObject;
-//@property XSObjectView *oneMoreConjunctionObject;
-//@property XSObjectView *exitObject;
-
-@property (readonly) NSScrollView *contentScrollView;
-
-@end
-
 @implementation XSEditorView
-
-@synthesize contentScrollView = _contentScrollView;
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame Color:[NSColor workplaceBackgrountColor]];
     
     if (self) {
-        [self addSubview:self.contentScrollView];
-        [self contentScrollViewConstraints];
-        
-        XSEnterObject *enterObject = [[XSEnterObject alloc] initSchemeObject];
-        [self addSubview:enterObject];
-        
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[enterObject(48)]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:NSDictionaryOfVariableBindings(enterObject)]];
-        
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[enterObject(48)]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:NSDictionaryOfVariableBindings(enterObject)]];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:enterObject
-                                                         attribute:NSLayoutAttributeCenterY
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self
-                                                         attribute:NSLayoutAttributeCenterY
-                                                        multiplier:1
-                                                          constant:0]];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:enterObject
-                                                         attribute:NSLayoutAttributeCenterX
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self
-                                                         attribute:NSLayoutAttributeCenterX
-                                                        multiplier:1
-                                                          constant:0]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveObject:) name:XSSchemeObjectDraggingNotification object:nil];
     }
     
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
-    [super drawRect:dirtyRect];
+- (void)moveObject:(NSNotification *)notification {
+    XSObjectView *movableObject = notification.object;
+    NSPoint originPoint = [[notification.userInfo valueForKey:@"locationInWindow"] pointValue];
+    originPoint.x -= kSchemeObjectHeight / 2;
+    originPoint.y -= kSchemeObjectHeight / 2;
+    [movableObject setFrameOrigin:originPoint];
+}
+
+- (void)addNewSchemeObject:(XSObjectView *)newObjectView {
+    if ([[XSSchemeManager sharedManager] addNewSchemeObject:newObjectView]) {
+        newObjectView.index = [[XSSchemeManager sharedManager] countOfObjectsWithType:newObjectView.type];
         
-//    [XSConnectObjects connectingLineBetweenObject:self.enterObject andObject:self.conjunctionObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.enterObject andObject:self.disjunctionObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.conjunctionObject andObject:self.delayFirstObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.disjunctionObject andObject:self.delaySecondObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.disjunctionObject andObject:self.denielObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.denielObject andObject:self.oneMoreConjunctionObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.delayFirstObject andObject:self.oneMoreConjunctionObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.delaySecondObject andObject:self.oneMoreConjunctionObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.conjunctionObject andObject:self.oneMoreConjunctionObject];
-//    [XSConnectObjects connectingLineBetweenObject:self.oneMoreConjunctionObject andObject:self.exitObject];
-}
-
-#pragma mark - UI Elements
-
-- (NSScrollView *)contentScrollView {
-    if (!_contentScrollView) {
-        _contentScrollView = [[NSScrollView alloc] init];
-        _contentScrollView.backgroundColor = [NSColor workplaceBackgrountColor];
-//        _contentScrollView.hasVerticalScroller = YES;
-//        _contentScrollView.hasHorizontalScroller = YES;
-        _contentScrollView.borderType = NSNoBorder;
-        [_contentScrollView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
-        _contentScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+        if (newObjectView.index > 1) {
+            [newObjectView showIndex];
+            
+            if (newObjectView.index == 2)
+                [self showIndexForFirstObjectWithType:newObjectView.type];
+        }
+        
+        
+        
+        
+        [self addSubview:newObjectView];
     }
-    
-    return _contentScrollView;
 }
 
-#pragma mark - UI Constraints 
-
-- (void)contentScrollViewConstraints {
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_contentScrollView]|"
-                                                                 options:0
-                                                                 metrics:nil
-                                                                   views:NSDictionaryOfVariableBindings(_contentScrollView)]];
+- (void)showIndexForFirstObjectWithType:(XSObjectType)type {
+    XSObjectView *firstObjectView = [[XSSchemeManager sharedManager] objectWithType:type atIndex:0];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_contentScrollView]|"
-                                                                 options:0
-                                                                 metrics:nil
-                                                                   views:NSDictionaryOfVariableBindings(_contentScrollView)]];
-    
-    
+    if (firstObjectView)
+        [firstObjectView showIndex];
 }
 
 @end

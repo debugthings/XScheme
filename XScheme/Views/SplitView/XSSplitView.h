@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SplitView : NSSplitView
+@interface XSSplitView : NSSplitView
 
 @end

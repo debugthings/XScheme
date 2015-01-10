@@ -6,17 +6,22 @@
 //  Copyright (c) 2014 Vladimir Shemet. All rights reserved.
 //
 
-#import "SplitView.h"
+#import "XSSplitView.h"
 #import "XSEditorView.h"
 #import "XSUtilityView.h"
 
-@interface SplitView() <NSSplitViewDelegate>
+@interface XSSplitView() <NSSplitViewDelegate>
 
+@property (readonly) XSEditorView *schemeEditorView;
+@property (readonly) XSUtilityView *listObjectsView;
 @property (nonatomic, strong) XSObjectView *draggedObject;
 
 @end
 
-@implementation SplitView
+@implementation XSSplitView
+
+@synthesize schemeEditorView = _schemeEditorView;
+@synthesize listObjectsView = _listObjectsView;
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -25,18 +30,8 @@
         self.dividerStyle = NSSplitViewDividerStyleThick;
         [self setVertical:YES];
         
-        XSEditorView *view1 = [[XSEditorView alloc] initWithFrame:CGRectMake([[self.window contentView] bounds].origin.x,
-                                                                             [[self.window contentView] bounds].origin.y,
-                                                                             400,
-                                                                             [[self.window contentView] bounds].size.height)];
-        
-        XSUtilityView *view2 = [[XSUtilityView alloc] initWithFrame:CGRectMake(view1.bounds.size.width,
-                                                                               [[self.window contentView] bounds].origin.y,
-                                                                               [[self.window contentView] bounds].size.width - 400,
-                                                                               [[self.window contentView] bounds].size.height)];
-        
-        [self addSubview:view1];
-        [self addSubview:view2];
+        [self addSubview:self.schemeEditorView];
+        [self addSubview:self.listObjectsView];
         [self adjustSubviews];
         [self setPosition:100 ofDividerAtIndex:0];
         self.delegate = self;
@@ -55,18 +50,8 @@
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(objectDragging:)
-                                                     name:XSObjectDraggingNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(schemeObjectDragging:)
-                                                     name:XSSchemeObjectBeginDragNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(schemeObjectDragging:)
-                                                     name:XSSchemeObjectEndDragNotification
+                                                 selector:@selector(listObjectDragging:)
+                                                     name:XSListObjectDraggingNotification
                                                    object:nil];
     }
     return self;
@@ -84,6 +69,8 @@
     [gradient drawInRect:rect angle:180];
 }
 
+#pragma mark - Dragging Notifications
+
 - (void)listObjectBeginDrag:(NSNotification *)notification {
     XSObjectView *objectView = notification.object;
     
@@ -98,7 +85,7 @@
     [self.window.contentView addSubview:self.draggedObject];
 }
 
-- (void)objectDragging:(NSNotification *)notification {
+- (void)listObjectDragging:(NSNotification *)notification {
     NSPoint locationInWindow = [[notification.userInfo valueForKey:@"locationInWindow"] pointValue];
     
     locationInWindow.x -= kSchemeObjectWidth / 2;
@@ -108,11 +95,13 @@
 }
 
 - (void)listObjectEndDrag:(NSNotification *)notification {
+    XSObjectView *newObjectView = [XSObjectView duplicateSchemeObject:self.draggedObject];
+    [newObjectView setFrame:self.draggedObject.frame];
+    newObjectView.translatesAutoresizingMaskIntoConstraints = YES;
+    [self.draggedObject removeFromSuperview];
+    [self.schemeEditorView addNewSchemeObject:newObjectView];
 //    [self.draggedObject removeFromSuperview];
-}
-
-- (void)schemeObjectDragging:(NSNotification *)notification {
-//    [notification.object setFrameOrigin:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+//    [self.schemeView addNewSchemeObject:self.draggedObject];
 }
 
 #pragma mark NSSplitViewDelegate
@@ -125,6 +114,30 @@
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
          ofSubviewAt:(NSInteger)dividerIndex {
     return [[NSScreen mainScreen] frame].size.width - 200;
+}
+
+#pragma mark - UI ELements 
+
+- (XSEditorView *)schemeEditorView {
+    if (!_schemeEditorView) {
+        _schemeEditorView = [[XSEditorView alloc] initWithFrame:CGRectMake([[self.window contentView] bounds].origin.x,
+                                                                           [[self.window contentView] bounds].origin.y,
+                                                                           1500,
+                                                                           [[self.window contentView] bounds].size.height)];
+    }
+    
+    return _schemeEditorView;
+}
+
+- (XSUtilityView *)listObjectsView {
+    if (!_listObjectsView) {
+        _listObjectsView = [[XSUtilityView alloc] initWithFrame:CGRectMake(self.schemeEditorView.bounds.size.width,
+                                                                           [[self.window contentView] bounds].origin.y,
+                                                                           [[self.window contentView] bounds].size.width - 400,
+                                                                           [[self.window contentView] bounds].size.height)];
+    }
+    
+    return _listObjectsView;
 }
 
 @end
