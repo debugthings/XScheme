@@ -35,4 +35,12 @@
     return self;
 }
 
+- (NSInteger)inputsNumber {
+    return 1;
+}
+
+- (NSInteger)outputsNumber {
+    return 1;
+}
+
 @end

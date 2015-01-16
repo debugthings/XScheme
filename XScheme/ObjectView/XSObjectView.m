@@ -10,12 +10,12 @@
 #import <Quartz/Quartz.h>
 
 /*
-    Вход            X
-    Выход           Y
-    Конъюнкция      ∧
-    Дизъюнкция      ∨
-    Отрицание       -
-    Задержка        Z
+    Вход             X
+    Выход            Y
+    Конъюнкция       ∧
+    Дизъюнкция       ∨
+    Отрицание        -
+    Задержка (Delay) Z
 */
 
 NSString * const XSListObjectBeginDragNotification = @"XSListElementBeginDragNotification";
@@ -25,6 +25,8 @@ NSString * const XSListObjectDraggingNotification = @"XSListObjectDraggingNotifi
 NSString * const XSSchemeObjectDraggingNotification = @"XSSchemeObjectDraggingNotification";
 NSString * const XSSchemeObjectBeginDragNotification = @"XSSchemeObjectBeginDragNotification";
 NSString * const XSSchemeObjectEndDragNotification = @"XSSchemeObjectEndDragNotification";
+
+NSString * const XSSchemeObjectSelectNotification = @"XSSchemeObjectSelectNotification";
 
 static NSInteger const kBorderWidth = 3;
 static NSInteger const kCornerRadius = 24;
@@ -39,6 +41,7 @@ static NSInteger const kCornerRadius = 24;
 @property (readonly) XSLabel *titleLabel;
 @property (readonly) NSImageView *imageView;
 @property (readonly) XSLabel *indexLabel;
+@property (readonly) XSView *highlightView;
 
 @property (nonatomic) NSString *title;
 
@@ -53,6 +56,7 @@ static NSInteger const kCornerRadius = 24;
 @synthesize image = _image;
 @synthesize borderColor = _borderColor;
 @synthesize indexLabel = _indexLabel;
+@synthesize highlightView = _highlightView;
 
 + (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView {
     return [[XSObjectView alloc] initSchemeObjectWithType:objectView.type
@@ -104,8 +108,23 @@ static NSInteger const kCornerRadius = 24;
     return self;
 }
 
+- (BOOL)isLogicalOperator {
+    if (self.type == kXSObjectTypeConjunction || self.type == kXSObjectTypeDisjunction || self.type == kXSObjectTypeDenial)
+        return YES;
+    
+    return NO;
+}
+
+- (NSInteger)inputsNumber {
+    return -1;
+}
+
+- (NSInteger)outputsNumber {
+    return -1;
+}
+
 - (void)showIndex {
-    if (![self.subviews containsObject:self.indexLabel])
+    if (![self.subviews containsObject:self.indexLabel] && ![self isLogicalOperator])
         [self addSubview:self.indexLabel];
     
     [self.indexLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)_index]];
@@ -146,6 +165,15 @@ static NSInteger const kCornerRadius = 24;
     [self imageViewConstraints];
 }
 
+- (void)setHighlightState:(BOOL)state {
+    if (state) {
+        [self.contentView addSubview:self.highlightView];
+        [self highlightViewConstraints];
+    } else {
+        [self.highlightView removeFromSuperview];
+    }
+}
+
 #pragma mark - Mouse respondes
 
 - (void)mouseDragged:(NSEvent *)theEvent {
@@ -181,6 +209,10 @@ static NSInteger const kCornerRadius = 24;
             [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectEndDragNotification
                                                                 object:self];
     }
+    
+    if (!self.isListElement)
+        [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectSelectNotification
+                                                            object:self];
 }
 
 #pragma mark - UI Elements
@@ -233,12 +265,23 @@ static NSInteger const kCornerRadius = 24;
         [_indexLabel setWantsLayer:YES];
         _indexLabel.textColor = [NSColor whiteColor];
         [_indexLabel setAlignment:NSCenterTextAlignment];
-        _indexLabel.font = [NSFont systemFontOfSize:14.0f];
+        _indexLabel.font = [NSFont systemFontOfSize:10.0f];
         _indexLabel.backgroundColor = [NSColor indexBackgroundColor];
         _indexLabel.layer.cornerRadius = 10;
     }
     
     return _indexLabel;
+}
+
+- (XSView *)highlightView {
+    if (!_highlightView) {
+        _highlightView = [[XSView alloc] initWithColor:[NSColor colorWithCalibratedRed:12.0f/255.0f green:139.0f/255.0f blue:220.0f/255.0f alpha:0.3f]];
+        [_highlightView setWantsLayer:YES];
+        _highlightView.layer.cornerRadius = (kSchemeObjectHeight - 10) / 2;
+        _highlightView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    
+    return _highlightView;
 }
 
 #pragma mark - UI Constraints 
@@ -288,6 +331,18 @@ static NSInteger const kCornerRadius = 24;
                                                                              options:0
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(_titleLabel, _imageView)]];
+}
+
+- (void)highlightViewConstraints {
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[_highlightView]-5-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(_highlightView)]];
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_highlightView]-5-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(_highlightView)]];
 }
 
 @end

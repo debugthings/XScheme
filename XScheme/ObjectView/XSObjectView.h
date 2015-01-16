@@ -29,5 +29,11 @@
 
 - (void)showIndex;
 - (void)hideIndex;
+- (BOOL)isLogicalOperator;
+
+- (void)setHighlightState:(BOOL)state;
+
+- (NSInteger)inputsNumber;
+- (NSInteger)outputsNumber;
 
 @end

@@ -29,6 +29,8 @@ extern NSString * const XSSchemeObjectDraggingNotification;
 extern NSString * const XSSchemeObjectBeginDragNotification;
 extern NSString * const XSSchemeObjectEndDragNotification;
 
+extern NSString * const XSSchemeObjectSelectNotification;
+
 static NSInteger const kSchemeObjectHeight = 58;
 static NSInteger const kSchemeObjectWidth = 58;
 

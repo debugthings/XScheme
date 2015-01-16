@@ -9,20 +9,44 @@
 #import "XSEditorView.h"
 #import "XSConnectObjects.h"
 
+@interface XSEditorView()
+
+@property (nonatomic, weak) XSObjectView *selectedObject;
+
+@end
+
 @implementation XSEditorView
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame Color:[NSColor workplaceBackgrountColor]];
     
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectObject:) name:XSSchemeObjectSelectNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveObject:) name:XSSchemeObjectDraggingNotification object:nil];
     }
     
     return self;
 }
 
+- (void)selectObject:(NSNotification *)notification {
+    if (![self.selectedObject isEqual:notification.object]) {
+        
+        if (self.selectedObject)
+            [self.selectedObject setHighlightState:NO];
+        
+        self.selectedObject = notification.object;
+        [self.selectedObject setHighlightState:YES];
+    }
+}
+
 - (void)moveObject:(NSNotification *)notification {
     XSObjectView *movableObject = notification.object;
+    
+    if (![self.selectedObject isEqual:movableObject]) {
+        self.selectedObject = movableObject;
+        [self.selectedObject setHighlightState:YES];
+    }
+    
     NSPoint originPoint = [[notification.userInfo valueForKey:@"locationInWindow"] pointValue];
     originPoint.x -= kSchemeObjectHeight / 2;
     originPoint.y -= kSchemeObjectHeight / 2;
