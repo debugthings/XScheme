@@ -28,6 +28,8 @@ NSString * const XSSchemeObjectEndDragNotification = @"XSSchemeObjectEndDragNoti
 
 NSString * const XSSchemeObjectSelectNotification = @"XSSchemeObjectSelectNotification";
 
+NSString * const XSSchemeObjectRightClickNotification = @"XSSchemeObjectRightClickNotification";
+
 static NSInteger const kBorderWidth = 3;
 static NSInteger const kCornerRadius = 24;
 
@@ -43,7 +45,8 @@ static NSInteger const kCornerRadius = 24;
 @property (readonly) XSLabel *indexLabel;
 @property (readonly) XSView *highlightView;
 
-@property (nonatomic) NSString *title;
+@property (readonly) NSMutableArray *inputConnectionsArray;
+@property (readonly) NSMutableArray *outputConnectionsArray;
 
 @end
 
@@ -57,9 +60,15 @@ static NSInteger const kCornerRadius = 24;
 @synthesize borderColor = _borderColor;
 @synthesize indexLabel = _indexLabel;
 @synthesize highlightView = _highlightView;
+@synthesize inputConnectionsArray = _inputConnectionsArray;
+@synthesize outputConnectionsArray = _outputConnectionsArray;
+
+@synthesize inputConnections = _inputConnections;
+@synthesize outputConnections = _outputConnections;
 
 + (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView {
     return [[XSObjectView alloc] initSchemeObjectWithType:objectView.type
+                                                    title:objectView.title
                                                     image:objectView.image
                                               borderColor:objectView.borderColor];
 }
@@ -67,6 +76,7 @@ static NSInteger const kCornerRadius = 24;
 /* Object for scheme */
 
 - (id)initSchemeObjectWithType:(XSObjectType)objectType
+                         title:(NSString *)title
                          image:(NSImage *)image
                    borderColor:(NSColor *)borderColor {
     
@@ -76,6 +86,7 @@ static NSInteger const kCornerRadius = 24;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self setFrame:CGRectMake(0, 0, 58, 58)];
         _type = objectType;
+        _title = title;
         _borderColor = borderColor;
         _image = image;
         
@@ -174,7 +185,29 @@ static NSInteger const kCornerRadius = 24;
     }
 }
 
+- (void)addInputConnectionObject:(XSObjectView *)object {
+    [self.inputConnectionsArray addObject:object];
+}
+
+- (void)addOutputConnectionObject:(XSObjectView *)object {
+    [self.outputConnectionsArray addObject:object];
+}
+
+- (void)removeInputConnectionObject:(XSObjectView *)object {
+    [self.inputConnectionsArray removeObject:object];
+}
+
+- (void)removeOutputConnectionObject:(XSObjectView *)object {
+    [self.outputConnectionsArray removeObject:object];
+}
+
 #pragma mark - Mouse respondes
+
+- (void)mouseDown:(NSEvent *)theEvent {
+    if (!self.isListElement)
+        [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectSelectNotification
+                                                            object:self];
+}
 
 - (void)mouseDragged:(NSEvent *)theEvent {
     if (!_isDragging) {
@@ -209,10 +242,37 @@ static NSInteger const kCornerRadius = 24;
             [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectEndDragNotification
                                                                 object:self];
     }
-    
+}
+
+- (void)rightMouseDown:(NSEvent *)theEvent {
     if (!self.isListElement)
-        [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectSelectNotification
-                                                            object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:XSSchemeObjectRightClickNotification
+                                                            object:self
+                                                          userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow]}];
+}
+
+#pragma mark - Object data
+
+- (NSMutableArray *)inputConnectionsArray {
+    if (!_inputConnectionsArray)
+        _inputConnectionsArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    return _inputConnectionsArray;
+}
+
+- (NSMutableArray *)outputConnectionsArray {
+    if (!_outputConnectionsArray)
+        _outputConnectionsArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    return _outputConnectionsArray;
+}
+
+- (NSArray *)inputConnections {
+    return [[NSArray alloc] initWithArray:self.inputConnectionsArray];
+}
+
+- (NSArray *)outputConnections {
+    return [[NSArray alloc] initWithArray:self.outputConnectionsArray];
 }
 
 #pragma mark - UI Elements
@@ -265,9 +325,10 @@ static NSInteger const kCornerRadius = 24;
         [_indexLabel setWantsLayer:YES];
         _indexLabel.textColor = [NSColor whiteColor];
         [_indexLabel setAlignment:NSCenterTextAlignment];
-        _indexLabel.font = [NSFont systemFontOfSize:10.0f];
+        _indexLabel.font = [NSFont systemFontOfSize:12.0f];
         _indexLabel.backgroundColor = [NSColor indexBackgroundColor];
         _indexLabel.layer.cornerRadius = 10;
+        _indexLabel.stringValue = @"1";
     }
     
     return _indexLabel;

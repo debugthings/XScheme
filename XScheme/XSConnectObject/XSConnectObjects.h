@@ -12,5 +12,6 @@
 @interface XSConnectObjects : NSObject
 
 + (void)connectingLineBetweenObject:(id)firstObject andObject:(id)secondObject;
++ (NSArray *)bezierPathsArray;
 
 @end

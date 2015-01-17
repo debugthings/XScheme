@@ -75,6 +75,7 @@
     XSObjectView *objectView = notification.object;
     
     self.draggedObject = [[XSObjectView alloc] initSchemeObjectWithType:objectView.type
+                                                                  title:objectView.title
                                                                   image:objectView.image
                                                             borderColor:objectView.borderColor];
     

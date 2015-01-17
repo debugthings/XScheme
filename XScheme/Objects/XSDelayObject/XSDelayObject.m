@@ -12,9 +12,9 @@
 
 - (instancetype)initListObject {
     self = [super initListObjectWithType:kXSObjectTypeDelay
-                                    title:@"Задержка"
-                                    image:[NSImage imageNamed:@"delay-icon"]
-                              borderColor:[NSColor objectBorderColor]];
+                                   title:@"Задержка"
+                                   image:[NSImage imageNamed:@"delay-icon"]
+                             borderColor:[NSColor objectBorderColor]];
     
     if (self) {
         
@@ -25,8 +25,9 @@
 
 - (instancetype)initSchemeObject {
     self = [super initSchemeObjectWithType:kXSObjectTypeDelay
-                               image:[NSImage imageNamed:@"delay-icon"]
-                         borderColor:[NSColor objectBorderColor]];
+                                     title:@"Задержка"
+                                     image:[NSImage imageNamed:@"delay-icon"]
+                               borderColor:[NSColor objectBorderColor]];
     
     if (self) {
         

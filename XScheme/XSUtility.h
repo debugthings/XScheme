@@ -31,6 +31,8 @@ extern NSString * const XSSchemeObjectEndDragNotification;
 
 extern NSString * const XSSchemeObjectSelectNotification;
 
+extern NSString * const XSSchemeObjectRightClickNotification;
+
 static NSInteger const kSchemeObjectHeight = 58;
 static NSInteger const kSchemeObjectWidth = 58;
 

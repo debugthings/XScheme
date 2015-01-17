@@ -25,6 +25,7 @@
 
 - (instancetype)initSchemeObject {
     self = [super initSchemeObjectWithType:kXSObjectTypeDisjunction
+                                     title:@"Дизъюнкция"
                                      image:[NSImage imageNamed:@"disjunction-icon"]
                                borderColor:[NSColor objectBorderColor]];
     

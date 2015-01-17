@@ -25,6 +25,7 @@
 
 - (instancetype)initSchemeObject {
     self = [super initSchemeObjectWithType:kXSObjectTypeDenial
+                                     title:@"Отрицание"
                                      image:[NSImage imageNamed:@"denial-icon"]
                                borderColor:[NSColor objectBorderColor]];
     

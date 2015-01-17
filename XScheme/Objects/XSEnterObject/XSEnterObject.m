@@ -25,6 +25,7 @@
 
 - (instancetype)initSchemeObject {
     self = [super initSchemeObjectWithType:kXSObjectTypeEnter
+                                     title:@"Вход"
                                image:[NSImage imageNamed:@"enter-icon"]
                          borderColor:[NSColor enterObjectBorderColor]];
     

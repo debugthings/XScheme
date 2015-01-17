@@ -9,14 +9,9 @@
 #import "AppDelegate.h"
 #import "XSSplitView.h"
 
-@interface AppDelegate()
-
-@end
-
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self.window setFrame:[[NSScreen mainScreen] frame] display:YES animate:YES];
     
     XSSplitView *splitView = [[XSSplitView alloc] initWithFrame:[[self.window contentView] bounds]];

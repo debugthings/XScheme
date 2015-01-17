@@ -25,6 +25,7 @@
 
 - (instancetype)initSchemeObject {
     self = [super initSchemeObjectWithType:kXSObjectTypeExit
+                                     title:@"Выход"
                                      image:[NSImage imageNamed:@"exit-icon"]
                                borderColor:[NSColor exitObjectBorderColor]];
     

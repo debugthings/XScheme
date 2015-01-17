@@ -25,6 +25,7 @@
 
 - (instancetype)initSchemeObject {
     self = [super initSchemeObjectWithType:kXSObjectTypeConjunction
+                                     title:@"Конъюнкция"
                                      image:[NSImage imageNamed:@"conjunction-icon"]
                                borderColor:[NSColor objectBorderColor]];
     

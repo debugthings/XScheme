@@ -46,6 +46,9 @@
     if (!array)
         array = [[NSMutableArray alloc] initWithCapacity:0];
     
+    if (newObjectView.type == kXSObjectTypeExit && [array count] > 0)
+        return NO;
+    
     [array addObject:newObjectView];
     
     [self.schemeObjectsDictionary setObject:array forKey:currentKey];
