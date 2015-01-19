@@ -11,6 +11,13 @@
 
 @interface XSConnectObjects : NSObject
 
++ (XSConnectObjects *)sharedObject;
+
+- (void)drawLineInView:(XSView *)view atBeginPoint:(NSPoint)point;
+- (void)redrawLineInView:(XSView *)view atPoint:(NSPoint)point;
+- (void)removeLineInView:(XSView *)view;
+- (NSBezierPath *)currentBezierPath;
+
 + (void)connectingLineBetweenObject:(id)firstObject andObject:(id)secondObject;
 + (NSArray *)bezierPathsArray;
 

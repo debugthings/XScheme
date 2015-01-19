@@ -101,8 +101,6 @@
     newObjectView.translatesAutoresizingMaskIntoConstraints = YES;
     [self.draggedObject removeFromSuperview];
     [self.schemeEditorView addNewSchemeObject:newObjectView];
-//    [self.draggedObject removeFromSuperview];
-//    [self.schemeView addNewSchemeObject:self.draggedObject];
 }
 
 #pragma mark NSSplitViewDelegate

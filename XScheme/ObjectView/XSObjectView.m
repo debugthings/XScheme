@@ -134,6 +134,20 @@ static NSInteger const kCornerRadius = 24;
     return -1;
 }
 
+- (BOOL)isHasInputs {
+    if ([self inputsNumber] != 0)
+        return YES;
+    
+    return NO;
+}
+
+- (BOOL)isHasOutputs {
+    if ([self outputsNumber] != 0)
+        return YES;
+    
+    return NO;
+}
+
 - (void)showIndex {
     if (![self.subviews containsObject:self.indexLabel] && ![self isLogicalOperator])
         [self addSubview:self.indexLabel];

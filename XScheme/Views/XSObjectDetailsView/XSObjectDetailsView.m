@@ -7,14 +7,16 @@
 //
 
 #import "XSObjectDetailsView.h"
+#import "XSObjectDetailsDataSectionView.h"
 
-static NSInteger const kSectionHeaderHeight = 15;
+static NSInteger const kTopIndent = 3;
+static NSInteger const kHeaderHeight = 12;
 
 @interface XSObjectDetailsView()
 
 @property (readonly) XSLabel *titleLabel;
-@property (readonly) XSView *inputsSection;
-@property (readonly) XSView *outputsSection;
+@property (readonly) XSObjectDetailsDataSectionView *inputsSection;
+@property (readonly) XSObjectDetailsDataSectionView *outputsSection;
 
 @property (nonatomic, strong) NSMutableArray *inputsViewArray;
 @property (nonatomic, strong) NSMutableArray *outputsViewArray;
@@ -57,15 +59,26 @@ static NSInteger const kSectionHeaderHeight = 15;
 }
 
 - (void)configureDetailsView {
-    [self removeObjectsFromSuperview:self.inputsViewArray];
-    [self removeObjectsFromSuperview:self.outputsViewArray];
+    [self setupData];
     
     self.titleLabel.stringValue = self.targetObject.title;
     
-    if (![self.subviews containsObject:self.inputsSection]) {
+    if ([self.targetObject isHasInputs]) {
         [self addSubview:self.inputsSection];
         [self inputsSectionConstraints];
     }
+    
+    if ([self.targetObject isHasOutputs]) {
+        [self addSubview:self.outputsSection];
+        [self outputsSectionConstraints];
+    }
+    
+    [self configureFrame];
+}
+
+- (void)setupData {
+    [self removeObjectsFromSuperview:self.inputsViewArray];
+    [self removeObjectsFromSuperview:self.outputsViewArray];
 }
 
 - (void)removeObjectsFromSuperview:(NSArray *)objectsArray {
@@ -73,13 +86,10 @@ static NSInteger const kSectionHeaderHeight = 15;
         [subview removeFromSuperview];
 }
 
-- (XSLabel *)sectionTitleLabel {
-    XSLabel *label = [[XSLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kSectionHeaderHeight)];
-    label.backgroundColor = [NSColor colorWithRed:41.0f/255.0f green:42.0f/255.0f blue:43.0f/255.0f alpha:0.8f];
-    label.textColor = [NSColor whiteColor];
-    label.font = [NSFont boldSystemFontOfSize:10.0f];
-    
-    return label;
+- (void)configureFrame {
+    CGRect rect = self.frame;
+    rect.size.height = kTopIndent + kHeaderHeight + 5 + [self.inputsSection height] + [self.outputsSection height];
+    [self setFrame:rect];
 }
 
 #pragma mark - UI Elements
@@ -97,27 +107,21 @@ static NSInteger const kSectionHeaderHeight = 15;
     return _titleLabel;
 }
 
-- (XSView *)inputsSection {
+- (XSObjectDetailsDataSectionView *)inputsSection {
     if (!_inputsSection) {
-        _inputsSection = [[XSView alloc] init];
+        _inputsSection = [[XSObjectDetailsDataSectionView alloc] init];
         _inputsSection.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        XSLabel *label = [self sectionTitleLabel];
-        label.stringValue = @"  Входные данные";
-        [_inputsSection addSubview:label];
+        _inputsSection.title = @"  Входные данные";
     }
     
     return _inputsSection;
 }
 
-- (XSView *)outputsSection {
+- (XSObjectDetailsDataSectionView *)outputsSection {
     if (!_outputsSection) {
-        _outputsSection = [[XSView alloc] init];
+        _outputsSection = [[XSObjectDetailsDataSectionView alloc] init];
         _outputsSection.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        XSLabel *label = [self sectionTitleLabel];
-        label.stringValue = @"  Выходные данные";
-        [_outputsSection addSubview:label];
+        _outputsSection.title = @"  Выходные данные";
     }
     
     return _outputsSection;
@@ -126,9 +130,12 @@ static NSInteger const kSectionHeaderHeight = 15;
 #pragma mark - Constraints 
 
 - (void)titleLabelConstraints {
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-3-[_titleLabel(12)]"
+    NSDictionary *metrics = @{@"topIndent" : [NSNumber numberWithInteger:kTopIndent],
+                              @"headerHeight" : [NSNumber numberWithInteger:kHeaderHeight]};
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(topIndent)-[_titleLabel(headerHeight)]"
                                                                  options:0
-                                                                 metrics:nil
+                                                                 metrics:metrics
                                                                    views:NSDictionaryOfVariableBindings(_titleLabel)]];
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|"
@@ -143,11 +150,29 @@ static NSInteger const kSectionHeaderHeight = 15;
                                                                  metrics:nil
                                                                    views:NSDictionaryOfVariableBindings(_inputsSection)]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=20)-[_inputsSection(>=15)]"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(20)-[_inputsSection(>=40)]"
                                                                  options:0
                                                                  metrics:nil
                                                                    views:NSDictionaryOfVariableBindings(_inputsSection)]];
     
+}
+
+- (void)outputsSectionConstraints {
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_outputsSection]|"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:NSDictionaryOfVariableBindings(_outputsSection)]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_outputsSection(>=40)]|"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:NSDictionaryOfVariableBindings(_outputsSection)]];
+    
+    if (_inputsSection)
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_inputsSection]-(0)-[_outputsSection]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:NSDictionaryOfVariableBindings(_inputsSection, _outputsSection)]];
 }
 
 @end

@@ -42,6 +42,9 @@
 - (NSInteger)inputsNumber;
 - (NSInteger)outputsNumber;
 
+- (BOOL)isHasInputs;
+- (BOOL)isHasOutputs;
+
 - (void)addInputConnectionObject:(XSObjectView *)object;
 - (void)addOutputConnectionObject:(XSObjectView *)object;
 

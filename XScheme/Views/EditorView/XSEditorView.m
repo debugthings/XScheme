@@ -28,6 +28,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectObject:) name:XSSchemeObjectSelectNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveObject:) name:XSSchemeObjectDraggingNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showObjectDetails:) name:XSSchemeObjectRightClickNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragBegin:) name:XSConnectingDragBeginNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragging:) name:XSConnectingDraggingNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragEnd:) name:XSConnectingDragEndNotification object:nil];
     }
     
     return self;
@@ -36,10 +40,9 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    NSArray *bezierPathsArray = [XSConnectObjects bezierPathsArray];
-    
-    for (int i = 0; i < [bezierPathsArray count]; i++)
-        [[bezierPathsArray objectAtIndex:i] stroke];
+    NSBezierPath *line = [[XSConnectObjects sharedObject] currentBezierPath];
+    [[NSColor blueColor] set];
+    [line stroke];
 }
 
 - (void)addNewSchemeObject:(XSObjectView *)newObjectView {
@@ -65,6 +68,20 @@
     
     if (firstObjectView)
         [firstObjectView showIndex];
+}
+
+#pragma mark - Connecting drag notification
+
+- (void)connectingDragBegin:(NSNotification *)notification {
+    [[XSConnectObjects sharedObject] drawLineInView:self atBeginPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+}
+
+- (void)connectingDragging:(NSNotification *)notification {
+    [[XSConnectObjects sharedObject] redrawLineInView:self atPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+}
+
+- (void)connectingDragEnd:(NSNotification *)notification {
+    [[XSConnectObjects sharedObject] removeLineInView:self];
 }
 
 #pragma mark - Mouse responde
@@ -119,6 +136,8 @@
     if (![self.subviews containsObject:self.objectDetailsView])
         [self addSubview:self.objectDetailsView];
 }
+
+#pragma mark - UI Elements
 
 - (XSObjectDetailsView *)objectDetailsView {
     if (!_objectDetailsView) {

@@ -20,18 +20,31 @@ enum XSObjectType {
 
 typedef enum XSObjectType XSObjectType;
 
+#pragma mark - List objects drag notifications
 
 extern NSString * const XSListObjectBeginDragNotification;
 extern NSString * const XSListObjectEndDragNotification;
 extern NSString * const XSListObjectDraggingNotification;
 
+#pragma mark - Scheme objects drag notifications
+
 extern NSString * const XSSchemeObjectDraggingNotification;
 extern NSString * const XSSchemeObjectBeginDragNotification;
 extern NSString * const XSSchemeObjectEndDragNotification;
 
+#pragma mark - Scheme objecs select notification
+
 extern NSString * const XSSchemeObjectSelectNotification;
 
+#pragma mark - Objects right click notification
+
 extern NSString * const XSSchemeObjectRightClickNotification;
+
+#pragma mark - Objects connecting notifications
+
+extern NSString * const XSConnectingDragBeginNotification;
+extern NSString * const XSConnectingDraggingNotification;
+extern NSString * const XSConnectingDragEndNotification;
 
 static NSInteger const kSchemeObjectHeight = 58;
 static NSInteger const kSchemeObjectWidth = 58;

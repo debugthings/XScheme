@@ -10,6 +10,7 @@
 
 @interface XSConnectObjects()
 
+@property (nonatomic, strong) NSBezierPath *currentPath;
 @property (readonly) NSMutableArray *bezierPathsArray;
 
 @end
@@ -27,6 +28,34 @@
     });
     
     return connectionObject;
+}
+
+- (void)drawLineInView:(XSView *)view atBeginPoint:(NSPoint)point {
+    self.currentPath = [NSBezierPath bezierPath];
+    [self.currentPath setLineWidth:3.0f];
+    [self.currentPath moveToPoint:point];
+    [view setNeedsDisplay:YES];
+}
+
+- (void)redrawLineInView:(XSView *)view atPoint:(NSPoint)point {
+    NSInteger elementCount = [self.currentPath elementCount];
+    
+    if (elementCount > 1) {
+        [self.currentPath setAssociatedPoints:&point atIndex:1];
+    } else {
+        [self.currentPath lineToPoint:point];
+    }
+    
+    [view setNeedsDisplay:YES];
+}
+
+- (void)removeLineInView:(XSView *)view {
+    self.currentPath = nil;
+    [view setNeedsDisplay:YES];
+}
+
+- (NSBezierPath *)currentBezierPath {
+    return self.currentPath;
 }
 
 + (NSArray *)bezierPathsArray {
