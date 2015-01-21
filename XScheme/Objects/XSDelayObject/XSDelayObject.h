@@ -10,7 +10,4 @@
 
 @interface XSDelayObject : XSObjectView
 
-- (instancetype)initSchemeObject;
-- (instancetype)initListObject;
-
 @end

@@ -18,17 +18,16 @@
     Задержка (Delay) Z
 */
 
-NSString * const XSListObjectBeginDragNotification = @"XSListElementBeginDragNotification";
-NSString * const XSListObjectEndDragNotification = @"XSListElementEndDragNotification";
-NSString * const XSListObjectDraggingNotification = @"XSListObjectDraggingNotificaton";
+NSString * const XSListObjectBeginDragNotification  = @"XSListElementBeginDragNotification";
+NSString * const XSListObjectEndDragNotification    = @"XSListElementEndDragNotification";
+NSString * const XSListObjectDraggingNotification   = @"XSListObjectDraggingNotificaton";
 
-NSString * const XSSchemeObjectDraggingNotification = @"XSSchemeObjectDraggingNotification";
-NSString * const XSSchemeObjectBeginDragNotification = @"XSSchemeObjectBeginDragNotification";
-NSString * const XSSchemeObjectEndDragNotification = @"XSSchemeObjectEndDragNotification";
+NSString * const XSSchemeObjectDraggingNotification     = @"XSSchemeObjectDraggingNotification";
+NSString * const XSSchemeObjectBeginDragNotification    = @"XSSchemeObjectBeginDragNotification";
+NSString * const XSSchemeObjectEndDragNotification      = @"XSSchemeObjectEndDragNotification";
 
-NSString * const XSSchemeObjectSelectNotification = @"XSSchemeObjectSelectNotification";
-
-NSString * const XSSchemeObjectRightClickNotification = @"XSSchemeObjectRightClickNotification";
+NSString * const XSSchemeObjectSelectNotification       = @"XSSchemeObjectSelectNotification";
+NSString * const XSSchemeObjectRightClickNotification   = @"XSSchemeObjectRightClickNotification";
 
 static NSInteger const kBorderWidth = 3;
 static NSInteger const kCornerRadius = 24;
@@ -36,8 +35,6 @@ static NSInteger const kCornerRadius = 24;
 @interface XSObjectView() {
     BOOL _isDragging;
 }
-
-@property (nonatomic) BOOL isListElement;
 
 @property (readonly) XSView *contentView;
 @property (readonly) XSLabel *titleLabel;
@@ -67,24 +64,21 @@ static NSInteger const kCornerRadius = 24;
 @synthesize outputConnections = _outputConnections;
 
 + (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView {
-    return [[XSObjectView alloc] initSchemeObjectWithType:objectView.type
-                                                    title:objectView.title
-                                                    image:objectView.image
-                                              borderColor:objectView.borderColor];
+    return [[XSObjectView alloc] initObjectWithType:objectView.type
+                                              title:objectView.title
+                                              image:objectView.image
+                                        borderColor:objectView.borderColor];
 }
 
-/* Object for scheme */
-
-- (id)initSchemeObjectWithType:(XSObjectType)objectType
-                         title:(NSString *)title
-                         image:(NSImage *)image
-                   borderColor:(NSColor *)borderColor {
+- (id)initObjectWithType:(XSObjectType)objectType
+                   title:(NSString *)title
+                   image:(NSImage *)image
+             borderColor:(NSColor *)borderColor {
     
-    self = [super initWithColor:[NSColor workplaceBackgrountColor]];
+    self = [super initWithColor:nil];
     
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        [self setFrame:CGRectMake(0, 0, 58, 58)];
         _type = objectType;
         _title = title;
         _borderColor = borderColor;
@@ -96,27 +90,36 @@ static NSInteger const kCornerRadius = 24;
     return self;
 }
 
-/* Object with label for objects list */
-
-- (id)initListObjectWithType:(XSObjectType)objectType
-                        title:(NSString *)title
-                        image:(NSImage *)image
-                  borderColor:(NSColor *)borderColor {
-    
-    self = [super initWithColor:[NSColor sideMenuBackgroundColor]];
+- (instancetype)initListObject {
+    self = [self init];
     
     if (self) {
-        self.translatesAutoresizingMaskIntoConstraints = NO;
         self.isListElement = YES;
-        _title = title;
-        _type = objectType;
-        _borderColor = borderColor;
-        _image = image;
         
+        [self.contentView removeConstraints:self.contentView.constraints];
         [self createContentView];
     }
     
     return self;
+}
+
+- (instancetype)initSchemeObject {
+    self = [self init];
+    
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
+
+- (void)setIsListElement:(BOOL)isListElement {
+    _isListElement = isListElement;
+    
+    if (!_isListElement) {
+        [self setFrame:CGRectMake(0, 0, 58, 58)];
+    }
 }
 
 - (BOOL)isLogicalOperator {

@@ -10,24 +10,11 @@
 
 @implementation XSDelayObject
 
-- (instancetype)initListObject {
-    self = [super initListObjectWithType:kXSObjectTypeDelay
-                                   title:@"Задержка"
-                                   image:[NSImage imageNamed:@"delay-icon"]
-                             borderColor:[NSColor objectBorderColor]];
-    
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
-- (instancetype)initSchemeObject {
-    self = [super initSchemeObjectWithType:kXSObjectTypeDelay
-                                     title:@"Задержка"
-                                     image:[NSImage imageNamed:@"delay-icon"]
-                               borderColor:[NSColor objectBorderColor]];
+- (instancetype)init {
+    self = [super initObjectWithType:kXSObjectTypeDelay
+                               title:@"Задержка"
+                               image:[NSImage imageNamed:@"delay-icon"]
+                         borderColor:[NSColor objectBorderColor]];
     
     if (self) {
         

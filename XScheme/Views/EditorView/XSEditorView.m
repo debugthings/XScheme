@@ -9,17 +9,20 @@
 #import "XSEditorView.h"
 #import "XSConnectObjects.h"
 #import "XSObjectDetailsView.h"
+#import "XSAccessoryConnectingView.h"
 
 @interface XSEditorView()
 
 @property (nonatomic, weak) XSObjectView *selectedObject;
 @property (readonly) XSObjectDetailsView *objectDetailsView;
+@property (readonly) XSAccessoryConnectingView *accessoryConnectingView;
 
 @end
 
 @implementation XSEditorView
 
 @synthesize objectDetailsView = _objectDetailsView;
+@synthesize accessoryConnectingView = _accessoryConnectingView;
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame Color:[NSColor workplaceBackgrountColor]];
@@ -37,14 +40,6 @@
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    NSBezierPath *line = [[XSConnectObjects sharedObject] currentBezierPath];
-    [[NSColor blueColor] set];
-    [line stroke];
-}
-
 - (void)addNewSchemeObject:(XSObjectView *)newObjectView {
     if ([[XSSchemeManager sharedManager] addNewSchemeObject:newObjectView]) {
         newObjectView.index = [[XSSchemeManager sharedManager] countOfObjectsWithType:newObjectView.type];
@@ -56,11 +51,14 @@
                 [self showIndexForFirstObjectWithType:newObjectView.type];
         }
         
-        
-        
-        
         [self addSubview:newObjectView];
     }
+}
+
+- (void)removeSelectedSchemeObject {
+    [self.objectDetailsView removeFromSuperview];
+    [[XSSchemeManager sharedManager] removeSchemeObject:self.selectedObject];
+    [self.selectedObject removeFromSuperview];
 }
 
 - (void)showIndexForFirstObjectWithType:(XSObjectType)type {
@@ -73,15 +71,18 @@
 #pragma mark - Connecting drag notification
 
 - (void)connectingDragBegin:(NSNotification *)notification {
-    [[XSConnectObjects sharedObject] drawLineInView:self atBeginPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+    [self addSubview:self.accessoryConnectingView];
+    [self layout];
+    [[XSConnectObjects sharedObject] drawLineInView:self.accessoryConnectingView atBeginPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
 }
 
 - (void)connectingDragging:(NSNotification *)notification {
-    [[XSConnectObjects sharedObject] redrawLineInView:self atPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+    [[XSConnectObjects sharedObject] redrawLineInView:self.accessoryConnectingView atPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
 }
 
 - (void)connectingDragEnd:(NSNotification *)notification {
-    [[XSConnectObjects sharedObject] removeLineInView:self];
+    [[XSConnectObjects sharedObject] removeLineInView:self.accessoryConnectingView];
+    [self.accessoryConnectingView removeFromSuperview];
 }
 
 #pragma mark - Mouse responde
@@ -137,6 +138,17 @@
         [self addSubview:self.objectDetailsView];
 }
 
+#pragma mark - Key responde
+
+- (BOOL)acceptsFirstResponder {
+    return YES;
+}
+
+- (void)keyUp:(NSEvent *)theEvent {
+    if (theEvent.keyCode == 51)             //"DELETE" key
+        [self removeSelectedSchemeObject];
+}
+
 #pragma mark - UI Elements
 
 - (XSObjectDetailsView *)objectDetailsView {
@@ -145,6 +157,14 @@
     }
     
     return _objectDetailsView;
+}
+
+- (XSAccessoryConnectingView *)accessoryConnectingView {
+    if (!_accessoryConnectingView) {
+        _accessoryConnectingView = [[XSAccessoryConnectingView alloc] initWithFrame:self.frame];
+    }
+    
+    return _accessoryConnectingView;
 }
 
 

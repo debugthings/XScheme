@@ -32,7 +32,7 @@
 
 - (void)drawLineInView:(XSView *)view atBeginPoint:(NSPoint)point {
     self.currentPath = [NSBezierPath bezierPath];
-    [self.currentPath setLineWidth:3.0f];
+    [self.currentPath setLineWidth:2.0f];
     [self.currentPath moveToPoint:point];
     [view setNeedsDisplay:YES];
 }

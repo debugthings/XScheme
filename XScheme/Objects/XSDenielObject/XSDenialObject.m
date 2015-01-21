@@ -10,24 +10,11 @@
 
 @implementation XSDenialObject
 
-- (instancetype)initListObject {
-    self = [super initListObjectWithType:kXSObjectTypeDenial
-                                   title:@"Отрицание"
-                                   image:[NSImage imageNamed:@"denial-icon"]
-                             borderColor:[NSColor objectBorderColor]];
-    
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
-- (instancetype)initSchemeObject {
-    self = [super initSchemeObjectWithType:kXSObjectTypeDenial
-                                     title:@"Отрицание"
-                                     image:[NSImage imageNamed:@"denial-icon"]
-                               borderColor:[NSColor objectBorderColor]];
+- (instancetype)init {
+    self = [super initObjectWithType:kXSObjectTypeDenial
+                               title:@"Отрицание"
+                               image:[NSImage imageNamed:@"denial-icon"]
+                         borderColor:[NSColor objectBorderColor]];
     
     if (self) {
         

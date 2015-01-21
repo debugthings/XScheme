@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8853DC781A6E5948004796C2 /* XSAccessoryConnectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8853DC771A6E5948004796C2 /* XSAccessoryConnectingView.m */; };
 		8862A5D11A6CF4E30069DE23 /* XSObjectDetailsDataSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8862A5D01A6CF4E30069DE23 /* XSObjectDetailsDataSectionView.m */; };
 		8862A5D41A6CFFF00069DE23 /* XSNewConnectionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8862A5D31A6CFFF00069DE23 /* XSNewConnectionButton.m */; };
 		88A1E1781A6A4D9700A6B8BD /* XSObjectDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A1E1771A6A4D9700A6B8BD /* XSObjectDetailsView.m */; };
@@ -59,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8853DC761A6E5948004796C2 /* XSAccessoryConnectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSAccessoryConnectingView.h; path = Views/EditorView/XSAccessoryConnectingView.h; sourceTree = "<group>"; };
+		8853DC771A6E5948004796C2 /* XSAccessoryConnectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSAccessoryConnectingView.m; path = Views/EditorView/XSAccessoryConnectingView.m; sourceTree = "<group>"; };
 		8862A5CF1A6CF4E30069DE23 /* XSObjectDetailsDataSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSObjectDetailsDataSectionView.h; path = Views/XSObjectDetailsView/XSObjectDetailsDataSectionView.h; sourceTree = "<group>"; };
 		8862A5D01A6CF4E30069DE23 /* XSObjectDetailsDataSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSObjectDetailsDataSectionView.m; path = Views/XSObjectDetailsView/XSObjectDetailsDataSectionView.m; sourceTree = "<group>"; };
 		8862A5D21A6CFFF00069DE23 /* XSNewConnectionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSNewConnectionButton.h; path = Views/XSObjectDetailsView/XSNewConnectionButton.h; sourceTree = "<group>"; };
@@ -311,6 +314,8 @@
 			children = (
 				E7243EE519C2D06F00E1E9C4 /* XSEditorView.h */,
 				E7243EE619C2D06F00E1E9C4 /* XSEditorView.m */,
+				8853DC761A6E5948004796C2 /* XSAccessoryConnectingView.h */,
+				8853DC771A6E5948004796C2 /* XSAccessoryConnectingView.m */,
 			);
 			name = EditorView;
 			sourceTree = "<group>";
@@ -571,6 +576,7 @@
 				8862A5D41A6CFFF00069DE23 /* XSNewConnectionButton.m in Sources */,
 				E768ACA919EFFD4600AD2A0C /* XSEnterObject.m in Sources */,
 				E768AC9D19EFFC5600AD2A0C /* XSDenialObject.m in Sources */,
+				8853DC781A6E5948004796C2 /* XSAccessoryConnectingView.m in Sources */,
 				E7478AF61A29C9540022BC11 /* NSColor+CustomColor.m in Sources */,
 				E768AC9A19EFFC3800AD2A0C /* XSDelayObject.m in Sources */,
 				E7243EFC19C3022400E1E9C4 /* XSView.m in Sources */,

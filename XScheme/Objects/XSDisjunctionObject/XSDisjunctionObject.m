@@ -10,24 +10,11 @@
 
 @implementation XSDisjunctionObject
 
-- (instancetype)initListObject {
-    self = [super initListObjectWithType:kXSObjectTypeDisjunction
-                                   title:@"Дизъюнкция"
-                                   image:[NSImage imageNamed:@"disjunction-icon"]
-                             borderColor:[NSColor objectBorderColor]];
-    
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
-- (instancetype)initSchemeObject {
-    self = [super initSchemeObjectWithType:kXSObjectTypeDisjunction
-                                     title:@"Дизъюнкция"
-                                     image:[NSImage imageNamed:@"disjunction-icon"]
-                               borderColor:[NSColor objectBorderColor]];
+- (instancetype)init {
+    self = [super initObjectWithType:kXSObjectTypeDisjunction
+                               title:@"Дизъюнкция"
+                               image:[NSImage imageNamed:@"disjunction-icon"]
+                         borderColor:[NSColor objectBorderColor]];
     
     if (self) {
         

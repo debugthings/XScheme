@@ -20,17 +20,17 @@
 @property (readonly) NSArray *inputConnections;
 @property (readonly) NSArray *outputConnections;
 
+@property (nonatomic) BOOL isListElement;
+
 + (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView;
 
-- (instancetype)initSchemeObjectWithType:(XSObjectType)objectType
-                                   title:(NSString *)title
-                                   image:(NSImage *)image
-                             borderColor:(NSColor *)borderColor;
+- (instancetype)initObjectWithType:(XSObjectType)objectType
+                             title:(NSString *)title
+                             image:(NSImage *)image
+                       borderColor:(NSColor *)borderColor;
 
-- (instancetype)initListObjectWithType:(XSObjectType)objectType
-                                 title:(NSString *)title
-                                 image:(NSImage *)image
-                           borderColor:(NSColor *)borderColor;
+- (instancetype)initSchemeObject;
+- (instancetype)initListObject;
 
 - (void)showIndex;
 - (void)hideIndex;

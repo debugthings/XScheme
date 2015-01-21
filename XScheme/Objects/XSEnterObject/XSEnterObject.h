@@ -10,7 +10,4 @@
 
 @interface XSEnterObject : XSObjectView
 
-- (instancetype)initSchemeObject;
-- (instancetype)initListObject;
-
 @end

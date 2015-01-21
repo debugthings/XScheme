@@ -16,6 +16,10 @@
 
 - (BOOL)addNewSchemeObject:(XSObjectView *)newObjectView;
 
+/* removeSchemeObject: return boolean value. If return YES - object was removed from scheme. If return NO - object was not removed from scheme (Not exist object) */
+
+- (BOOL)removeSchemeObject:(XSObjectView *)objectView;
+
 /* countOfObjectsWithType: return number of objects with same type. For example, 2 objects with type kXSObjectTypeConjunction */
 
 - (NSInteger)countOfObjectsWithType:(XSObjectType)type;

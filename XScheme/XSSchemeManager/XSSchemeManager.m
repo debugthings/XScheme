@@ -56,6 +56,19 @@
     return YES;
 }
 
+- (BOOL)removeSchemeObject:(XSObjectView *)objectView {
+    NSString *currentKey = [XSUtility keyForObjectType:objectView.type];
+    NSMutableArray *array = [self.schemeObjectsDictionary valueForKey:currentKey];
+    
+    if (!array)
+        return NO;
+    
+    [array removeObject:objectView];
+    [self.schemeObjectsDictionary setObject:array forKey:currentKey];
+    
+    return YES;
+}
+
 - (NSInteger)countOfObjectsWithType:(XSObjectType)type {
     NSArray *objectsArray = [self.schemeObjectsDictionary valueForKey:[XSUtility keyForObjectType:type]];
     return [objectsArray count];

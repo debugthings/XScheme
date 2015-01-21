@@ -10,22 +10,9 @@
 
 @implementation XSEnterObject
 
-- (instancetype)initListObject {
-    self = [super initListObjectWithType:kXSObjectTypeEnter
-                                    title:@"Вход"
-                                    image:[NSImage imageNamed:@"enter-icon"]
-                              borderColor:[NSColor enterObjectBorderColor]];
-    
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
-- (instancetype)initSchemeObject {
-    self = [super initSchemeObjectWithType:kXSObjectTypeEnter
-                                     title:@"Вход"
+- (instancetype)init {
+    self = [super initObjectWithType:kXSObjectTypeEnter
+                               title:@"Вход"
                                image:[NSImage imageNamed:@"enter-icon"]
                          borderColor:[NSColor enterObjectBorderColor]];
     

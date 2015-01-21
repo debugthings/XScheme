@@ -10,7 +10,4 @@
 
 @interface XSDenialObject : XSObjectView
 
-- (instancetype)initSchemeObject;
-- (instancetype)initListObject;
-
 @end

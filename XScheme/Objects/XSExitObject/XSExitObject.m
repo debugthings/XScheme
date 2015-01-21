@@ -10,24 +10,11 @@
 
 @implementation XSExitObject
 
-- (instancetype)initListObject {
-    self = [super initListObjectWithType:kXSObjectTypeExit
-                                   title:@"Выход"
-                                   image:[NSImage imageNamed:@"exit-icon"]
-                             borderColor:[NSColor exitObjectBorderColor]];
-    
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
-- (instancetype)initSchemeObject {
-    self = [super initSchemeObjectWithType:kXSObjectTypeExit
-                                     title:@"Выход"
-                                     image:[NSImage imageNamed:@"exit-icon"]
-                               borderColor:[NSColor exitObjectBorderColor]];
+- (instancetype)init {
+    self = [super initObjectWithType:kXSObjectTypeExit
+                               title:@"Выход"
+                               image:[NSImage imageNamed:@"exit-icon"]
+                         borderColor:[NSColor exitObjectBorderColor]];
     
     if (self) {
         

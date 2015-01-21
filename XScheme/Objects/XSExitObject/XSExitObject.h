@@ -10,7 +10,4 @@
 
 @interface XSExitObject : XSObjectView
 
-- (instancetype)initSchemeObject;
-- (instancetype)initListObject;
-
 @end

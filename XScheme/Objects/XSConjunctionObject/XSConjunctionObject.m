@@ -10,24 +10,11 @@
 
 @implementation XSConjunctionObject
 
-- (instancetype)initListObject {
-    self = [super initListObjectWithType:kXSObjectTypeConjunction
-                                   title:@"Конъюнкция"
-                                   image:[NSImage imageNamed:@"conjunction-icon"]
-                             borderColor:[NSColor objectBorderColor]];
-    
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
-- (instancetype)initSchemeObject {
-    self = [super initSchemeObjectWithType:kXSObjectTypeConjunction
-                                     title:@"Конъюнкция"
-                                     image:[NSImage imageNamed:@"conjunction-icon"]
-                               borderColor:[NSColor objectBorderColor]];
+- (instancetype)init {
+    self = [super initObjectWithType:kXSObjectTypeConjunction
+                               title:@"Конъюнкция"
+                               image:[NSImage imageNamed:@"conjunction-icon"]
+                         borderColor:[NSColor objectBorderColor]];
     
     if (self) {
         
