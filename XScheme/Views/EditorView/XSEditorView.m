@@ -28,13 +28,13 @@
     self = [super initWithFrame:frame Color:[NSColor workplaceBackgrountColor]];
     
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectObject:) name:XSSchemeObjectSelectNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveObject:) name:XSSchemeObjectDraggingNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showObjectDetails:) name:XSSchemeObjectRightClickNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectObject:)        name:XSSchemeObjectSelectNotification       object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveObject:)          name:XSSchemeObjectDraggingNotification     object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showObjectDetails:)   name:XSSchemeObjectRightClickNotification   object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragBegin:) name:XSConnectingDragBeginNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragging:) name:XSConnectingDraggingNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragEnd:) name:XSConnectingDragEndNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragBegin:) name:XSConnectingDragBeginNotification  object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragging:)  name:XSConnectingDraggingNotification   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragEnd:)   name:XSConnectingDragEndNotification    object:nil];
     }
     
     return self;

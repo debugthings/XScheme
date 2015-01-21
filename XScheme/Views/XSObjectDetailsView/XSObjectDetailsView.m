@@ -79,6 +79,12 @@ static NSInteger const kHeaderHeight = 12;
 - (void)setupData {
     [self removeObjectsFromSuperview:self.inputsViewArray];
     [self removeObjectsFromSuperview:self.outputsViewArray];
+    
+    [_inputsSection removeFromSuperview];
+    [_outputsSection removeFromSuperview];
+    
+    _inputsSection = nil;
+    _outputsSection = nil;
 }
 
 - (void)removeObjectsFromSuperview:(NSArray *)objectsArray {
@@ -88,7 +94,14 @@ static NSInteger const kHeaderHeight = 12;
 
 - (void)configureFrame {
     CGRect rect = self.frame;
-    rect.size.height = kTopIndent + kHeaderHeight + 5 + [self.inputsSection height] + [self.outputsSection height];
+    rect.size.height = kTopIndent + kHeaderHeight + 5;
+    
+    if (_inputsSection)
+        rect.size.height += [_inputsSection height];
+    
+    if (_outputsSection)
+        rect.size.height += [_outputsSection height];
+    
     [self setFrame:rect];
 }
 

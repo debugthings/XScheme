@@ -29,16 +29,6 @@
     return schemeManager;
 }
 
-- (instancetype)init {
-    self = [super init];
-    
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
 - (BOOL)addNewSchemeObject:(XSObjectView *)newObjectView {
     NSString *currentKey = [XSUtility keyForObjectType:newObjectView.type];
     NSMutableArray *array = [self.schemeObjectsDictionary valueForKey:currentKey];

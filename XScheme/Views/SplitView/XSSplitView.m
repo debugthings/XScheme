@@ -74,11 +74,12 @@
 - (void)listObjectBeginDrag:(NSNotification *)notification {
     XSObjectView *objectView = notification.object;
     
-    self.draggedObject = [[XSObjectView alloc] initObjectWithType:objectView.type
-                                                            title:objectView.title
-                                                            image:objectView.image
-                                                      borderColor:objectView.borderColor];
-    
+    self.draggedObject = [XSObjectView duplicateSchemeObject:objectView];
+//    self.draggedObject = [[XSObjectView alloc] initObjectWithType:objectView.type
+//                                                            title:objectView.title
+//                                                            image:objectView.image
+//                                                      borderColor:objectView.borderColor];
+//    
     self.draggedObject.translatesAutoresizingMaskIntoConstraints = YES;
     
     [self.draggedObject setFrame:CGRectMake([XSUtility mousePosition].x - kSchemeObjectWidth / 2, [XSUtility mousePosition].y - kSchemeObjectHeight / 2, kSchemeObjectWidth, kSchemeObjectHeight)];

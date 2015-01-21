@@ -64,7 +64,7 @@ static NSInteger const kCornerRadius = 24;
 @synthesize outputConnections = _outputConnections;
 
 + (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView {
-    return [[XSObjectView alloc] initObjectWithType:objectView.type
+    return [[[objectView class] alloc] initObjectWithType:objectView.type
                                               title:objectView.title
                                               image:objectView.image
                                         borderColor:objectView.borderColor];
