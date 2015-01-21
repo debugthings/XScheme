@@ -14,10 +14,7 @@
     self = [super initWithFrame:frameRect];
     
     if (self) {
-        [self setBezeled:NO];
-        [self setDrawsBackground:NO];
-        [self setEditable:NO];
-        [self setSelectable:NO];
+        [self setupLabelProperties];
     }
     
     return self;
@@ -27,13 +24,17 @@
     self = [super init];
     
     if (self) {
-        [self setBezeled:NO];
-        [self setDrawsBackground:NO];
-        [self setEditable:NO];
-        [self setSelectable:NO];
+        [self setupLabelProperties];
     }
     
     return self;
+}
+
+- (void)setupLabelProperties {
+    [self setBezeled:NO];
+    [self setDrawsBackground:NO];
+    [self setEditable:NO];
+    [self setSelectable:NO];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {

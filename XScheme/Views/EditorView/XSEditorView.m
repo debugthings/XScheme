@@ -71,8 +71,8 @@
 #pragma mark - Connecting drag notification
 
 - (void)connectingDragBegin:(NSNotification *)notification {
-    [self addSubview:self.accessoryConnectingView];
-    [self layout];
+//    [self addSubview:self.accessoryConnectingView];
+    [self addSubview:self.accessoryConnectingView positioned:NSWindowAbove relativeTo:nil];
     [[XSConnectObjects sharedObject] drawLineInView:self.accessoryConnectingView atBeginPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
 }
 
@@ -131,8 +131,8 @@
     if (objectDetailsViewOrigin.x + self.objectDetailsView.frame.size.width > self.frame.size.width)
         objectDetailsViewOrigin.x = self.frame.size.width - self.objectDetailsView.frame.size.width - 10;
     
-    [self.objectDetailsView setFrameOrigin:objectDetailsViewOrigin];
     self.objectDetailsView.targetObject = notification.object;
+    [self.objectDetailsView setFrameOrigin:objectDetailsViewOrigin];
     
     if (![self.subviews containsObject:self.objectDetailsView])
         [self addSubview:self.objectDetailsView];

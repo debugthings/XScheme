@@ -42,7 +42,6 @@ static NSInteger const kIndentBetweenObject = 20;
         NSView *contentView = [self contentView];
         [contentView setBoundsOrigin:CGPointMake(0, 0)];
         [self.contentScrollView setDocumentView:contentView];
-        [self scrollToBottom];
     }
     
     return self;
@@ -131,29 +130,6 @@ static NSInteger const kIndentBetweenObject = 20;
     return CGRectMake(0, 0, [self.contentScrollView.documentView bounds].size.width, [XSUtility windowContentViewHeight]);
 }
 
-#pragma mark - ObjectsView
-
-- (NSView *)objectViewOrigin:(CGPoint)origin ObjectType:(NSInteger)objectType {
-    return nil;
-}
-
-#pragma mark - NSScrollViewDelegate
-
-- (void)scrollToTop {
-    NSPoint newScrollOrigin;
-    
-    // assume that the scrollview is an existing variable
-    if ([[self.contentScrollView documentView] isFlipped]) {
-        newScrollOrigin=NSMakePoint(0.0,0.0);
-    } else {
-        newScrollOrigin=NSMakePoint(0.0,NSMaxY([[self.contentScrollView documentView] frame])
-                                    -NSHeight([[self.contentScrollView contentView] bounds]));
-    }
-    
-    [[self.contentScrollView documentView] scrollPoint:newScrollOrigin];
-    
-}
-
 #pragma mark - UI Elements
 
 - (NSScrollView *)contentScrollView {
@@ -166,20 +142,6 @@ static NSInteger const kIndentBetweenObject = 20;
     }
     
     return _contentScrollView;
-}
-
-- (void)scrollToBottom {
-    NSPoint newScrollOrigin;
-    
-    // assume that the scrollview is an existing variable
-    if ([[self.contentScrollView documentView] isFlipped]) {
-        newScrollOrigin = NSMakePoint(0.0,NSMaxY([[self.contentScrollView documentView] frame])
-                                      -NSHeight([[self.contentScrollView contentView] bounds]));
-    } else {
-        newScrollOrigin = NSMakePoint(0.0,0.0);
-    }
-    
-    [[self.contentScrollView documentView] scrollPoint:newScrollOrigin];
 }
 
 #pragma mark - UI Constraints
