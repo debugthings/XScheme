@@ -75,6 +75,8 @@
     XSObjectView *objectView = notification.object;
     
     self.draggedObject = [XSObjectView duplicateSchemeObject:objectView];
+    self.draggedObject.translatesAutoresizingMaskIntoConstraints = YES;
+    
     [self.draggedObject setFrame:CGRectMake([XSUtility mousePosition].x - kSchemeObjectWidth / 2, [XSUtility mousePosition].y - kSchemeObjectHeight / 2, kSchemeObjectWidth, kSchemeObjectHeight)];
     [self.window.contentView addSubview:self.draggedObject];
 }

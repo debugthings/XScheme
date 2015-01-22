@@ -71,7 +71,6 @@
 #pragma mark - Connecting drag notification
 
 - (void)connectingDragBegin:(NSNotification *)notification {
-//    [self addSubview:self.accessoryConnectingView];
     [self addSubview:self.accessoryConnectingView positioned:NSWindowAbove relativeTo:nil];
     [[XSConnectObjects sharedObject] drawLineInView:self.accessoryConnectingView atBeginPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
 }
