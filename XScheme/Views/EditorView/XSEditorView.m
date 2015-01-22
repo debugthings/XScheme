@@ -123,6 +123,8 @@
 }
 
 - (void)showObjectDetails:(NSNotification *)notification {
+    self.objectDetailsView.targetObject = notification.object;
+    
     NSPoint objectDetailsViewOrigin = [[notification.userInfo valueForKey:@"locationInWindow"] pointValue];
     objectDetailsViewOrigin.x -= 5;
     objectDetailsViewOrigin.y -= self.objectDetailsView.frame.size.height - 5;
@@ -130,7 +132,7 @@
     if (objectDetailsViewOrigin.x + self.objectDetailsView.frame.size.width > self.frame.size.width)
         objectDetailsViewOrigin.x = self.frame.size.width - self.objectDetailsView.frame.size.width - 10;
     
-    self.objectDetailsView.targetObject = notification.object;
+    
     [self.objectDetailsView setFrameOrigin:objectDetailsViewOrigin];
     
     if (![self.subviews containsObject:self.objectDetailsView])
