@@ -18,7 +18,4 @@
 - (void)removeLineInView:(XSView *)view;
 - (NSBezierPath *)currentBezierPath;
 
-+ (void)connectingLineBetweenObject:(id)firstObject andObject:(id)secondObject;
-+ (NSArray *)bezierPathsArray;
-
 @end

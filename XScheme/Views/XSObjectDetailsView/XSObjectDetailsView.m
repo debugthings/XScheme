@@ -12,14 +12,11 @@
 static NSInteger const kTopIndent = 3;
 static NSInteger const kHeaderHeight = 12;
 
-@interface XSObjectDetailsView()
+@interface XSObjectDetailsView() <XSDataSectionDelegate>
 
 @property (readonly) XSLabel *titleLabel;
 @property (readonly) XSObjectDetailsDataSectionView *inputsSection;
 @property (readonly) XSObjectDetailsDataSectionView *outputsSection;
-
-@property (nonatomic, strong) NSMutableArray *inputsViewArray;
-@property (nonatomic, strong) NSMutableArray *outputsViewArray;
 
 @end
 
@@ -43,6 +40,20 @@ static NSInteger const kHeaderHeight = 12;
     return self;
 }
 
+- (NSArray *)objectForSectionView:(XSObjectDetailsDataSectionView *)sectionView {
+    if (sectionView == self.inputsSection) {
+        return self.targetObject.inputConnections;
+    } else if (sectionView == self.outputsSection) {
+        return self.targetObject.outputConnections;
+    }
+    
+    return nil;
+}
+
+- (void)reloadData {
+    
+}
+
 - (void)setFrameOrigin:(NSPoint)newOrigin {
     if (newOrigin.y < 0)
         newOrigin.y = 0;
@@ -59,7 +70,11 @@ static NSInteger const kHeaderHeight = 12;
 }
 
 - (void)configureDetailsView {
-    [self setupData];
+    [_inputsSection removeFromSuperview];
+    [_outputsSection removeFromSuperview];
+    
+    _inputsSection = nil;
+    _outputsSection = nil;
     
     self.titleLabel.stringValue = self.targetObject.title;
     
@@ -74,17 +89,6 @@ static NSInteger const kHeaderHeight = 12;
     }
     
     [self configureFrame];
-}
-
-- (void)setupData {
-    [self removeObjectsFromSuperview:self.inputsViewArray];
-    [self removeObjectsFromSuperview:self.outputsViewArray];
-    
-    [_inputsSection removeFromSuperview];
-    [_outputsSection removeFromSuperview];
-    
-    _inputsSection = nil;
-    _outputsSection = nil;
 }
 
 - (void)removeObjectsFromSuperview:(NSArray *)objectsArray {
@@ -125,6 +129,8 @@ static NSInteger const kHeaderHeight = 12;
         _inputsSection = [[XSObjectDetailsDataSectionView alloc] init];
         _inputsSection.translatesAutoresizingMaskIntoConstraints = NO;
         _inputsSection.title = @"  Входные данные";
+        _inputsSection.delegate = self;
+        _inputsSection.dataType = XSDataTypeInput;
     }
     
     return _inputsSection;
@@ -135,6 +141,8 @@ static NSInteger const kHeaderHeight = 12;
         _outputsSection = [[XSObjectDetailsDataSectionView alloc] init];
         _outputsSection.translatesAutoresizingMaskIntoConstraints = NO;
         _outputsSection.title = @"  Выходные данные";
+        _outputsSection.delegate = self;
+        _outputsSection.dataType = XSDataTypeOutput;
     }
     
     return _outputsSection;

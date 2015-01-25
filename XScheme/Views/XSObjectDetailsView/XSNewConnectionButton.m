@@ -36,19 +36,22 @@ NSString * const XSConnectingDraggingNotification = @"XSConnectingDraggingNotifi
 - (void)mouseDown:(NSEvent *)theEvent {
     [[NSNotificationCenter defaultCenter] postNotificationName:XSConnectingDragBeginNotification
                                                         object:nil
-                                                      userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow]}];
+                                                      userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow],
+                                                                 @"dataType" : @(self.dataType)}];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
     [[NSNotificationCenter defaultCenter] postNotificationName:XSConnectingDraggingNotification
                                                         object:nil
-                                                      userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow]}];
+                                                      userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow],
+                                                                 @"dataType" : @(self.dataType)}];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
     [[NSNotificationCenter defaultCenter] postNotificationName:XSConnectingDragEndNotification
                                                         object:nil
-                                                      userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow]}];
+                                                      userInfo:@{@"locationInWindow" : [NSValue valueWithPoint:theEvent.locationInWindow],
+                                                                 @"dataType" : @(self.dataType)}];
 }
 
 - (void)setTitle:(NSString *)title {

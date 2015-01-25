@@ -12,4 +12,6 @@
 
 @property (nonatomic, weak) XSObjectView *targetObject;
 
+- (void)reloadData;
+
 @end

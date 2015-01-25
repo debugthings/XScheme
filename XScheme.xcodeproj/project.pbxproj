@@ -45,6 +45,7 @@
 		E768ACA319EFFCA000AD2A0C /* XSConjunctionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768ACA219EFFCA000AD2A0C /* XSConjunctionObject.m */; };
 		E768ACA619EFFD3100AD2A0C /* XSExitObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768ACA519EFFD3100AD2A0C /* XSExitObject.m */; };
 		E768ACA919EFFD4600AD2A0C /* XSEnterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768ACA819EFFD4600AD2A0C /* XSEnterObject.m */; };
+		E77191531A7446A0002E1599 /* XSEditorView+ConnectObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = E77191521A7446A0002E1599 /* XSEditorView+ConnectObjects.m */; };
 		E7BE53C51A3C8F71005CC718 /* NSGradient+CustomGradients.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BE53C41A3C8F71005CC718 /* NSGradient+CustomGradients.m */; };
 		E7BE53C91A3C91D5005CC718 /* XSSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BE53C81A3C91D5005CC718 /* XSSeparatorView.m */; };
 /* End PBXBuildFile section */
@@ -127,6 +128,8 @@
 		E768ACA519EFFD3100AD2A0C /* XSExitObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSExitObject.m; path = Objects/XSExitObject/XSExitObject.m; sourceTree = "<group>"; };
 		E768ACA719EFFD4600AD2A0C /* XSEnterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSEnterObject.h; path = Objects/XSEnterObject/XSEnterObject.h; sourceTree = "<group>"; };
 		E768ACA819EFFD4600AD2A0C /* XSEnterObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSEnterObject.m; path = Objects/XSEnterObject/XSEnterObject.m; sourceTree = "<group>"; };
+		E77191511A7446A0002E1599 /* XSEditorView+ConnectObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "XSEditorView+ConnectObjects.h"; path = "Views/EditorView/XSEditorView+ConnectObjects.h"; sourceTree = "<group>"; };
+		E77191521A7446A0002E1599 /* XSEditorView+ConnectObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "XSEditorView+ConnectObjects.m"; path = "Views/EditorView/XSEditorView+ConnectObjects.m"; sourceTree = "<group>"; };
 		E7BE53C31A3C8F71005CC718 /* NSGradient+CustomGradients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSGradient+CustomGradients.h"; path = "Categories/CustomGradients/NSGradient+CustomGradients.h"; sourceTree = "<group>"; };
 		E7BE53C41A3C8F71005CC718 /* NSGradient+CustomGradients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSGradient+CustomGradients.m"; path = "Categories/CustomGradients/NSGradient+CustomGradients.m"; sourceTree = "<group>"; };
 		E7BE53C71A3C91D5005CC718 /* XSSeparatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSSeparatorView.h; path = Views/XSSeparatorView/XSSeparatorView.h; sourceTree = "<group>"; };
@@ -312,6 +315,7 @@
 		E7243EE419C2D05400E1E9C4 /* EditorView */ = {
 			isa = PBXGroup;
 			children = (
+				E771914D1A744644002E1599 /* Categories */,
 				E7243EE519C2D06F00E1E9C4 /* XSEditorView.h */,
 				E7243EE619C2D06F00E1E9C4 /* XSEditorView.m */,
 				8853DC761A6E5948004796C2 /* XSAccessoryConnectingView.h */,
@@ -444,6 +448,15 @@
 				E768AC9119EFFB8400AD2A0C /* XSEnterObject */,
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		E771914D1A744644002E1599 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E77191511A7446A0002E1599 /* XSEditorView+ConnectObjects.h */,
+				E77191521A7446A0002E1599 /* XSEditorView+ConnectObjects.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		E7BE53C21A3C8F47005CC718 /* NSGradient */ = {
@@ -585,6 +598,7 @@
 				E7243EF219C2DF2D00E1E9C4 /* XSObjectView.m in Sources */,
 				E7243EEB19C2D45A00E1E9C4 /* XSSplitView.m in Sources */,
 				E7243EE719C2D06F00E1E9C4 /* XSEditorView.m in Sources */,
+				E77191531A7446A0002E1599 /* XSEditorView+ConnectObjects.m in Sources */,
 				E7BE53C51A3C8F71005CC718 /* NSGradient+CustomGradients.m in Sources */,
 				E768ACA019EFFC8200AD2A0C /* XSDisjunctionObject.m in Sources */,
 				E7243EB819C2CB9E00E1E9C4 /* main.m in Sources */,

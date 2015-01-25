@@ -123,11 +123,13 @@ static NSInteger const kCornerRadius = 24;
 }
 
 - (BOOL)isLogicalOperator {
-    if (self.type == kXSObjectTypeConjunction || self.type == kXSObjectTypeDisjunction || self.type == kXSObjectTypeDenial)
+    if ((kXSObjectTypeConjunction | kXSObjectTypeDisjunction | kXSObjectTypeDenial) & self.type)
         return YES;
     
     return NO;
 }
+
+#pragma mark - Inputs/Outputs numbers
 
 - (NSInteger)inputsNumber {
     return -1;
@@ -136,6 +138,32 @@ static NSInteger const kCornerRadius = 24;
 - (NSInteger)outputsNumber {
     return -1;
 }
+
+#pragma mark - Allowed types
+
+- (XSObjectType)allowedInputTypes {
+    return 0;
+}
+
+- (XSObjectType)allowedOutputTypes {
+    return 0;
+}
+
+- (BOOL)isAllowedInputType:(XSObjectType)type {
+    if ([self allowedInputTypes] & type)
+        return YES;
+    
+    return NO;
+}
+
+- (BOOL)isAllowedOutputType:(XSObjectType)type {
+    if ([self allowedOutputTypes] & type)
+        return YES;
+    
+    return NO;
+}
+
+#pragma mark - Inputs/Outputs object data
 
 - (BOOL)isHasInputs {
     if ([self inputsNumber] != 0)
@@ -150,6 +178,8 @@ static NSInteger const kCornerRadius = 24;
     
     return NO;
 }
+
+#pragma mark - Index
 
 - (void)showIndex {
     if (![self.subviews containsObject:self.indexLabel] && ![self isLogicalOperator])
@@ -202,20 +232,38 @@ static NSInteger const kCornerRadius = 24;
     }
 }
 
+#pragma mark - Operation with connections
+
 - (void)addInputConnectionObject:(XSObjectView *)object {
-    [self.inputConnectionsArray addObject:object];
+    if (![self.inputConnectionsArray containsObject:object])
+        [self.inputConnectionsArray addObject:object];
+    
+    if (![[object outputConnections] containsObject:self])
+        [object addOutputConnectionObject:self];
 }
 
 - (void)addOutputConnectionObject:(XSObjectView *)object {
-    [self.outputConnectionsArray addObject:object];
+    if (![self.outputConnectionsArray containsObject:object])
+        [self.outputConnectionsArray addObject:object];
+    
+    if (![[object inputConnections] containsObject:self])
+        [object addInputConnectionObject:self];
 }
 
 - (void)removeInputConnectionObject:(XSObjectView *)object {
-    [self.inputConnectionsArray removeObject:object];
+    if ([self.inputConnectionsArray containsObject:object])
+        [self.inputConnectionsArray removeObject:object];
+    
+    if ([[object inputConnections] containsObject:self])
+        [object removeOutputConnectionObject:self];
 }
 
 - (void)removeOutputConnectionObject:(XSObjectView *)object {
-    [self.outputConnectionsArray removeObject:object];
+    if ([self.outputConnectionsArray containsObject:object])
+        [self.outputConnectionsArray removeObject:object];
+    
+    if ([[object outputConnections] containsObject:self])
+        [object removeInputConnectionObject:self];
 }
 
 #pragma mark - Mouse respondes

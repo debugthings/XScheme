@@ -28,4 +28,6 @@
 
 - (XSObjectView *)objectWithType:(XSObjectType)type atIndex:(NSInteger)index;
 
+- (XSObjectView *)objectAtPoint:(NSPoint)point;
+
 @end

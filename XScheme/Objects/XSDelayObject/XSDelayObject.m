@@ -31,4 +31,12 @@
     return 1;
 }
 
+- (XSObjectType)allowedInputTypes {
+    return kXSObjectTypeEnter | kXSObjectTypeConjunction | kXSObjectTypeDisjunction | kXSObjectTypeDelay | kXSObjectTypeDenial;
+}
+
+- (XSObjectType)allowedOutputTypes {
+    return kXSObjectTypeConjunction | kXSObjectTypeDisjunction | kXSObjectTypeDelay | kXSObjectTypeDenial | kXSObjectTypeExit;
+}
+
 @end

@@ -8,9 +8,19 @@
 
 #import "XSView.h"
 
+@class XSObjectDetailsDataSectionView;
+
+@protocol XSDataSectionDelegate <NSObject>
+
+- (NSArray *)objectForSectionView:(XSObjectDetailsDataSectionView *)sectionView;
+
+@end
+
 @interface XSObjectDetailsDataSectionView : XSView
 
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic) XSDataType dataType;
+@property (nonatomic, weak) id<XSDataSectionDelegate> delegate;
 
 - (CGFloat)height;
 

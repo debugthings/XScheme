@@ -42,6 +42,12 @@
 - (NSInteger)inputsNumber;
 - (NSInteger)outputsNumber;
 
+- (XSObjectType)allowedInputTypes;
+- (XSObjectType)allowedOutputTypes;
+
+- (BOOL)isAllowedInputType:(XSObjectType)type;
+- (BOOL)isAllowedOutputType:(XSObjectType)type;
+
 - (BOOL)isHasInputs;
 - (BOOL)isHasOutputs;
 

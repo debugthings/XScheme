@@ -11,12 +11,14 @@
 @interface XSSchemeManager()
 
 @property (readonly) NSMutableDictionary *schemeObjectsDictionary;
+@property (readonly) NSMutableArray *schemeObjectsArray;
 
 @end
 
 @implementation XSSchemeManager
 
 @synthesize schemeObjectsDictionary = _schemeObjectsDictionary;
+@synthesize schemeObjectsArray = _schemeObjectsArray;
 
 + (instancetype)sharedManager {
     static XSSchemeManager *schemeManager = nil;
@@ -42,6 +44,7 @@
     [array addObject:newObjectView];
     
     [self.schemeObjectsDictionary setObject:array forKey:currentKey];
+    [self.schemeObjectsArray addObject:newObjectView];
     
     return YES;
 }
@@ -55,6 +58,7 @@
     
     [array removeObject:objectView];
     [self.schemeObjectsDictionary setObject:array forKey:currentKey];
+    [self.schemeObjectsArray removeObject:objectView];
     
     return YES;
 }
@@ -73,6 +77,16 @@
     return nil;
 }
 
+- (XSObjectView *)objectAtPoint:(NSPoint)point {
+    for (int i = 0; i < [self.schemeObjectsArray count]; i++) {
+        XSObjectView *currentObject = [self.schemeObjectsArray objectAtIndex:i];
+        if (NSPointInRect(point, currentObject.frame))
+            return currentObject;
+    }
+    
+    return nil;
+}
+
 #pragma mark - Manager data
 
 - (NSMutableDictionary *)schemeObjectsDictionary {
@@ -81,6 +95,14 @@
     }
     
     return _schemeObjectsDictionary;
+}
+
+- (NSMutableArray *)schemeObjectsArray {
+    if (!_schemeObjectsArray) {
+        _schemeObjectsArray = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    
+    return _schemeObjectsArray;
 }
 
 @end

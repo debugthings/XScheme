@@ -8,17 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-enum XSObjectType {
-    
-    kXSObjectTypeEnter,           /* ВХОД */
-    kXSObjectTypeExit,            /* ВЫХОД */
-    kXSObjectTypeConjunction,     /* КОНЪЮНКЦИЯ */
-    kXSObjectTypeDisjunction,     /* ДИЗЪЮНКЦИЯ */
-    kXSObjectTypeDenial,          /* ОТРИЦАНИЕ */
-    kXSObjectTypeDelay            /* ЗАДЕРЖКА */
+typedef NS_OPTIONS(NSUInteger, XSObjectType) {
+    kXSObjectTypeNone           = 0,
+    kXSObjectTypeEnter          = 1 << 0,   /* ВХОД */
+    kXSObjectTypeExit           = 1 << 1,   /* ВЫХОД */
+    kXSObjectTypeConjunction    = 1 << 2,   /* КОНЪЮНКЦИЯ */
+    kXSObjectTypeDisjunction    = 1 << 3,   /* ДИЗЪЮНКЦИЯ */
+    kXSObjectTypeDenial         = 1 << 4,   /* ОТРИЦАНИЕ */
+    kXSObjectTypeDelay          = 1 << 5    /* ЗАДЕРЖКА */
 };
 
-typedef enum XSObjectType XSObjectType;
+typedef NS_OPTIONS(NSUInteger, XSDataType) {
+    XSDataTypeNone      = 0,
+    XSDataTypeInput     = 1 << 0,
+    XSDataTypeOutput    = 1 << 1
+};
 
 #pragma mark - List objects drag notifications
 

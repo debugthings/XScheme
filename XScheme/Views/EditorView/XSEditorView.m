@@ -10,12 +10,13 @@
 #import "XSConnectObjects.h"
 #import "XSObjectDetailsView.h"
 #import "XSAccessoryConnectingView.h"
+#import "XSEditorView+ConnectObjects.h"
 
 @interface XSEditorView()
 
-@property (nonatomic, weak) XSObjectView *selectedObject;
 @property (readonly) XSObjectDetailsView *objectDetailsView;
 @property (readonly) XSAccessoryConnectingView *accessoryConnectingView;
+@property (nonatomic) XSDataType currentDataType;   // Input/Output data for connecting objects
 
 @end
 
@@ -23,18 +24,37 @@
 
 @synthesize objectDetailsView = _objectDetailsView;
 @synthesize accessoryConnectingView = _accessoryConnectingView;
+@synthesize linesArray = _linesArray;
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame Color:[NSColor workplaceBackgrountColor]];
     
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectObject:)        name:XSSchemeObjectSelectNotification       object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveObject:)          name:XSSchemeObjectDraggingNotification     object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showObjectDetails:)   name:XSSchemeObjectRightClickNotification   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(selectObject:)
+                                                     name:XSSchemeObjectSelectNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(moveObject:)
+                                                     name:XSSchemeObjectDraggingNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(showObjectDetails:)
+                                                     name:XSSchemeObjectRightClickNotification
+                                                   object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragBegin:) name:XSConnectingDragBeginNotification  object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragging:)  name:XSConnectingDraggingNotification   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectingDragEnd:)   name:XSConnectingDragEndNotification    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(connectingDragBegin:)
+                                                     name:XSConnectingDragBeginNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(connectingDragging:)
+                                                     name:XSConnectingDraggingNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(connectingDragEnd:)
+                                                     name:XSConnectingDragEndNotification
+                                                   object:nil];
     }
     
     return self;
@@ -55,8 +75,21 @@
     }
 }
 
+- (void)drawRect:(NSRect)dirtyRect {
+    [super drawRect:dirtyRect];
+    
+    [NSBezierPath setDefaultLineWidth:1.0];
+    [[NSColor lightGrayColorCustom] set];
+    
+    for (int i = 0; i < [self.linesArray count]; i++) {
+        NSBezierPath *bezierPath = [[self.linesArray objectAtIndex:i] valueForKey:@"bezierPath"];
+        [bezierPath stroke];
+    }
+}
+
 - (void)removeSelectedSchemeObject {
     [self.objectDetailsView removeFromSuperview];
+    [self removeLinesWithObject:self.selectedObject];
     [[XSSchemeManager sharedManager] removeSchemeObject:self.selectedObject];
     [self.selectedObject removeFromSuperview];
 }
@@ -72,16 +105,39 @@
 
 - (void)connectingDragBegin:(NSNotification *)notification {
     [self addSubview:self.accessoryConnectingView positioned:NSWindowAbove relativeTo:nil];
-    [[XSConnectObjects sharedObject] drawLineInView:self.accessoryConnectingView atBeginPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+    [self setWantsLayer:YES];
+    [[XSConnectObjects sharedObject] drawLineInView:self.accessoryConnectingView
+                                       atBeginPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+    
+    self.currentDataType = [[notification.userInfo valueForKey:@"dataType"] integerValue];
 }
 
 - (void)connectingDragging:(NSNotification *)notification {
-    [[XSConnectObjects sharedObject] redrawLineInView:self.accessoryConnectingView atPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+    [[XSConnectObjects sharedObject] redrawLineInView:self.accessoryConnectingView
+                                              atPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue]];
+    
+    NSPoint point = [self convertPoint:[[notification.userInfo valueForKey:@"locationInWindow"] pointValue] fromView:nil];
+
+    self.hoverObject = [[XSSchemeManager sharedManager] objectAtPoint:point];
 }
 
 - (void)connectingDragEnd:(NSNotification *)notification {
+    if (self.hoverObject) {
+        if (self.currentDataType == XSDataTypeInput) {
+            [self.selectedObject addInputConnectionObject:self.hoverObject];
+            [self drawLineBetweenSelectedAndHoverObjects];
+        } else if (self.currentDataType == XSDataTypeOutput) {
+            [self.selectedObject addOutputConnectionObject:self.hoverObject];
+            [self drawLineBetweenSelectedAndHoverObjects];
+        }
+    }
+    
+    [self.objectDetailsView reloadData];
+    
+    self.hoverObject = nil;
     [[XSConnectObjects sharedObject] removeLineInView:self.accessoryConnectingView];
     [self.accessoryConnectingView removeFromSuperview];
+    self.currentDataType = 0;
 }
 
 #pragma mark - Mouse responde
@@ -109,6 +165,8 @@
     originPoint.x -= (kSchemeObjectHeight / 2 > 0) ? kSchemeObjectHeight / 2 : 0;
     originPoint.y -= (kSchemeObjectHeight / 2 > 0) ? kSchemeObjectHeight / 2 : 0;
     [movableObject setFrameOrigin:originPoint];
+    
+    [self correctLinesWithObject:self.selectedObject];
 }
 
 - (void)selectObject:(NSNotification *)notification {
@@ -118,12 +176,12 @@
             [self.selectedObject setHighlightState:NO];
         
         self.selectedObject = notification.object;
-        [self.selectedObject setHighlightState:YES];
     }
 }
 
 - (void)showObjectDetails:(NSNotification *)notification {
     self.objectDetailsView.targetObject = notification.object;
+    self.selectedObject = self.objectDetailsView.targetObject;
     
     NSPoint objectDetailsViewOrigin = [[notification.userInfo valueForKey:@"locationInWindow"] pointValue];
     objectDetailsViewOrigin.x -= 5;
@@ -150,6 +208,43 @@
         [self removeSelectedSchemeObject];
 }
 
+#pragma mark - Setter
+
+- (void)setSelectedObject:(XSObjectView *)selectedObject {
+    
+    if (![_selectedObject isEqualTo:selectedObject])
+        [self.objectDetailsView removeFromSuperview];
+    
+    if (_selectedObject)
+        [_selectedObject setHighlightState:NO];
+    
+    _selectedObject = selectedObject;
+    
+    
+    [_selectedObject setHighlightState:YES];
+}
+
+- (void)setHoverObject:(XSObjectView *)hoverObject {
+    _hoverObject.layer.borderWidth = 0;
+    
+    XSObjectType allowedObjects = -1;
+    
+    if (self.currentDataType == XSDataTypeInput) {
+        allowedObjects = [self.selectedObject allowedInputTypes];
+    } else if (self.currentDataType == XSDataTypeOutput) {
+        allowedObjects = [self.selectedObject allowedOutputTypes];
+    }
+    
+    if (hoverObject.type & allowedObjects) {
+        _hoverObject = hoverObject;
+    
+        _hoverObject.layer.borderColor = [NSColor blueColor].CGColor;
+        _hoverObject.layer.borderWidth = 2.0f;
+        _hoverObject.layer.cornerRadius = 5.0f;
+    } else if (!hoverObject)
+        _hoverObject = nil;
+}
+
 #pragma mark - UI Elements
 
 - (XSObjectDetailsView *)objectDetailsView {
@@ -166,6 +261,14 @@
     }
     
     return _accessoryConnectingView;
+}
+
+- (NSMutableArray *)linesArray {
+    if (!_linesArray) {
+        _linesArray = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    
+    return _linesArray;
 }
 
 

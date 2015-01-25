@@ -11,5 +11,6 @@
 @interface XSNewConnectionButton : XSView
 
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic) XSDataType dataType;
 
 @end

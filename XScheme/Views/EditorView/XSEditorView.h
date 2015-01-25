@@ -10,6 +10,10 @@
 
 @interface XSEditorView : XSView
 
+@property (nonatomic, weak) XSObjectView *selectedObject;
+@property (nonatomic, weak) XSObjectView *hoverObject;
+@property (readonly) NSMutableArray *linesArray;
+
 - (void)addNewSchemeObject:(XSObjectView *)newObjectView;
 
 @end

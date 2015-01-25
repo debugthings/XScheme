@@ -54,34 +54,18 @@ static NSInteger const kIndentBetweenObject = 20;
     for (int i = 0; i < 6; i++) {
         id object = nil;
         
-        switch (i) {
-            case kXSObjectTypeEnter:
-                object = [[XSEnterObject alloc] initListObject];
-                break;
-                
-            case kXSObjectTypeExit:
-                object = [[XSExitObject alloc] initListObject];
-                break;
-                
-            case kXSObjectTypeConjunction:
-                object = [[XSConjunctionObject alloc] initListObject];
-                break;
-                
-            case kXSObjectTypeDisjunction:
-                object = [[XSDisjunctionObject alloc] initListObject];
-                break;
-                
-            case kXSObjectTypeDelay:
-                object = [[XSDelayObject alloc] initListObject];
-                break;
-                
-            case kXSObjectTypeDenial:
-                object = [[XSDenialObject alloc] initListObject];
-                break;
-                
-            default:
-                break;
-        }
+        if (i == 0)
+            object = [[XSEnterObject alloc] initListObject];
+        else if (i == 1)
+            object = [[XSExitObject alloc] initListObject];
+        else if (i == 2)
+            object = [[XSConjunctionObject alloc] initListObject];
+        else if (i == 3)
+            object = [[XSDisjunctionObject alloc] initListObject];
+        else if (i == 4)
+            object = [[XSDelayObject alloc] initListObject];
+        else if (i == 5)
+            object = [[XSDenialObject alloc] initListObject];
         
         NSInteger topPadding = kIndentBetweenObject + ((kIndentBetweenObject + 48) * i);
         

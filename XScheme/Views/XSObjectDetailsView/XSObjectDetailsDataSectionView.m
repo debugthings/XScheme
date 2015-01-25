@@ -37,6 +37,12 @@ static NSInteger const kNewConnectionAreaHeight = 40;
     return self;
 }
 
+- (void)objects {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(objectForSectionView:)]) {
+        //sadfg
+    }
+}
+
 - (CGFloat)height {
     return kSectionViewHeaderHeight + kNewConnectionAreaHeight;
 }
@@ -47,6 +53,12 @@ static NSInteger const kNewConnectionAreaHeight = 40;
     _title = title;
     
     [self.titleLabel setStringValue:_title];
+}
+
+- (void)setDataType:(XSDataType)dataType {
+    _dataType = dataType;
+    
+    self.newConnectionButton.dataType = _dataType;
 }
 
 #pragma mark - UI Elements

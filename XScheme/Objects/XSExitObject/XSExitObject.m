@@ -31,4 +31,12 @@
     return 0;
 }
 
+- (XSObjectType)allowedInputTypes {
+    return kXSObjectTypeEnter | kXSObjectTypeConjunction | kXSObjectTypeDisjunction | kXSObjectTypeDelay | kXSObjectTypeDenial;
+}
+
+- (XSObjectType)allowedOutputTypes {
+    return kXSObjectTypeNone;
+}
+
 @end
