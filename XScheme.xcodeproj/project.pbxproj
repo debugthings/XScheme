@@ -12,6 +12,7 @@
 		8862A5D41A6CFFF00069DE23 /* XSNewConnectionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8862A5D31A6CFFF00069DE23 /* XSNewConnectionButton.m */; };
 		88A1E1781A6A4D9700A6B8BD /* XSObjectDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A1E1771A6A4D9700A6B8BD /* XSObjectDetailsView.m */; };
 		E71787DE19F0FD6100173675 /* XSConnectObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = E71787DD19F0FD6100173675 /* XSConnectObjects.m */; };
+		E72012981A781B1C005BAD96 /* XSDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E72012971A781B1C005BAD96 /* XSDataCell.m */; };
 		E7243EAC19C2CB9E00E1E9C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7243EAB19C2CB9E00E1E9C4 /* Cocoa.framework */; };
 		E7243EB619C2CB9E00E1E9C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7243EB419C2CB9E00E1E9C4 /* InfoPlist.strings */; };
 		E7243EB819C2CB9E00E1E9C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7243EB719C2CB9E00E1E9C4 /* main.m */; };
@@ -71,6 +72,8 @@
 		88A1E1771A6A4D9700A6B8BD /* XSObjectDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSObjectDetailsView.m; path = Views/XSObjectDetailsView/XSObjectDetailsView.m; sourceTree = "<group>"; };
 		E71787DC19F0FD6100173675 /* XSConnectObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSConnectObjects.h; path = XSConnectObject/XSConnectObjects.h; sourceTree = "<group>"; };
 		E71787DD19F0FD6100173675 /* XSConnectObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSConnectObjects.m; path = XSConnectObject/XSConnectObjects.m; sourceTree = "<group>"; };
+		E72012961A781B1C005BAD96 /* XSDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDataCell.h; path = Views/XSObjectDetailsView/DataCell/XSDataCell.h; sourceTree = "<group>"; };
+		E72012971A781B1C005BAD96 /* XSDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSDataCell.m; path = Views/XSObjectDetailsView/DataCell/XSDataCell.m; sourceTree = "<group>"; };
 		E7243EA819C2CB9E00E1E9C4 /* XScheme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XScheme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7243EAB19C2CB9E00E1E9C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E7243EAE19C2CB9E00E1E9C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -161,6 +164,7 @@
 		8862A5CE1A6CF4A10069DE23 /* XSObjectDetailsDataSectionView */ = {
 			isa = PBXGroup;
 			children = (
+				E72012951A781ACC005BAD96 /* DataCell */,
 				8862A5CF1A6CF4E30069DE23 /* XSObjectDetailsDataSectionView.h */,
 				8862A5D01A6CF4E30069DE23 /* XSObjectDetailsDataSectionView.m */,
 				8862A5D21A6CFFF00069DE23 /* XSNewConnectionButton.h */,
@@ -195,6 +199,15 @@
 				E7478AF31A29C9120022BC11 /* NSColor */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		E72012951A781ACC005BAD96 /* DataCell */ = {
+			isa = PBXGroup;
+			children = (
+				E72012961A781B1C005BAD96 /* XSDataCell.h */,
+				E72012971A781B1C005BAD96 /* XSDataCell.m */,
+			);
+			name = DataCell;
 			sourceTree = "<group>";
 		};
 		E7243E9F19C2CB9E00E1E9C4 = {
@@ -599,6 +612,7 @@
 				E7243EEB19C2D45A00E1E9C4 /* XSSplitView.m in Sources */,
 				E7243EE719C2D06F00E1E9C4 /* XSEditorView.m in Sources */,
 				E77191531A7446A0002E1599 /* XSEditorView+ConnectObjects.m in Sources */,
+				E72012981A781B1C005BAD96 /* XSDataCell.m in Sources */,
 				E7BE53C51A3C8F71005CC718 /* NSGradient+CustomGradients.m in Sources */,
 				E768ACA019EFFC8200AD2A0C /* XSDisjunctionObject.m in Sources */,
 				E7243EB819C2CB9E00E1E9C4 /* main.m in Sources */,

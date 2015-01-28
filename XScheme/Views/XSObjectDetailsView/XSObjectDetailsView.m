@@ -31,7 +31,7 @@ static NSInteger const kHeaderHeight = 12;
     
     if (self) {
         [self setWantsLayer:YES];
-        self.layer.cornerRadius = 5;
+        self.layer.cornerRadius = 7.5f;
         
         [self addSubview:self.titleLabel];
         [self titleLabelConstraints];
@@ -41,10 +41,12 @@ static NSInteger const kHeaderHeight = 12;
 }
 
 - (NSArray *)objectForSectionView:(XSObjectDetailsDataSectionView *)sectionView {
-    if (sectionView == self.inputsSection) {
-        return self.targetObject.inputConnections;
-    } else if (sectionView == self.outputsSection) {
-        return self.targetObject.outputConnections;
+    if (sectionView == _inputsSection) {
+        return @[@"1",@"2",@"3"];
+//        return self.targetObject.inputConnections;
+    } else if (sectionView == _outputsSection) {
+        return @[@"1",@"2",@"3"];
+//        return self.targetObject.outputConnections;
     }
     
     return nil;
@@ -80,12 +82,10 @@ static NSInteger const kHeaderHeight = 12;
     
     if ([self.targetObject isHasInputs]) {
         [self addSubview:self.inputsSection];
-        [self inputsSectionConstraints];
     }
     
     if ([self.targetObject isHasOutputs]) {
         [self addSubview:self.outputsSection];
-        [self outputsSectionConstraints];
     }
     
     [self configureFrame];
@@ -107,6 +107,18 @@ static NSInteger const kHeaderHeight = 12;
         rect.size.height += [_outputsSection height];
     
     [self setFrame:rect];
+    
+    [self.titleLabel setFrame:CGRectMake(0, rect.size.height - kHeaderHeight - kTopIndent, rect.size.width, kHeaderHeight)];
+    
+    if (_inputsSection) {
+        CGFloat inputHeight = [self.inputsSection height];
+        [self.inputsSection setFrame:CGRectMake(0, rect.size.height - kHeaderHeight - kTopIndent - 3 - inputHeight, rect.size.width, inputHeight)];
+    }
+    
+    if (_outputsSection) {
+        CGFloat outputHeight = [self.outputsSection height];
+        [self.outputsSection setFrame:CGRectMake(0, 0, rect.size.width, outputHeight)];
+    }
 }
 
 #pragma mark - UI Elements
@@ -118,7 +130,6 @@ static NSInteger const kHeaderHeight = 12;
         _titleLabel.textColor = [NSColor whiteColor];
         _titleLabel.font = [NSFont boldSystemFontOfSize:11.0f];
         [_titleLabel setAlignment:NSCenterTextAlignment];
-        _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
     return _titleLabel;
@@ -127,7 +138,6 @@ static NSInteger const kHeaderHeight = 12;
 - (XSObjectDetailsDataSectionView *)inputsSection {
     if (!_inputsSection) {
         _inputsSection = [[XSObjectDetailsDataSectionView alloc] init];
-        _inputsSection.translatesAutoresizingMaskIntoConstraints = NO;
         _inputsSection.title = @"  Входные данные";
         _inputsSection.delegate = self;
         _inputsSection.dataType = XSDataTypeInput;
@@ -139,7 +149,6 @@ static NSInteger const kHeaderHeight = 12;
 - (XSObjectDetailsDataSectionView *)outputsSection {
     if (!_outputsSection) {
         _outputsSection = [[XSObjectDetailsDataSectionView alloc] init];
-        _outputsSection.translatesAutoresizingMaskIntoConstraints = NO;
         _outputsSection.title = @"  Выходные данные";
         _outputsSection.delegate = self;
         _outputsSection.dataType = XSDataTypeOutput;
@@ -194,6 +203,11 @@ static NSInteger const kHeaderHeight = 12;
                                                                      options:0
                                                                      metrics:nil
                                                                        views:NSDictionaryOfVariableBindings(_inputsSection, _outputsSection)]];
+    else
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(20)-[_outputsSection]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:NSDictionaryOfVariableBindings(_outputsSection)]];
 }
 
 @end

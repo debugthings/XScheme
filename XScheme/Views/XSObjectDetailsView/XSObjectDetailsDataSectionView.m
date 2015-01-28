@@ -8,14 +8,17 @@
 
 #import "XSObjectDetailsDataSectionView.h"
 #import "XSNewConnectionButton.h"
+#import "XSDataCell.h"
 
-static NSInteger const kSectionViewHeaderHeight = 15;
-static NSInteger const kNewConnectionAreaHeight = 40;
+static NSInteger const kHeightForCell = 17;
+static NSInteger const kHeightForNewConnectionButton = 40;
+static NSInteger const kIndentBetweenCells = 2;
 
 @interface XSObjectDetailsDataSectionView()
 
 @property (readonly) XSLabel *titleLabel;
 @property (readonly) XSNewConnectionButton *newConnectionButton;
+@property (nonatomic) NSArray *dataArray;
 
 @end
 
@@ -24,27 +27,33 @@ static NSInteger const kNewConnectionAreaHeight = 40;
 @synthesize titleLabel = _titleLabel;
 @synthesize newConnectionButton = _newConnectionButton;
 
-- (instancetype)init {
-    self = [super initWithColor:nil];
-    
-    if (self) {
-        [self addSubview:self.titleLabel];
-        [self titleLabelConstraints];
-        [self addSubview:self.newConnectionButton];
-        [self newConnectionButtonConstraints];
-    }
-    
-    return self;
-}
-
-- (void)objects {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(objectForSectionView:)]) {
-        //sadfg
-    }
-}
-
 - (CGFloat)height {
-    return kSectionViewHeaderHeight + kNewConnectionAreaHeight;
+    return kHeightForCell + kHeightForNewConnectionButton + [self numberOfRows] * kHeightForCell + ([self numberOfRows] + 1) * kIndentBetweenCells;
+}
+
+- (NSInteger)numberOfRows {
+    return [self.dataArray count];
+}
+
+- (void)dataForSection {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(objectForSectionView:)]) {
+        self.dataArray = [self.delegate objectForSectionView:self];
+    }
+}
+
+- (void)configureSectionView {
+    [self setFrameSize:CGSizeMake(200, [self height])];
+    [self.titleLabel setFrame:CGRectMake(0, self.frame.size.height - kHeightForCell, self.frame.size.width, kHeightForCell)];
+    [self addSubview:self.titleLabel];
+    
+    for (int i = 0; i < [self numberOfRows]; i++) {
+        XSDataCell *cell = [[XSDataCell alloc] init];
+        [cell setFrameOrigin:CGPointMake(2, self.frame.size.height - kHeightForCell - ((i + 1) * (kIndentBetweenCells + kHeightForCell)))];
+        [self addSubview:cell];
+    }
+    
+    [self.newConnectionButton setFrame:CGRectMake(0, self.frame.size.height - kHeightForCell - [self.dataArray count] * (kIndentBetweenCells + kHeightForCell) - kIndentBetweenCells - kHeightForNewConnectionButton, self.frame.size.width, kHeightForNewConnectionButton)];
+    [self addSubview:self.newConnectionButton];
 }
 
 #pragma mark - Setter
@@ -61,6 +70,13 @@ static NSInteger const kNewConnectionAreaHeight = 40;
     self.newConnectionButton.dataType = _dataType;
 }
 
+- (void)setDelegate:(id<XSDataSectionDelegate>)delegate {
+    _delegate = delegate;
+    
+    [self dataForSection];
+    [self configureSectionView];
+}
+
 #pragma mark - UI Elements
 
 - (XSLabel *)titleLabel {
@@ -68,8 +84,7 @@ static NSInteger const kNewConnectionAreaHeight = 40;
         _titleLabel = [[XSLabel alloc] init];
         _titleLabel.backgroundColor = [NSColor colorWithRed:41.0f/255.0f green:42.0f/255.0f blue:43.0f/255.0f alpha:0.8f];
         _titleLabel.textColor = [NSColor whiteColor];
-        _titleLabel.font = [NSFont boldSystemFontOfSize:10.0f];
-        _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _titleLabel.font = [NSFont boldSystemFontOfSize:12.0f];
     }
     
     return _titleLabel;
@@ -79,42 +94,9 @@ static NSInteger const kNewConnectionAreaHeight = 40;
     if (!_newConnectionButton) {
         _newConnectionButton = [[XSNewConnectionButton alloc] init];
         _newConnectionButton.title = @"New connection";
-        _newConnectionButton.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
     return _newConnectionButton;
-}
-
-#pragma mark - UI Constraints
-
-- (void)titleLabelConstraints {
-    NSDictionary *metrics = @{@"titleHeight" : [NSNumber numberWithInteger:kSectionViewHeaderHeight]};
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|"
-                                                                 options:0
-                                                                 metrics:nil
-                                                                   views:NSDictionaryOfVariableBindings(_titleLabel)]];
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel(titleHeight)]"
-                                                                 options:0
-                                                                 metrics:metrics
-                                                                   views:NSDictionaryOfVariableBindings(_titleLabel)]];
-}
-
-- (void)newConnectionButtonConstraints {
-    NSDictionary *metrics = @{@"titleHeight" : [NSNumber numberWithInteger:kSectionViewHeaderHeight],
-                              @"newConnectionAreaHeight" : [NSNumber numberWithInteger:kNewConnectionAreaHeight]};
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_newConnectionButton]|"
-                                                                 options:0
-                                                                 metrics:nil
-                                                                   views:NSDictionaryOfVariableBindings(_newConnectionButton)]];
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=titleHeight)-[_newConnectionButton(newConnectionAreaHeight)]|"
-                                                                 options:0
-                                                                 metrics:metrics
-                                                                   views:NSDictionaryOfVariableBindings(_newConnectionButton)]];
-    
 }
 
 @end

@@ -235,7 +235,7 @@
         allowedObjects = [self.selectedObject allowedOutputTypes];
     }
     
-    if (hoverObject.type & allowedObjects) {
+    if (hoverObject.type & allowedObjects & ![hoverObject isEqualTo:self.selectedObject]) {
         _hoverObject = hoverObject;
     
         _hoverObject.layer.borderColor = [NSColor blueColor].CGColor;
