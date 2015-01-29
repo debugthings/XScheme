@@ -47,7 +47,9 @@ static NSInteger const kIndentBetweenCells = 2;
     [self addSubview:self.titleLabel];
     
     for (int i = 0; i < [self numberOfRows]; i++) {
+        XSObjectView *currentObject = self.dataArray[i];
         XSDataCell *cell = [[XSDataCell alloc] init];
+        [cell setTitle:currentObject.title];
         [cell setFrameOrigin:CGPointMake(2, self.frame.size.height - kHeightForCell - ((i + 1) * (kIndentBetweenCells + kHeightForCell)))];
         [self addSubview:cell];
     }

@@ -10,15 +10,16 @@
 
 @implementation XSEditorView (ConnectObjects)
 
-- (void)drawLineBetweenSelectedAndHoverObjects {
+- (void)drawLineBetweenObjectsWithFirstObjectOutputDataState:(BOOL)isOutputData {
     NSView *firstView = (NSView *)self.selectedObject;
     NSView *secondView = (NSView *)self.hoverObject;
     
-    NSBezierPath *bezierPath = [self configureBezierPathWithFirstView:firstView secondView:secondView];
+    NSBezierPath *bezierPath = [self configureBezierPathWithFirstView:firstView secondView:secondView firstViewOutputData:isOutputData];
     
-    NSDictionary *dictionary = @{@"firstObject"     : self.selectedObject,
-                                 @"secondObject"    : self.hoverObject,
-                                 @"bezierPath"      : bezierPath};
+    NSDictionary *dictionary = @{@"firstObject"                 : self.selectedObject,
+                                 @"secondObject"                : self.hoverObject,
+                                 @"bezierPath"                  : bezierPath,
+                                 @"firstObjectOutputDataState"  : @(isOutputData)};
     
     [self.linesArray addObject:dictionary];
     
@@ -41,27 +42,46 @@
 - (NSDictionary *)correctLine:(NSDictionary *)lineDictionary {
     XSObjectView *firstObject = [lineDictionary valueForKey:@"firstObject"];
     XSObjectView *secondObject = [lineDictionary valueForKey:@"secondObject"];
-    NSBezierPath *bezierPath = [self configureBezierPathWithFirstView:firstObject secondView:secondObject];
+    BOOL isOutputData = [[lineDictionary valueForKey:@"firstObjectOutputDataState"] boolValue];
+    NSBezierPath *bezierPath = [self configureBezierPathWithFirstView:firstObject secondView:secondObject firstViewOutputData:isOutputData];
     
-    return @{@"firstObject"     : firstObject,
-             @"secondObject"    : secondObject,
-             @"bezierPath"      : bezierPath};
+    return @{@"firstObject"                 : firstObject,
+             @"secondObject"                : secondObject,
+             @"bezierPath"                  : bezierPath,
+             @"firstObjectOutputDataState"  : @(isOutputData)};
 }
 
-- (NSBezierPath *)configureBezierPathWithFirstView:(NSView *)firstView secondView:(NSView *)secondView {
+- (NSBezierPath *)configureBezierPathWithFirstView:(NSView *)firstView secondView:(NSView *)secondView firstViewOutputData:(BOOL)isOutputData {
     NSBezierPath *bezierPath = [NSBezierPath bezierPath];
     CGPoint startPoint = CGPointMake(firstView.frame.origin.x + firstView.frame.size.width / 2,
                                      firstView.frame.origin.y + firstView.frame.size.height / 2);
     CGPoint endPoint = CGPointMake(secondView.frame.origin.x + secondView.frame.size.width / 2,
                                    secondView.frame.origin.y + secondView.frame.size.height / 2);
     
-    if (startPoint.y <= endPoint.y)
-        startPoint = CGPointMake(firstView.frame.origin.x + firstView.frame.size.width / 2,
-                                 firstView.frame.origin.y + firstView.frame.size.height / 2);
-    
     [bezierPath moveToPoint:startPoint];
-    [bezierPath lineToPoint:CGPointMake(startPoint.x, endPoint.y + firstView.frame.size.height / 2 + 10)];
-    [bezierPath lineToPoint:CGPointMake(endPoint.x, endPoint.y + firstView.frame.size.height / 2 + 10)];
+    
+    CGPoint nextPoint = CGPointZero;
+    
+    if (!isOutputData)
+        nextPoint = CGPointMake(startPoint.x, startPoint.y + firstView.frame.size.height / 2 + 20);
+    else
+        nextPoint = CGPointMake(startPoint.x, startPoint.y - (firstView.frame.size.height / 2 + 20));
+    
+    [bezierPath lineToPoint:nextPoint];
+    
+    nextPoint = CGPointMake((endPoint.x + startPoint.x) / 2, nextPoint.y);
+    [bezierPath lineToPoint:nextPoint];
+    
+    if (isOutputData)
+        nextPoint = CGPointMake(nextPoint.x, endPoint.y + (secondView.frame.size.height / 2 + 20));
+    else
+        nextPoint = CGPointMake(nextPoint.x, endPoint.y - (secondView.frame.size.height / 2 + 20));
+    
+    [bezierPath lineToPoint:nextPoint];
+    
+    nextPoint = CGPointMake(endPoint.x, nextPoint.y);
+    
+    [bezierPath lineToPoint:nextPoint];
     [bezierPath lineToPoint:endPoint];
     
     return bezierPath;

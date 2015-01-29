@@ -10,7 +10,7 @@
 
 @interface XSEditorView (ConnectObjects)
 
-- (void)drawLineBetweenSelectedAndHoverObjects;
+- (void)drawLineBetweenObjectsWithFirstObjectOutputDataState:(BOOL)isOutputData;
 - (NSDictionary *)correctLine:(NSDictionary *)lineDictionary;
 - (NSArray *)linesWithObject:(XSObjectView *)objextView;
 

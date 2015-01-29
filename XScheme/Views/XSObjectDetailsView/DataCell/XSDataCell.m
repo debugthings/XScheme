@@ -32,11 +32,21 @@ static NSInteger const kHeightForCell = 17;
         
         [self setWantsLayer:YES];
         self.layer.cornerRadius = 7.5f;
-        
-        [self.titleLabel setStringValue:@"X1"];
     }
     
     return self;
+}
+
+- (void)setTitle:(NSString *)title {
+    self.titleLabel.stringValue = title;
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent {
+    NSLog(@"Enter");
+}
+
+- (void)mouseExited:(NSEvent *)theEvent {
+    NSLog(@"Exit");
 }
 
 #pragma mark - UI Elements

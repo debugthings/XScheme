@@ -125,10 +125,10 @@
     if (self.hoverObject) {
         if (self.currentDataType == XSDataTypeInput) {
             [self.selectedObject addInputConnectionObject:self.hoverObject];
-            [self drawLineBetweenSelectedAndHoverObjects];
+            [self drawLineBetweenObjectsWithFirstObjectOutputDataState:NO];
         } else if (self.currentDataType == XSDataTypeOutput) {
             [self.selectedObject addOutputConnectionObject:self.hoverObject];
-            [self drawLineBetweenSelectedAndHoverObjects];
+            [self drawLineBetweenObjectsWithFirstObjectOutputDataState:YES];
         }
     }
     
@@ -235,7 +235,7 @@
         allowedObjects = [self.selectedObject allowedOutputTypes];
     }
     
-    if (hoverObject.type & allowedObjects & ![hoverObject isEqualTo:self.selectedObject]) {
+    if ((hoverObject.type & allowedObjects) && self.hoverObject != self.selectedObject) {
         _hoverObject = hoverObject;
     
         _hoverObject.layer.borderColor = [NSColor blueColor].CGColor;

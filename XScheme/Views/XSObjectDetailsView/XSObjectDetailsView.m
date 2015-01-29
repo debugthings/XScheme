@@ -42,18 +42,16 @@ static NSInteger const kHeaderHeight = 12;
 
 - (NSArray *)objectForSectionView:(XSObjectDetailsDataSectionView *)sectionView {
     if (sectionView == _inputsSection) {
-        return @[@"1",@"2",@"3"];
-//        return self.targetObject.inputConnections;
+        return self.targetObject.inputConnections;
     } else if (sectionView == _outputsSection) {
-        return @[@"1",@"2",@"3"];
-//        return self.targetObject.outputConnections;
+        return self.targetObject.outputConnections;
     }
     
     return nil;
 }
 
 - (void)reloadData {
-    
+    [self configureDetailsView];
 }
 
 - (void)setFrameOrigin:(NSPoint)newOrigin {
@@ -130,6 +128,7 @@ static NSInteger const kHeaderHeight = 12;
         _titleLabel.textColor = [NSColor whiteColor];
         _titleLabel.font = [NSFont boldSystemFontOfSize:11.0f];
         [_titleLabel setAlignment:NSCenterTextAlignment];
+        _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
     return _titleLabel;

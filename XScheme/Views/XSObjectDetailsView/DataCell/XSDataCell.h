@@ -10,4 +10,6 @@
 
 @interface XSDataCell : XSView
 
+- (void)setTitle:(NSString *)title;
+
 @end
