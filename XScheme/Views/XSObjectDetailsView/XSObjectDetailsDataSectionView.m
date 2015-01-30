@@ -14,11 +14,13 @@ static NSInteger const kHeightForCell = 17;
 static NSInteger const kHeightForNewConnectionButton = 40;
 static NSInteger const kIndentBetweenCells = 2;
 
-@interface XSObjectDetailsDataSectionView()
+@interface XSObjectDetailsDataSectionView() <XSDataCellDelegate>
 
 @property (readonly) XSLabel *titleLabel;
 @property (readonly) XSNewConnectionButton *newConnectionButton;
 @property (nonatomic) NSArray *dataArray;
+
+@property (nonatomic, readonly) NSMutableArray *cells;
 
 @end
 
@@ -26,9 +28,15 @@ static NSInteger const kIndentBetweenCells = 2;
 
 @synthesize titleLabel = _titleLabel;
 @synthesize newConnectionButton = _newConnectionButton;
+@synthesize cells = _cells;
 
 - (CGFloat)height {
-    return kHeightForCell + kHeightForNewConnectionButton + [self numberOfRows] * kHeightForCell + ([self numberOfRows] + 1) * kIndentBetweenCells;
+    CGFloat height = kHeightForCell + [self numberOfRows] * kHeightForCell + ([self numberOfRows] + 1) * kIndentBetweenCells;
+    
+    if ([self isAllowNewConnection])
+        height += kHeightForNewConnectionButton;
+    
+    return height;
 }
 
 - (NSInteger)numberOfRows {
@@ -49,13 +57,47 @@ static NSInteger const kIndentBetweenCells = 2;
     for (int i = 0; i < [self numberOfRows]; i++) {
         XSObjectView *currentObject = self.dataArray[i];
         XSDataCell *cell = [[XSDataCell alloc] init];
+        cell.delegate = self;
         [cell setTitle:currentObject.title];
         [cell setFrameOrigin:CGPointMake(2, self.frame.size.height - kHeightForCell - ((i + 1) * (kIndentBetweenCells + kHeightForCell)))];
         [self addSubview:cell];
+        [self.cells addObject:cell];
     }
     
-    [self.newConnectionButton setFrame:CGRectMake(0, self.frame.size.height - kHeightForCell - [self.dataArray count] * (kIndentBetweenCells + kHeightForCell) - kIndentBetweenCells - kHeightForNewConnectionButton, self.frame.size.width, kHeightForNewConnectionButton)];
-    [self addSubview:self.newConnectionButton];
+    if ([self isAllowNewConnection]) {
+        [self.newConnectionButton setFrame:CGRectMake(0, self.frame.size.height - kHeightForCell - [self.dataArray count] * (kIndentBetweenCells + kHeightForCell) - kIndentBetweenCells - kHeightForNewConnectionButton, self.frame.size.width, kHeightForNewConnectionButton)];
+        [self addSubview:self.newConnectionButton];
+    }
+}
+
+- (BOOL)isAllowNewConnection {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(isAllowNewConnectionForSectionView:)])
+        return [self.delegate isAllowNewConnectionForSectionView:self];
+    
+    return YES;
+}
+
+#pragma mark - XSDataCellDelegate
+
+- (void)highlightDataCell:(XSDataCell *)cell {
+    NSInteger index = [self.cells indexOfObject:cell];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(sectionView:highlightCellAtIndex:)] && index != NSNotFound)
+        [self.delegate sectionView:self highlightCellAtIndex:index];
+}
+
+- (void)unhighlightDataCell:(XSDataCell *)cell {
+    NSInteger index = [self.cells indexOfObject:cell];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(sectionView:unhighlightCellAtIndex:)] && index != NSNotFound)
+        [self.delegate sectionView:self unhighlightCellAtIndex:index];
+}
+
+- (void)cancelPressedAtDataCell:(XSDataCell *)cell {
+    NSInteger index = [self.cells indexOfObject:cell];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(sectionView:pressedCancelAtIndex:)] && index != NSNotFound)
+        [self.delegate sectionView:self pressedCancelAtIndex:index];
 }
 
 #pragma mark - Setter
@@ -79,6 +121,14 @@ static NSInteger const kIndentBetweenCells = 2;
     [self configureSectionView];
 }
 
+- (NSMutableArray *)cells {
+    if (!_cells) {
+        _cells = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    
+    return _cells;
+}
+
 #pragma mark - UI Elements
 
 - (XSLabel *)titleLabel {
@@ -86,7 +136,7 @@ static NSInteger const kIndentBetweenCells = 2;
         _titleLabel = [[XSLabel alloc] init];
         _titleLabel.backgroundColor = [NSColor colorWithRed:41.0f/255.0f green:42.0f/255.0f blue:43.0f/255.0f alpha:0.8f];
         _titleLabel.textColor = [NSColor whiteColor];
-        _titleLabel.font = [NSFont boldSystemFontOfSize:12.0f];
+        _titleLabel.font = [NSFont systemFontOfSize:12.0f];
     }
     
     return _titleLabel;

@@ -18,10 +18,10 @@ typedef NS_OPTIONS(NSUInteger, XSObjectType) {
     kXSObjectTypeDelay          = 1 << 5    /* ЗАДЕРЖКА */
 };
 
-typedef NS_OPTIONS(NSUInteger, XSDataType) {
+typedef NS_ENUM(NSUInteger, XSDataType) {
     XSDataTypeNone      = 0,
-    XSDataTypeInput     = 1 << 0,
-    XSDataTypeOutput    = 1 << 1
+    XSDataTypeInput     = 1,
+    XSDataTypeOutput    = 2
 };
 
 #pragma mark - List objects drag notifications
@@ -49,6 +49,8 @@ extern NSString * const XSSchemeObjectRightClickNotification;
 extern NSString * const XSConnectingDragBeginNotification;
 extern NSString * const XSConnectingDraggingNotification;
 extern NSString * const XSConnectingDragEndNotification;
+
+extern NSString * const XSRemovedConnectionNotification;
 
 static NSInteger const kSchemeObjectHeight = 58;
 static NSInteger const kSchemeObjectWidth = 58;

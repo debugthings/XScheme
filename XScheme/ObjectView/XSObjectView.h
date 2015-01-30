@@ -38,6 +38,7 @@
 - (BOOL)isLogicalOperator;
 
 - (void)setHighlightState:(BOOL)state;
+- (void)setTargetingState:(BOOL)state;
 
 - (NSInteger)inputsNumber;
 - (NSInteger)outputsNumber;

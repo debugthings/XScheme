@@ -55,6 +55,11 @@
                                                  selector:@selector(connectingDragEnd:)
                                                      name:XSConnectingDragEndNotification
                                                    object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(removedConnection:)
+                                                     name:XSRemovedConnectionNotification
+                                                   object:nil];
     }
     
     return self;
@@ -125,10 +130,10 @@
     if (self.hoverObject) {
         if (self.currentDataType == XSDataTypeInput) {
             [self.selectedObject addInputConnectionObject:self.hoverObject];
-            [self drawLineBetweenObjectsWithFirstObjectOutputDataState:NO];
+            [self drawLineBetweenObjectsWithActiveDataType:self.currentDataType];
         } else if (self.currentDataType == XSDataTypeOutput) {
             [self.selectedObject addOutputConnectionObject:self.hoverObject];
-            [self drawLineBetweenObjectsWithFirstObjectOutputDataState:YES];
+            [self drawLineBetweenObjectsWithActiveDataType:self.currentDataType];
         }
     }
     
@@ -225,22 +230,23 @@
 }
 
 - (void)setHoverObject:(XSObjectView *)hoverObject {
-    _hoverObject.layer.borderWidth = 0;
+    [_hoverObject setTargetingState:NO];
     
     XSObjectType allowedObjects = -1;
+    BOOL isAllowNewData = NO;
     
     if (self.currentDataType == XSDataTypeInput) {
         allowedObjects = [self.selectedObject allowedInputTypes];
+        isAllowNewData = [hoverObject.outputConnections count] < [hoverObject outputsNumber];
     } else if (self.currentDataType == XSDataTypeOutput) {
         allowedObjects = [self.selectedObject allowedOutputTypes];
+        isAllowNewData = [hoverObject.inputConnections count] < [hoverObject inputsNumber];
     }
     
-    if ((hoverObject.type & allowedObjects) && self.hoverObject != self.selectedObject) {
-        _hoverObject = hoverObject;
     
-        _hoverObject.layer.borderColor = [NSColor blueColor].CGColor;
-        _hoverObject.layer.borderWidth = 2.0f;
-        _hoverObject.layer.cornerRadius = 5.0f;
+    if ((hoverObject.type & allowedObjects) && (self.hoverObject != self.selectedObject) && isAllowNewData) {
+        _hoverObject = hoverObject;
+        [_hoverObject setTargetingState:YES];
     } else if (!hoverObject)
         _hoverObject = nil;
 }

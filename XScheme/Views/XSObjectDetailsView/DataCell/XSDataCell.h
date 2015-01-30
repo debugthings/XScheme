@@ -8,7 +8,19 @@
 
 #import "XSView.h"
 
+@class XSDataCell;
+
+@protocol XSDataCellDelegate <NSObject>
+
+- (void)highlightDataCell:(XSDataCell *)cell;
+- (void)unhighlightDataCell:(XSDataCell *)cell;
+- (void)cancelPressedAtDataCell:(XSDataCell *)cell;
+
+@end
+
 @interface XSDataCell : XSView
+
+@property (nonatomic, weak) id<XSDataCellDelegate> delegate;
 
 - (void)setTitle:(NSString *)title;
 

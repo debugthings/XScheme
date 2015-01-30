@@ -27,7 +27,7 @@ static NSInteger const kHeaderHeight = 12;
 @synthesize outputsSection = _outputsSection;
 
 - (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, 0, 200, 200) Color:[NSColor colorWithRed:25.0f/255.0f green:25.0f/255.0f blue:26.0f/255.0f alpha:0.8f]];
+    self = [super initWithFrame:CGRectMake(0, 0, 200, 200) Color:[NSColor colorWithRed:25.0f/255.0f green:25.0f/255.0f blue:26.0f/255.0f alpha:0.9f]];
     
     if (self) {
         [self setWantsLayer:YES];
@@ -38,16 +38,6 @@ static NSInteger const kHeaderHeight = 12;
     }
     
     return self;
-}
-
-- (NSArray *)objectForSectionView:(XSObjectDetailsDataSectionView *)sectionView {
-    if (sectionView == _inputsSection) {
-        return self.targetObject.inputConnections;
-    } else if (sectionView == _outputsSection) {
-        return self.targetObject.outputConnections;
-    }
-    
-    return nil;
 }
 
 - (void)reloadData {
@@ -116,6 +106,76 @@ static NSInteger const kHeaderHeight = 12;
     if (_outputsSection) {
         CGFloat outputHeight = [self.outputsSection height];
         [self.outputsSection setFrame:CGRectMake(0, 0, rect.size.width, outputHeight)];
+    }
+}
+
+#pragma mark - XSDataSectionDelegate
+
+- (NSArray *)objectForSectionView:(XSObjectDetailsDataSectionView *)sectionView {
+    if (sectionView == _inputsSection) {
+        return self.targetObject.inputConnections;
+    } else if (sectionView == _outputsSection) {
+        return self.targetObject.outputConnections;
+    }
+    
+    return nil;
+}
+
+- (BOOL)isAllowNewConnectionForSectionView:(XSObjectDetailsDataSectionView *)sectionView {
+    if (sectionView == _inputsSection) {
+        if ([self.targetObject inputsNumber] == -1)
+            return YES;
+        
+        return ([self.targetObject.inputConnections count] < [self.targetObject inputsNumber]);
+    } else if (sectionView == _outputsSection) {
+        if ([self.targetObject outputsNumber] == -1)
+            return YES;
+        
+        return ([self.targetObject.outputConnections count] < [self.targetObject outputsNumber]);
+    }
+    
+    return NO;
+}
+
+- (void)sectionView:(XSObjectDetailsDataSectionView *)sectionView highlightCellAtIndex:(NSInteger)index {
+    if (sectionView == _inputsSection) {
+        if ([self.targetObject.inputConnections count] > index) {
+            [[self.targetObject.inputConnections objectAtIndex:index] setTargetingState:YES];
+        }
+    } else if (sectionView == _outputsSection) {
+        if ([self.targetObject.outputConnections count] > index) {
+            [[self.targetObject.outputConnections objectAtIndex:index] setTargetingState:YES];
+        }
+    }
+}
+
+- (void)sectionView:(XSObjectDetailsDataSectionView *)sectionView unhighlightCellAtIndex:(NSInteger)index {
+    if (sectionView == _inputsSection) {
+        if ([self.targetObject.inputConnections count] > index) {
+            [[self.targetObject.inputConnections objectAtIndex:index] setTargetingState:NO];
+        }
+    } else if (sectionView == _outputsSection) {
+        if ([self.targetObject.outputConnections count] > index) {
+            [[self.targetObject.outputConnections objectAtIndex:index] setTargetingState:NO];
+        }
+    }
+}
+
+- (void)sectionView:(XSObjectDetailsDataSectionView *)sectionView pressedCancelAtIndex:(NSInteger)index {
+    if (sectionView == _inputsSection) {
+        if ([self.targetObject.inputConnections count] > index) {
+            [[self.targetObject.inputConnections objectAtIndex:index] setTargetingState:NO];
+            [[XSSchemeManager sharedManager] removeConnectionBetweenFirstObject:self.targetObject
+                                                                andSecondObject:[self.targetObject.inputConnections objectAtIndex:index]];
+            [self reloadData];
+        }
+    } else if (sectionView == _outputsSection) {
+        if ([self.targetObject.outputConnections count] > index) {
+            [[self.targetObject.outputConnections objectAtIndex:index] setTargetingState:NO];
+            [[XSSchemeManager sharedManager] removeConnectionBetweenFirstObject:self.targetObject
+                                                                andSecondObject:[self.targetObject.outputConnections objectAtIndex:index]];
+            [self reloadData];
+        }
     }
 }
 

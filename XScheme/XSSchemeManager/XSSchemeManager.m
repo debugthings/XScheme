@@ -8,6 +8,8 @@
 
 #import "XSSchemeManager.h"
 
+NSString * const XSRemovedConnectionNotification  = @"XSRemovedConnectionNotification";
+
 @interface XSSchemeManager()
 
 @property (readonly) NSMutableDictionary *schemeObjectsDictionary;
@@ -85,6 +87,19 @@
     }
     
     return nil;
+}
+
+- (void)removeConnectionBetweenFirstObject:(XSObjectView *)firstObject andSecondObject:(XSObjectView *)secondObject {
+    if([firstObject.inputConnections containsObject:secondObject])
+        [firstObject removeInputConnectionObject:secondObject];
+    
+    if ([firstObject.outputConnections containsObject:secondObject])
+        [firstObject removeOutputConnectionObject:secondObject];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:XSRemovedConnectionNotification
+                                                        object:nil
+                                                      userInfo:@{@"firstObject"  : firstObject,
+                                                                 @"secondObject" : secondObject}];
 }
 
 #pragma mark - Manager data

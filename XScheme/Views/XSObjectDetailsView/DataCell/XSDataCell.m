@@ -12,6 +12,7 @@ static NSInteger const kHeightForCell = 17;
 
 @interface XSDataCell()
 
+@property (nonatomic) NSTrackingArea *trackingArea;
 @property (readonly) XSLabel *titleLabel;
 @property (readonly) NSButton *cancelButton;
 
@@ -41,13 +42,42 @@ static NSInteger const kHeightForCell = 17;
     self.titleLabel.stringValue = title;
 }
 
+-(void)updateTrackingAreas {
+    if(self.trackingArea != nil) {
+        [self removeTrackingArea:self.trackingArea];
+    }
+    
+    int opts = (NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways);
+    self.trackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds]
+                                                options:opts
+                                                  owner:self
+                                               userInfo:nil];
+    [self addTrackingArea:self.trackingArea];
+}
+
+- (void)cancelButtonAction:(NSButton *)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cancelPressedAtDataCell:)])
+        [self.delegate cancelPressedAtDataCell:self];
+}
+
+#pragma mark - Mouse responds
+
 - (void)mouseEntered:(NSEvent *)theEvent {
-    NSLog(@"Enter");
+    [self setWantsLayer:YES];
+    self.layer.borderWidth = 1.0f;
+    self.layer.borderColor = [NSColor whiteColor].CGColor;
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(highlightDataCell:)])
+        [self.delegate highlightDataCell:self];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent {
-    NSLog(@"Exit");
+    self.layer.borderWidth = 0.0f;
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(unhighlightDataCell:)])
+        [self.delegate unhighlightDataCell:self];
 }
+
 
 #pragma mark - UI Elements
 
@@ -71,6 +101,9 @@ static NSInteger const kHeightForCell = 17;
         [_cancelButton setBordered:NO];
         [_cancelButton setTransparent:NO];
         [_cancelButton setButtonType:NSMomentaryChangeButton];
+        
+        [_cancelButton setTarget:self];
+        [_cancelButton setAction:@selector(cancelButtonAction:)];
     }
     
     return _cancelButton;

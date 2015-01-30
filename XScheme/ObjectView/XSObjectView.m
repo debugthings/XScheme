@@ -232,6 +232,16 @@ static NSInteger const kCornerRadius = 24;
     }
 }
 
+- (void)setTargetingState:(BOOL)state {
+    if (state) {
+        self.layer.borderColor = [NSColor blueColor].CGColor;
+        self.layer.borderWidth = 2.0f;
+        self.layer.cornerRadius = 5.0f;
+    } else {
+        self.layer.borderWidth = 0.0f;
+    }
+}
+
 #pragma mark - Operation with connections
 
 - (void)addInputConnectionObject:(XSObjectView *)object {
@@ -254,7 +264,7 @@ static NSInteger const kCornerRadius = 24;
     if ([self.inputConnectionsArray containsObject:object])
         [self.inputConnectionsArray removeObject:object];
     
-    if ([[object inputConnections] containsObject:self])
+    if ([[object outputConnections] containsObject:self])
         [object removeOutputConnectionObject:self];
 }
 
@@ -262,7 +272,7 @@ static NSInteger const kCornerRadius = 24;
     if ([self.outputConnectionsArray containsObject:object])
         [self.outputConnectionsArray removeObject:object];
     
-    if ([[object outputConnections] containsObject:self])
+    if ([[object inputConnections] containsObject:self])
         [object removeInputConnectionObject:self];
 }
 
