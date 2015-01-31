@@ -63,6 +63,8 @@ static NSInteger const kCornerRadius = 24;
 @synthesize inputConnections = _inputConnections;
 @synthesize outputConnections = _outputConnections;
 
+@synthesize objectOutputValue = _objectOutputValue;
+
 + (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView {
     return [[[objectView class] alloc] initObjectWithType:objectView.type
                                                     title:objectView.title
@@ -232,6 +234,16 @@ static NSInteger const kCornerRadius = 24;
     }
 }
 
+- (void)setTargetingState:(BOOL)state {
+    if (state) {
+        self.layer.borderColor = [NSColor blueColor].CGColor;
+        self.layer.borderWidth = 2.0f;
+        self.layer.cornerRadius = 5.0f;
+    } else {
+        self.layer.borderWidth = 0.0f;
+    }
+}
+
 #pragma mark - Operation with connections
 
 - (void)addInputConnectionObject:(XSObjectView *)object {
@@ -254,7 +266,7 @@ static NSInteger const kCornerRadius = 24;
     if ([self.inputConnectionsArray containsObject:object])
         [self.inputConnectionsArray removeObject:object];
     
-    if ([[object inputConnections] containsObject:self])
+    if ([[object outputConnections] containsObject:self])
         [object removeOutputConnectionObject:self];
 }
 
@@ -262,7 +274,7 @@ static NSInteger const kCornerRadius = 24;
     if ([self.outputConnectionsArray containsObject:object])
         [self.outputConnectionsArray removeObject:object];
     
-    if ([[object outputConnections] containsObject:self])
+    if ([[object inputConnections] containsObject:self])
         [object removeInputConnectionObject:self];
 }
 
@@ -332,6 +344,14 @@ static NSInteger const kCornerRadius = 24;
     return _outputConnectionsArray;
 }
 
+- (void)setOutputValue:(NSNumber *)value {
+    _objectOutputValue = value;
+}
+
+- (NSNumber *)outputValue {
+    return self.objectOutputValue;
+}
+
 - (NSArray *)inputConnections {
     return [[NSArray alloc] initWithArray:self.inputConnectionsArray];
 }
@@ -359,9 +379,11 @@ static NSInteger const kCornerRadius = 24;
 - (XSView *)contentView {
     if (!_contentView) {
         if (self.isListElement)
-            _contentView = [[XSView alloc] initWithFrame:CGRectMake(0, 0, 100, 50) Color:[NSColor sideMenuBackgroundColor]];
+            _contentView = [[XSView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)
+                                                   Color:[NSColor sideMenuBackgroundColor]];
         else {
-            _contentView = [[XSView alloc] initWithFrame:CGRectMake(0, 0, 48, 48) Color:[NSColor clearColor]];
+            _contentView = [[XSView alloc] initWithFrame:CGRectMake(0, 0, 48, 48)
+                                                   Color:[NSColor clearColor]];
             [_contentView setWantsLayer:YES];
             _contentView.layer.cornerRadius = kCornerRadius;
         }
@@ -386,7 +408,10 @@ static NSInteger const kCornerRadius = 24;
 
 - (XSLabel *)indexLabel {
     if (!_indexLabel) {
-        _indexLabel = [[XSLabel alloc] initWithFrame:CGRectMake(kSchemeObjectWidth - 20, kSchemeObjectHeight - 20, 20, 20)];
+        _indexLabel = [[XSLabel alloc] initWithFrame:CGRectMake(kSchemeObjectWidth - 20,
+                                                                kSchemeObjectHeight - 20,
+                                                                20,
+                                                                20)];
         [_indexLabel setWantsLayer:YES];
         _indexLabel.textColor = [NSColor whiteColor];
         [_indexLabel setAlignment:NSCenterTextAlignment];
@@ -401,7 +426,10 @@ static NSInteger const kCornerRadius = 24;
 
 - (XSView *)highlightView {
     if (!_highlightView) {
-        _highlightView = [[XSView alloc] initWithColor:[NSColor colorWithCalibratedRed:12.0f/255.0f green:139.0f/255.0f blue:220.0f/255.0f alpha:0.3f]];
+        _highlightView = [[XSView alloc] initWithColor:[NSColor colorWithCalibratedRed:12.0f/255.0f
+                                                                                 green:139.0f/255.0f
+                                                                                  blue:220.0f/255.0f
+                                                                                 alpha:0.3f]];
         [_highlightView setWantsLayer:YES];
         _highlightView.layer.cornerRadius = (kSchemeObjectHeight - 10) / 2;
         _highlightView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -469,6 +497,10 @@ static NSInteger const kCornerRadius = 24;
                                                                              options:0
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(_highlightView)]];
+}
+
+- (NSString *)key {
+    return nil;
 }
 
 @end

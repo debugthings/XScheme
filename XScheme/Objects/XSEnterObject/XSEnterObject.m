@@ -39,4 +39,8 @@
     return kXSObjectTypeConjunction | kXSObjectTypeDisjunction | kXSObjectTypeDelay | kXSObjectTypeDenial | kXSObjectTypeExit;
 }
 
+- (NSString *)key {
+    return [NSString stringWithFormat:@"X%ld", (long)self.index];
+}
+
 @end

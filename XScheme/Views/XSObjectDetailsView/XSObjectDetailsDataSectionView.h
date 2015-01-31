@@ -13,6 +13,10 @@
 @protocol XSDataSectionDelegate <NSObject>
 
 - (NSArray *)objectForSectionView:(XSObjectDetailsDataSectionView *)sectionView;
+- (BOOL)isAllowNewConnectionForSectionView:(XSObjectDetailsDataSectionView *)sectionView;
+- (void)sectionView:(XSObjectDetailsDataSectionView *)sectionView highlightCellAtIndex:(NSInteger)index;
+- (void)sectionView:(XSObjectDetailsDataSectionView *)sectionView unhighlightCellAtIndex:(NSInteger)index;
+- (void)sectionView:(XSObjectDetailsDataSectionView *)sectionView pressedCancelAtIndex:(NSInteger)index;
 
 @end
 

@@ -39,6 +39,7 @@
 		E7478B071A2A237F0022BC11 /* enter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B061A2A237F0022BC11 /* enter-icon@2x.png */; };
 		E7478B0D1A2A26840022BC11 /* exit-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7478B0C1A2A26840022BC11 /* exit-icon@2x.png */; };
 		E74CE6E41A5006C1000FAD9C /* XSUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CE6E31A5006C1000FAD9C /* XSUtility.m */; };
+		E756DA731A7C2DB50062C7F1 /* XSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E756DA721A7C2DB50062C7F1 /* XSTableView.m */; };
 		E75C89A01A6174780016FEE8 /* XSSchemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E75C899F1A6174780016FEE8 /* XSSchemeManager.m */; };
 		E768AC9A19EFFC3800AD2A0C /* XSDelayObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9919EFFC3800AD2A0C /* XSDelayObject.m */; };
 		E768AC9D19EFFC5600AD2A0C /* XSDenialObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E768AC9C19EFFC5600AD2A0C /* XSDenialObject.m */; };
@@ -117,6 +118,8 @@
 		E7478B0C1A2A26840022BC11 /* exit-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exit-icon@2x.png"; sourceTree = "<group>"; };
 		E74CE6E21A5006C1000FAD9C /* XSUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSUtility.h; path = XScheme/XSUtility.h; sourceTree = "<group>"; };
 		E74CE6E31A5006C1000FAD9C /* XSUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSUtility.m; path = XScheme/XSUtility.m; sourceTree = "<group>"; };
+		E756DA711A7C2DB50062C7F1 /* XSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSTableView.h; path = Views/XSTableView/XSTableView.h; sourceTree = "<group>"; };
+		E756DA721A7C2DB50062C7F1 /* XSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSTableView.m; path = Views/XSTableView/XSTableView.m; sourceTree = "<group>"; };
 		E75C899E1A6174780016FEE8 /* XSSchemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSSchemeManager.h; path = XScheme/XSSchemeManager/XSSchemeManager.h; sourceTree = "<group>"; };
 		E75C899F1A6174780016FEE8 /* XSSchemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XSSchemeManager.m; path = XScheme/XSSchemeManager/XSSchemeManager.m; sourceTree = "<group>"; };
 		E768AC9819EFFC3800AD2A0C /* XSDelayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XSDelayObject.h; path = Objects/XSDelayObject/XSDelayObject.h; sourceTree = "<group>"; };
@@ -305,6 +308,7 @@
 		E7243EDF19C2CFF500E1E9C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E756DA701A7C2D8C0062C7F1 /* XSTableView */,
 				E7243EF519C2E7F500E1E9C4 /* XSLabel */,
 				E7243EF919C3020A00E1E9C4 /* XSView */,
 				E7BE53C61A3C91AE005CC718 /* XSSeparatorView */,
@@ -393,6 +397,15 @@
 				E7478B041A2A22A30022BC11 /* delay-icon@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		E756DA701A7C2D8C0062C7F1 /* XSTableView */ = {
+			isa = PBXGroup;
+			children = (
+				E756DA711A7C2DB50062C7F1 /* XSTableView.h */,
+				E756DA721A7C2DB50062C7F1 /* XSTableView.m */,
+			);
+			name = XSTableView;
 			sourceTree = "<group>";
 		};
 		E768AC9119EFFB8400AD2A0C /* XSEnterObject */ = {
@@ -595,6 +608,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E768ACA619EFFD3100AD2A0C /* XSExitObject.m in Sources */,
+				E756DA731A7C2DB50062C7F1 /* XSTableView.m in Sources */,
 				E7BE53C91A3C91D5005CC718 /* XSSeparatorView.m in Sources */,
 				E71787DE19F0FD6100173675 /* XSConnectObjects.m in Sources */,
 				E768ACA319EFFCA000AD2A0C /* XSConjunctionObject.m in Sources */,

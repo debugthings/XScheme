@@ -12,6 +12,8 @@
 
 + (instancetype)sharedManager;
 
+
+
 /* addNewSchemeObject: return boolean value. If return YES - object was added to scheme. If return NO - object was not added to scheme (Already have same object etc.) */
 
 - (BOOL)addNewSchemeObject:(XSObjectView *)newObjectView;
@@ -28,6 +30,16 @@
 
 - (XSObjectView *)objectWithType:(XSObjectType)type atIndex:(NSInteger)index;
 
+/* objectAtPoint: return XSObjectView with rect which contain point */
+
 - (XSObjectView *)objectAtPoint:(NSPoint)point;
+
+/* removeConnectionBetweenFirstObject:andSecondObject: remove connection between two objects and send notification XSRemovedConnectionNotification (UserInfo contraint 'firstObject' and 'secondObject' */
+
+- (void)removeConnectionBetweenFirstObject:(XSObjectView *)firstObject andSecondObject:(XSObjectView *)secondObject;
+
+- (void)analisys;
+
+- (NSArray *)keys;
 
 @end

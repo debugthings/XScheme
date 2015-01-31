@@ -22,6 +22,8 @@
 
 @property (nonatomic) BOOL isListElement;
 
+@property (readonly) NSNumber *objectOutputValue;
+
 + (XSObjectView *)duplicateSchemeObject:(XSObjectView *)objectView;
 
 - (instancetype)initObjectWithType:(XSObjectType)objectType
@@ -38,6 +40,7 @@
 - (BOOL)isLogicalOperator;
 
 - (void)setHighlightState:(BOOL)state;
+- (void)setTargetingState:(BOOL)state;
 
 - (NSInteger)inputsNumber;
 - (NSInteger)outputsNumber;
@@ -56,5 +59,10 @@
 
 - (void)removeInputConnectionObject:(XSObjectView *)object;
 - (void)removeOutputConnectionObject:(XSObjectView *)object;
+
+- (void)setOutputValue:(NSNumber *)value;
+- (NSNumber *)outputValue;
+
+- (NSString *)key;
 
 @end

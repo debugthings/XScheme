@@ -8,8 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class XSTableView;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSSegmentedControl *segmentedControl;
+@property (assign) IBOutlet XSTableView *oneMoreView;
+
+- (IBAction)segmentedControlAction:(NSSegmentedControl *)sender;
+- (IBAction)analisysAction:(NSButton *)sender;
+- (void)showTableViewWithData:(NSArray *)data;
 
 @end

@@ -10,11 +10,14 @@
 
 @interface XSEditorView (ConnectObjects)
 
-- (void)drawLineBetweenObjectsWithFirstObjectOutputDataState:(BOOL)isOutputData;
+- (void)drawLineBetweenObjectsWithActiveDataType:(XSDataType)dataType;
 - (NSDictionary *)correctLine:(NSDictionary *)lineDictionary;
 - (NSArray *)linesWithObject:(XSObjectView *)objextView;
 
 - (void)correctLinesWithObject:(XSObjectView *)objectView;
 - (void)removeLinesWithObject:(XSObjectView *)objectView;
+
+#pragma mark - Removed connection
+- (void)removedConnection:(NSNotification *)notification;
 
 @end

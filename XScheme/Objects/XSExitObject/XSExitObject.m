@@ -23,6 +23,14 @@
     return self;
 }
 
+- (NSNumber *)outputValue {
+    if ([self.inputConnections count] == 1) {
+        return [[self.inputConnections firstObject] outputValue];
+    }
+    
+    return nil;
+}
+
 - (NSInteger)inputsNumber {
     return 1;
 }
@@ -37,6 +45,10 @@
 
 - (XSObjectType)allowedOutputTypes {
     return kXSObjectTypeNone;
+}
+
+- (NSString *)key {
+    return @"Y";
 }
 
 @end

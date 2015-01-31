@@ -23,12 +23,28 @@
     return self;
 }
 
+- (NSNumber *)outputValue {
+    if ([self.inputConnections count] == 1) {
+        XSObjectView *inputObject = [self.inputConnections firstObject];
+        
+        if ([[inputObject outputValue] boolValue]) {
+            [self setOutputValue:[NSNumber numberWithInteger:0]];
+        } else {
+            [self setOutputValue:[NSNumber numberWithInteger:1]];
+        }
+        
+        return self.objectOutputValue;
+    }
+    
+    return nil;
+}
+
 - (NSInteger)inputsNumber {
     return 1;
 }
 
 - (NSInteger)outputsNumber {
-    return 1;
+    return -1;
 }
 
 - (XSObjectType)allowedInputTypes {

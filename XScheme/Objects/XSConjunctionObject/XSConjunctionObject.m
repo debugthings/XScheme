@@ -23,12 +23,25 @@
     return self;
 }
 
+- (NSNumber *)outputValue {
+    if ([self.inputConnections count] == 2) {
+        NSNumber *firstValue = [[self.inputConnections firstObject] outputValue];
+        NSNumber *secondValue = [[self.inputConnections lastObject] outputValue];
+        
+        if (firstValue && secondValue) {
+            [self setOutputValue:[NSNumber numberWithBool:([firstValue boolValue] && [secondValue boolValue])]];
+            return self.objectOutputValue;
+        }
+    }
+    
+    return nil;}
+
 - (NSInteger)inputsNumber {
     return 2;
 }
 
 - (NSInteger)outputsNumber {
-    return 1;
+    return -1;
 }
 
 - (XSObjectType)allowedInputTypes {

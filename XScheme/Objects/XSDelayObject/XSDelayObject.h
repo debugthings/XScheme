@@ -10,4 +10,9 @@
 
 @interface XSDelayObject : XSObjectView
 
+- (void)setInputValue:(NSNumber *)value;
+- (NSNumber *)inputValue;
+
+- (NSString *)specialKey;
+
 @end

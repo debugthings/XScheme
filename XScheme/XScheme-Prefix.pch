@@ -6,6 +6,7 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #import "AppDelegate.h"
     #import "Global.h"
     #import "XSUtility.h"
     #import "XSView.h"
